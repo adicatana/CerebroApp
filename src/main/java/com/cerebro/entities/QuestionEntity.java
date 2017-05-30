@@ -1,4 +1,4 @@
-package entities;
+package com.cerebro.entities;
 
 import javax.persistence.*;
 

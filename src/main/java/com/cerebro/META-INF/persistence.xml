@@ -2,12 +2,12 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
     <persistence-unit name="NewPersistenceUnit">
-        <class>entities.QuestionEntity</class>
-        <class>entities.RoleEntity</class>
-        <class>entities.RoleuserEntity</class>
-        <class>entities.TopicEntity</class>
-        <class>entities.UserEntity</class>
-        <class>entities.UserquestionEntity</class>
+        <class>com.cerebro.entities.QuestionEntity</class>
+        <class>com.cerebro.entities.RoleEntity</class>
+        <class>com.cerebro.entities.RoleuserEntity</class>
+        <class>com.cerebro.entities.TopicEntity</class>
+        <class>com.cerebro.entities.UserEntity</class>
+        <class>com.cerebro.entities.UserquestionEntity</class>
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:46017/g1627115_u"/>
             <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>

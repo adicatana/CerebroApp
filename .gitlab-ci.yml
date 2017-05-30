@@ -4,7 +4,7 @@ stages:
   - package
   - deploy
 
-image: $CI_REGISTRY/gdocker
+image: docker:latest
 
 before_script:
   - mvn clean install

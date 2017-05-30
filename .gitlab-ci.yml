@@ -1,0 +1,31 @@
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+image: $CI_REGISTRY/gdocker
+
+before_script:
+  - mvn clean install
+
+build:
+  stage: build
+  script:
+    - mvn compile
+  artifacts:
+    untracked: true
+
+test:
+  stage: test
+  script:
+    - mvn test
+
+package:
+  stage: package
+  script:
+    - mvn package
+
+deploy:
+  stage: deploy
+  script:

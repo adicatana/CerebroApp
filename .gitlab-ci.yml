@@ -29,6 +29,7 @@ package:
     - mvn package
 
 deploy:
+  privileged: True
   stage: deploy
   variables:
     IMAGE_NAME: test

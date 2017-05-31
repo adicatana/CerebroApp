@@ -9,6 +9,9 @@ stages:
   - deploy
 
 image: docker:latest
+services:
+  - docker:dind
+
 image: maven:3.3.9-jdk-8
 
 build:
@@ -29,7 +32,6 @@ package:
     - mvn package
 
 deploy:
-  privileged: True
   stage: deploy
   variables:
     IMAGE_NAME: test

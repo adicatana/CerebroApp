@@ -1,5 +1,5 @@
-#FROM 146.169.46.199:5000/jagent
-FROM JAVA:8
+FROM 146.169.47.92:5000/jagent
+#FROM JAVA:8
 ADD /target/cerebro-1.0-SNAPSHOT.war /cerebro.jar
 
 ARG published_port=8080

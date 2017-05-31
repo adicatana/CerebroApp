@@ -1,6 +1,6 @@
 variables:
   PUBLISHED_PORT: "7081"
-  CI_REGISTRY: " 146.169.46.199:5000"
+  CI_REGISTRY: "146.169.47.92:5000"
 
 stages:
   - build

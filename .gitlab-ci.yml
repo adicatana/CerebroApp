@@ -30,3 +30,6 @@ package:
 deploy:
   stage: deploy
   script:
+    - docker build -f Dockerfile -t cerebro .
+    - docker run -p 8080:8080 -t cerebro
+    - docker-machine ls

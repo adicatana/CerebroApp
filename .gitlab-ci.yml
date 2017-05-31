@@ -1,3 +1,7 @@
+variables:
+  PUBLISHED_PORT: "7081"
+  CI_REGISTRY: " 146.169.46.199:5000"
+
 stages:
   - build
   - test
@@ -6,9 +10,6 @@ stages:
 
 image: docker:latest
 image: maven:3.3.9-jdk-8
-
-before_script:
-  - mvn clean install
 
 build:
   stage: build
@@ -29,7 +30,14 @@ package:
 
 deploy:
   stage: deploy
+  variables:
+    IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_PATH
+    SERVICE_NAME: $CI_PROJECT_NAME-$PUBLISHED_PORT
   script:
-    - docker build -f Dockerfile -t cerebro .
-    - docker run -p 8080:8080 -t cerebro
-    - docker-machine ls
+    - docker build --build-arg published_port=$PUBLISHED_PORT -t $IMAGE_NAME .
+    - docker push $IMAGE_NAME
+    - docker service rm $SERVICE_NAME || true
+    - docker service create --name $SERVICE_NAME -p $PUBLISHED_PORT:$PUBLISHED_PORT -p :9091 --mount type=bind,src=/proc/kagent,dst=/var/log/host/kagent --network=tracer_default $IMAGE_NAME
+  only:
+    - master
+  environment: staging

@@ -1,3 +1,7 @@
+variables:
+  APP_PORT: "8080"
+  EXTERN_PORT: "8080"
+
 stages:
   - build
   - test
@@ -6,9 +10,6 @@ stages:
 
 image: docker:latest
 image: maven:3.3.9-jdk-8
-
-before_script:
-  - mvn clean install
 
 build:
   stage: build
@@ -29,7 +30,12 @@ package:
 
 deploy:
   stage: deploy
+  variables:
+    IMAGE_NAME: test
   script:
-    - docker build -f Dockerfile -t cerebro .
-    - docker run -p 8080:8080 -t cerebro
-    - docker-machine ls
+    - docker build -t $IMAGE_NAME .
+    - docker run -p $EXTERN_PORT:$APP_PORT
+  only:
+    - master
+  environment: staging
+

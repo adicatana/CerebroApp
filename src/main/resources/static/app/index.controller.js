@@ -6,7 +6,7 @@
 
     angular
         .module('app')
-        .controller('IndexController', IndexController);
+        .controller('IndexController', [IndexController]);
 
     IndexController.$inject = ['$http'];
 

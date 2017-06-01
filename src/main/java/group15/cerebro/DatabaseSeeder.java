@@ -1,22 +1,13 @@
 package group15.cerebro;
 
-import group15.cerebro.entities.Question;
-import group15.cerebro.entities.Role;
-import group15.cerebro.entities.Topic;
-import group15.cerebro.entities.User;
-import group15.cerebro.repositories.QuestionRepository;
-import group15.cerebro.repositories.RoleRepository;
-import group15.cerebro.repositories.TopicRepository;
-import group15.cerebro.repositories.UserRepository;
+import group15.cerebro.entities.*;
+import group15.cerebro.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by adi_c on 31/05/2017.
- */
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
 
@@ -24,15 +15,22 @@ public class DatabaseSeeder implements CommandLineRunner {
     private RoleRepository roleRepository;
     private TopicRepository topicRepository;
     private UserRepository userRepository;
+    private RoleUserRepository roleUserRepository;
+    private UserQuestionRepository userQuestionRepository;
 
     public DatabaseSeeder(QuestionRepository questionRepository,
                           RoleRepository roleRepository,
                           TopicRepository topicRepository,
-                          UserRepository userRepository) {
+                          UserRepository userRepository,
+                          RoleUserRepository roleUserRepository,
+                          UserQuestionRepository userQuestionRepository
+                          ) {
         this.questionRepository = questionRepository;
         this.roleRepository = roleRepository;
         this.topicRepository = topicRepository;
         this.userRepository = userRepository;
+        this.roleUserRepository = roleUserRepository;
+        this.userQuestionRepository = userQuestionRepository;
     }
 
     @Override
@@ -87,6 +85,12 @@ public class DatabaseSeeder implements CommandLineRunner {
         users.add(usr2);
 
         userRepository.save(users);
+
+        List<RoleUser> roleUsers = new ArrayList<>();
+        roleUserRepository.save(roleUsers);
+
+        List<UserQuestion> userQuestions = new ArrayList<>();
+        userQuestionRepository.save(userQuestions);
 
     }
 }

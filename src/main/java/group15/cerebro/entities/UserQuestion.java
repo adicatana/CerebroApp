@@ -5,7 +5,8 @@ import javax.persistence.*;
 public class UserQuestion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userquestion_userquestionid_seq")
+    @SequenceGenerator(name = "userquestion_userquestionid_seq", sequenceName = "userquestion_userquestionid_seq", allocationSize = 1)
     private long id;
     private int userid;
     private int questionid;

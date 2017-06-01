@@ -6,9 +6,18 @@ import javax.persistence.*;
 public class Topic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "topic_topicid_seq")
+    @SequenceGenerator(name = "topic_topicid_seq", sequenceName = "topic_topicid_seq", allocationSize = 1)
     private long id;
     private String topicname;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTopicname() {
         return topicname;

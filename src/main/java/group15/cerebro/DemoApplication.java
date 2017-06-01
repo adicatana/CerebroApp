@@ -1,4 +1,4 @@
-package romaniancoder.booking;
+package group15.cerebro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

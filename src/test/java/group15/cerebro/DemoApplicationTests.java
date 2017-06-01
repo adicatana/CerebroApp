@@ -1,4 +1,4 @@
-package romaniancoder.booking;
+package group15.cerebro;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

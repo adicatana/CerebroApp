@@ -33,17 +33,40 @@ public class DatabaseSeeder implements CommandLineRunner {
         this.userQuestionRepository = userQuestionRepository;
     }
 
+    private Question makeQuestion(String question, String answer1, String wrong1, String wrong2) {
+        Question quest = new Question();
+        quest.setQuestion(question);
+        quest.setAnswer(answer1);
+        quest.setWrong1(wrong1);
+        quest.setWrong2(wrong2);
+        return quest;
+    }
+
     @Override
     public void run(String... args) throws Exception {
         List<Question> bookings = new ArrayList<>();
-        Question quest = new Question();
-        quest.setQuestion("Ce faci Ioan?");
-        quest.setAnswer("Asta e buna");
-        quest.setWrong1("Prima proasta");
-        quest.setWrong2("A doua proasta");
-        bookings.add(quest);
+
+        bookings.add(makeQuestion(
+                "Ce faci Ioan?",
+                "Asta e buna",
+                "Prima proasta",
+             "A doua proasta"
+        ));
+        bookings.add(makeQuestion(
+                "Cum e vremea?",
+                "E da bine",
+                "Sa moara bibi",
+                "Ploua"
+        ));
+        bookings.add(makeQuestion(
+                "Cum e Adi?",
+                "Valoros",
+                "Mare",
+                "Frumos"
+        ));
 
         questionRepository.save(bookings);
+
 
         List<Role> roles = new ArrayList<>();
         Role adm = new Role();

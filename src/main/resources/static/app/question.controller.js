@@ -7,14 +7,14 @@
     angular
         .module('app')
         .controller('QuestionController', ['$scope', '$http', function($scope, $http) {
-
             var vm = this;
 
-
             vm.questions = [];
-            vm.getAll = getAll;
+            vm.question = undefined;
+            vm.getAll = getAll; // used for updates
             vm.create = createQuestion;
             vm.delete = deleteQuestion;
+            vm.getRandomQuestion = getRandomQuestion;
 
             init();
 
@@ -27,7 +27,19 @@
                 var questionsPromise = $http.get(url);
                 questionsPromise.then(function(response){
                     vm.questions = response.data;
+                }).then(function (){
+                    getRandomQuestion();
                 });
+            }
+
+            function randMax(nbr) {
+                return Math.floor(Math.random() * nbr);
+            }
+
+            // PRE: WORKS ONLY IF GETALL WAS CALLED
+            function getRandomQuestion() {
+                var nbr = vm.questions.length;
+                vm.question = [vm.questions[randMax(nbr)]];
             }
 
             //Caution: Not implemented in Java

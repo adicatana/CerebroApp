@@ -70,17 +70,75 @@
 
 </nav>
 
-<script>
-    function registerListenerGroup(elems, id, listen, action) {
-        for (var i = 0; i < elems; ++i) {
-            document.getElementById(id + i)[listen] = function() {
-                action(id + i);
-            };
-        }
-    }
+<!--
+navbar should be in separate file  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
 
-    registerListenerGroup(3, "nav", "onmouseover", function(id) {
-    });
-    registerListenerGroup(3, "nav", "onmouseleave", function(id) {
-    });
-</script>
+<style>
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 400%; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+}
+</style>
+
+
+<style>
+#bg-video {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.jumbovidtext {
+  z-index: 10;
+}
+</style>
+
+  <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted" width="100%">
+      <source src="../misc/small.mp4" type="video/mp4" />
+  </video>
+
+  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+
+    <div class="jumbovidtext">
+        <div class="jumbotron">
+        <p>
+            <center><h2> Dummy question here that takes more the one row, doen't it?  Dummy question here that takes more the one row, doen't it? </h2><center>
+        </p>
+        </div>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div id="button"
+                <p>
+                <center> <a class="btn btn-primary btn-xlarge"> A. Raspunsul meu jmecher 1
+                </a><center>
+            </p>
+        </div>
+
+        <div id="button"
+              <p>
+              <center> <a class="btn btn-primary btn-xlarge">  B. Raspunsul meu gresit 2
+              </a><center>
+          </p>
+       </div>
+
+      <div id="button"
+            <p>
+              <center> <a class="btn btn-primary btn-xlarge">  C. Raspunsul meu gresit 3
+              </a><center>
+              </p>
+      </div>
+
+    </div>
+
+</div>

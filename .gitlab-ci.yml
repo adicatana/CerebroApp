@@ -1,16 +1,8 @@
-variables:
-  APP_PORT: "8080"
-  EXTERN_PORT: "8080"
-
 stages:
   - build
   - test
   - package
   - deploy
-
-image: docker:latest
-services:
-  - docker:dind
 
 image: maven:3.3.9-jdk-8
 
@@ -18,7 +10,7 @@ build:
   stage: build
   script:
     - mvn compile
-  artifacts:
+ artifacts:
     untracked: true
 
 test:
@@ -34,10 +26,13 @@ package:
 deploy:
   stage: deploy
   variables:
-    IMAGE_NAME: test
+    IMAGE_NAME: whispering-retreat-38205
+    HEROKU_KEY: 19005357-bd65-4ee0-99fb-359f62d8b4ba
   script:
-    - docker build -t $IMAGE_NAME .
-    - docker run -p $EXTERN_PORT:$APP_PORT
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$IMAGE_NAME --api-key=$HEROKU_KEY
   only:
     - master
   environment: staging

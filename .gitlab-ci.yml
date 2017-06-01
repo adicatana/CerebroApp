@@ -1,5 +1,5 @@
 variables:
-  IMAGE_NAME: whispering-retreat-38205
+  IMAGE_NAME: cerebroapp
   HEROKU_KEY: 19005357-bd65-4ee0-99fb-359f62d8b4ba
 
 stages:

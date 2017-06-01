@@ -23,7 +23,7 @@
             }
 
             function getAll(){
-                var url = "/roleuser/all";
+                var url = "/questions/all";
                 var questionsPromise = $http.get(url);
                 questionsPromise.then(function(response){
                     vm.questions = response.data;
@@ -32,7 +32,7 @@
 
             //Caution: Not implemented in Java
             function createQuestion(){
-                var url = "/roleuser/create";
+                var url = "/questions/create";
                 var questionsPromise = $http.post(url);
                 questionsPromise.then(function(response){
                     vm.questions = response.data;

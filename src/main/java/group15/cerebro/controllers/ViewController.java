@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ViewController {
-//    private String appMode;
+    private String appMode;
 
     @Autowired
     public ViewController(Environment environment){
-//        appMode = environment.getProperty("app-mode");
+        appMode = environment.getProperty("app-mode");
     }
 
     @RequestMapping("/")
     public String index(Model model){
 //        model.addAttribute("datetime", new Date());
 //        model.addAttribute("username", "John");
-//        model.addAttribute("mode", appMode);
+        model.addAttribute("mode", appMode);
 
         return "index";
     }

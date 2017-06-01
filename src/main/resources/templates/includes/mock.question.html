@@ -1,144 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="question">
 
-<head>
-    <link rel="stylesheet" href="../../static/bootstrap.css"/>
-</head>
+<video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted" width="100%">
+    <source th:src="@{app/misc/small.mp4}" type="video/mp4" />
+</video>
 
-<div> &nbsp; </div>
+<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="">Cerebro</a>
-        </div>
+<div class="jumbovidtext" ng-repeat="question in vm.questions">
+    <center><div class="jumbotron"><p> <h2>
+        {{question.question}}
+    </h2></p></div></center>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li> <!-- Make it dynamic using JS -->
-                    <div id="_nav0"></div> <a id="nav0" href="/item1/">Item1</a>
-                </li>
-                <li>
-                    <div id="_nav1"></div> <a id="nav1" href="/item2/">Item1</a>
-                </li>
-                <li class="dropdown">
-                    <div id="_nav2"></div> <a id="nav2" href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Item 4</a></li>
-                    </ul>
-                </li>
-            </ul>
+    &nbsp;&nbsp;&nbsp;&nbsp;
 
-<!-- logged out -->
-            <!-- <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                    Login
-            </ul> -->
-          </a></li>
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+        {{question.answer}}
+    </a></p></div></center>
 
-<!-- logged in -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                  <div>
-                      <div>User: pacanele</div>
-                      <div>Rating: 12313</div>
-                  </div>
-                </a></li>
-            </ul>
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+        {{question.wrong1}}
+    </a></p></div></center>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <a href="#">
-                    <img src="../misc/profile.png" style='height: 10%; width: 8%; float:right;'>
-                  </a>
-                </li>
-            </ul>
-
-
-        </div>
-
-
-    </div>
-
-</nav>
-
-<!--
-navbar should be in separate file  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-
-<style>
-.btn-xlarge {
-    padding: 18px 28px;
-    font-size: 400%; //change this to your desired size
-    line-height: normal;
-    -webkit-border-radius: 8px;
-       -moz-border-radius: 8px;
-            border-radius: 8px;
-}
-</style>
-
-
-<style>
-#bg-video {
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-}
-.jumbovidtext {
-  z-index: 10;
-}
-</style>
-
-  <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted" width="100%">
-      <source src="../misc/small.mp4" type="video/mp4" />
-  </video>
-
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-
-    <div class="jumbovidtext">
-        <div class="jumbotron">
-        <p>
-            <center><h2> Dummy question here that takes more the one row, doen't it?  Dummy question here that takes more the one row, doen't it? </h2><center>
-        </p>
-        </div>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <div id="button"
-                <p>
-                <center> <a class="btn btn-primary btn-xlarge"> A. Raspunsul meu jmecher 1
-                </a><center>
-            </p>
-        </div>
-
-        <div id="button"
-              <p>
-              <center> <a class="btn btn-primary btn-xlarge">  B. Raspunsul meu gresit 2
-              </a><center>
-          </p>
-       </div>
-
-      <div id="button"
-            <p>
-              <center> <a class="btn btn-primary btn-xlarge">  C. Raspunsul meu gresit 3
-              </a><center>
-              </p>
-      </div>
-
-    </div>
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+        {{question.wrong2}}
+    </a></p></div></center>
 
 </div>
+</div>
+</body>
+</html>

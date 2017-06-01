@@ -1,9 +1,7 @@
-
-<head>
-    <link rel="stylesheet" href="../../static/bootstrap.css"/>
-</head>
-
-<div> &nbsp; </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="header">
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -37,50 +35,28 @@
                 </li>
             </ul>
 
-<!-- logged out -->
-            <!-- <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                    Login
-            </ul> -->
-          </a></li>
-
-<!-- logged in -->
+            <!-- logged in -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">
-                  <div>
-                      <div>User: pacanele</div>
-                      <div>Rating: 12313</div>
-                  </div>
+                    <div>
+                        <div>User: pacanele</div>
+                        <div>Rating: 12313</div>
+                    </div>
                 </a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="#">
-                    <img src="../misc/profile.png" style='height: 10%; width: 8%; float:right;'>
-                  </a>
+                    <a href="#">
+                        <img th:src="@{app/misc/profile.png}" style='height: 10%; width: 8%; float:right;'/>
+                    </a>
                 </li>
             </ul>
-
-
         </div>
-
-
     </div>
-
 </nav>
 
-<script>
-    function registerListenerGroup(elems, id, listen, action) {
-        for (var i = 0; i < elems; ++i) {
-            document.getElementById(id + i)[listen] = function() {
-                action(id + i);
-            };
-        }
-    }
 
-    registerListenerGroup(3, "nav", "onmouseover", function(id) {
-    });
-    registerListenerGroup(3, "nav", "onmouseleave", function(id) {
-    });
-</script>
+</div>
+</body>
+</html>

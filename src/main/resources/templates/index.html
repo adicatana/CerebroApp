@@ -5,6 +5,7 @@
     <title>Cerebro</title>
     <link th:if="${mode ==   'development'}" rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}" />
     <link th:if="${mode == 'production'}" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
     <script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
     <script type="text/javascript" src="/static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
     <script type="text/javascript" src="/static/app/index.controller.js" th:src="@{/app/index.controller.js}"></script>
@@ -18,36 +19,10 @@
 
 <body ng-app="app" ng-controller="QuestionController as vm">
 
-<div>
-    <div class="col-lg-offset-2 col-lg-8">
-        <!-- Get all bookings or only affordable ones -->
-        <div class="btn-group" role="group">
-            <button ng-click="vm.getAll()" type="button" class="btn btn-default">All</button>
-        </div>
-    </div>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Question</th>
-        <th>Answer</th>
-        <th>Wrong1</th>
-        <th>Wrong2</th>
-        <th style="width: 90px"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="question in vm.questions">
-        <td>{{question.question}}</td>
-        <td>{{question.answer}}</td>
-        <td>{{question.wrong1}}</td>
-        <td>{{question.wrong2}}</td>
-        <td>
-            <button class="btn btn-danger" ng-click="vm.deleteQuestion(question.id)">Delete</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
-</div>
+<div th:include="includes/header::body"></div>
+<div th:include="includes/mock.question::body"></div>
+<div th:include="includes/footer::body"></div>
+
 </body>
 
 </html>

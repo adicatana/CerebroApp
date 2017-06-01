@@ -1,0 +1,16 @@
+.btn-xlarge-question {
+    padding: 18px 28px;
+    font-size: 400%;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+#bg-video {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.jumbovidtext {
+    z-index: 10;
+}

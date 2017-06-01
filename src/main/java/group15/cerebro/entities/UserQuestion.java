@@ -8,8 +8,15 @@ public class UserQuestion {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userquestion_userquestionid_seq")
     @SequenceGenerator(name = "userquestion_userquestionid_seq", sequenceName = "userquestion_userquestionid_seq", allocationSize = 1)
     private long id;
-    private int userid;
-    private int questionid;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private Usr userId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionId")
+    private Question question;
+
     private boolean lastattempt;
 
     public long getId() {
@@ -20,20 +27,20 @@ public class UserQuestion {
         this.id = id;
     }
 
-    public int getUserid() {
-        return userid;
+    public Usr getUserid() {
+        return userId;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserid(Usr userId) {
+        this.userId = userId;
     }
 
-    public int getQuestionid() {
-        return questionid;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuestionid(int questionid) {
-        this.questionid = questionid;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public boolean isLastattempt() {
@@ -52,18 +59,14 @@ public class UserQuestion {
         UserQuestion that = (UserQuestion) o;
 
         if (id != that.id) return false;
-        if (userid != that.userid) return false;
-        if (questionid != that.questionid) return false;
-        if (lastattempt != that.lastattempt) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = (int)id;
-        result = 31 * result + userid;
-        result = 31 * result + questionid;
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + question.hashCode();
         result = 31 * result + (lastattempt ? 1 : 0);
         return result;
     }

@@ -1,6 +1,7 @@
 package group15.cerebro.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Question {
@@ -15,8 +16,8 @@ public class Question {
     private String wrong1;
     private String wrong2;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "topic")
     private Topic topic;
 
     public String getQuestion() {
@@ -83,6 +84,7 @@ public class Question {
     public void setTopic(Topic topic) {
         this.topic = topic;
     }
+
 
     @Override
     public int hashCode() {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <body>
 <div th:fragment="question">
 
@@ -19,15 +20,18 @@
 
     &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question" onclick="
+            sweetAlert('Good job!', '', 'success');">
         {{question.answer}}
     </a></p></div></center>
 
-    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question" onclick="
+            sweetAlert('Wrong!', '', 'error');">
         {{question.wrong1}}
     </a></p></div></center>
 
-    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question">
+    <center><div id="button"><p><a class="btn btn-primary btn-xlarge-question" onclick="
+            sweetAlert('Wrong!', '', 'error');">
         {{question.wrong2}}
     </a></p></div></center>
 

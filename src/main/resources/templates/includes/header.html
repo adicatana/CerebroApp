@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="header">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Cerebro</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li> <!-- Make it dynamic using JS -->
+                    <div id="_nav0"></div> <a id="nav0" href="/item1/">Item1</a>
+                </li>
+                <li>
+                    <div id="_nav1"></div> <a id="nav1" href="/item2/">Item1</a>
+                </li>
+                <li class="dropdown">
+                    <div id="_nav2"></div> <a id="nav2" href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 2</a></li>
+                        <li><a href="#">Item 3</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Item 4</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- logged in -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">
+                    <div>
+                        <div>User: pacanele</div>
+                        <div>Rating: 12313</div>
+                    </div>
+                </a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <img th:src="@{app/misc/profile.png}" style='height: 10%; width: 8%; float:right;'/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+</div>
+</body>
+</html>

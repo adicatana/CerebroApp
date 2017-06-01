@@ -1,13 +1,11 @@
 package group15.cerebro.controllers;
 
 
-import group15.cerebro.entities.Topic;
-import group15.cerebro.entities.User;
+import group15.cerebro.entities.Question;
+import group15.cerebro.entities.Usr;
 import group15.cerebro.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +21,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<User> getAll() {
+    public List<Usr> getAll() {
         return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public List<Usr> create(@RequestBody Usr usr) {
+        userRepository.save(usr);
+        return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public List<Usr> remove(@PathVariable long id){
+        userRepository.delete(id);
+        return userRepository.findAll();
+
     }
 
 }

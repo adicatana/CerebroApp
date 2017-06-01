@@ -6,32 +6,39 @@ import javax.persistence.*;
 public class RoleUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    private int userid;
-    private int roleid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleuser_roleuserid_seq")
+    @SequenceGenerator(name = "roleuser_roleuserid_seq", sequenceName = "roleuser_roleuserid_seq", allocationSize = 1)
+    private long id;
 
-    public int getId() {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private Usr userid;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role roleid;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getUserid() {
+    public Usr getUser() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(Usr userid) {
         this.userid = userid;
     }
 
-    public int getRoleid() {
+    public Role getRole() {
         return roleid;
     }
 
-    public void setRoleid(int roleid) {
+    public void setRoleid(Role roleid) {
         this.roleid = roleid;
     }
 
@@ -51,9 +58,9 @@ public class RoleUser {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + userid;
-        result = 31 * result + roleid;
-        return result;
+        long result = id;
+        result = 31 * result + userid.hashCode();
+        result = 31 * result + roleid.hashCode();
+        return (int)result;
     }
 }

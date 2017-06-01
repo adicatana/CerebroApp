@@ -1,6 +1,6 @@
 package group15.cerebro.controllers;
 
-import group15.cerebro.entities.Topic;
+import group15.cerebro.entities.RoleUser;
 import group15.cerebro.repositories.RoleUserRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +19,8 @@ public class RoleUserController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String getAll() {
-        return "la misto";
+    public List<RoleUser> getAll() {
+        return roleUserRepository.findAll();
     }
 
 }

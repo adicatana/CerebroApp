@@ -24,8 +24,8 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public List<Question> create(@RequestBody Question booking) {
-        questionRepository.save(booking);
+    public List<Question> create(@RequestBody Question question) {
+        questionRepository.save(question);
         return questionRepository.findAll();
     }
 

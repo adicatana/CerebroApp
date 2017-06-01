@@ -1,27 +1,24 @@
 package group15.cerebro.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_questionid_seq")
+    @SequenceGenerator(name = "question_questionid_seq", sequenceName = "question_questionid_seq", allocationSize = 1)
     private long id;
 
-    private int topicid;
     private String question;
     private String answer;
     private String wrong1;
     private String wrong2;
 
-    public int getTopicid() {
-        return topicid;
-    }
-
-    public void setTopicid(int topicid) {
-        this.topicid = topicid;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "topic")
+    private Topic topic;
 
     public String getQuestion() {
         return question;
@@ -62,7 +59,7 @@ public class Question {
 
         Question that = (Question) o;
 
-        if (topicid != that.topicid) return false;
+        if (id != that.id) return false;
         if (question != null ? !question.equals(that.question) : that.question != null) return false;
         if (answer != null ? !answer.equals(that.answer) : that.answer != null) return false;
         if (wrong1 != null ? !wrong1.equals(that.wrong1) : that.wrong1 != null) return false;
@@ -79,10 +76,19 @@ public class Question {
         this.id = id;
     }
 
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+
     @Override
     public int hashCode() {
         long result = id;
-        result = 31 * result + topicid;
         result = 31 * result + (question != null ? question.hashCode() : 0);
         result = 31 * result + (answer != null ? answer.hashCode() : 0);
         result = 31 * result + (wrong1 != null ? wrong1.hashCode() : 0);

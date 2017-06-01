@@ -1,12 +1,16 @@
 package group15.cerebro.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class Usr {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_userid_seq")
+    @SequenceGenerator(name = "user_userid_seq", sequenceName = "user_userid_seq", allocationSize = 1)
+    private long id;
 
     private String login;
     private String password;
@@ -22,10 +26,12 @@ public class User {
         this.login = login;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -59,7 +65,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        User that = (User) o;
+        Usr that = (Usr) o;
 
         if (id != that.id) return false;
         if (rating != that.rating) return false;

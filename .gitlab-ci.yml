@@ -1,3 +1,7 @@
+variables:
+  IMAGE_NAME: whispering-retreat-38205
+  HEROKU_KEY: 19005357-bd65-4ee0-99fb-359f62d8b4ba
+
 stages:
   - build
   - test
@@ -5,12 +9,13 @@ stages:
   - deploy
 
 image: maven:3.3.9-jdk-8
+image: docker:latest
 
 build:
   stage: build
   script:
     - mvn compile
- artifacts:
+  artifacts:
     untracked: true
 
 test:
@@ -25,9 +30,6 @@ package:
 
 deploy:
   stage: deploy
-  variables:
-    IMAGE_NAME: whispering-retreat-38205
-    HEROKU_KEY: 19005357-bd65-4ee0-99fb-359f62d8b4ba
   script:
     - apt-get update -qy
     - apt-get install -y ruby-dev

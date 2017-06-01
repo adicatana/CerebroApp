@@ -8,8 +8,8 @@ stages:
   - package
   - deploy
 
-image: maven:3.3.9-jdk-8
 image: docker:latest
+image: maven:3.3.9-jdk-8
 
 build:
   stage: build

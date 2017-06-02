@@ -1,11 +1,23 @@
 .btn-xlarge-question {
     padding: 18px 28px;
     font-size: 400%;
+    width: 80%;
     line-height: normal;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
 }
+
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 700%;
+    width: 80%;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
 #bg-video {
     width: 100%;
     position: absolute;

@@ -1,98 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
-    <link rel="stylesheet" href="../../static/bootstrap.css"/>
-</head>
-
-<div> &nbsp; </div>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="">Cerebro</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li> <!-- Make it dynamic using JS -->
-                    <div id="_nav0"></div> <a id="nav0" href="/item1/">Item1</a>
-                </li>
-                <li>
-                    <div id="_nav1"></div> <a id="nav1" href="/item2/">Item1</a>
-                </li>
-                <li class="dropdown">
-                    <div id="_nav2"></div> <a id="nav2" href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Item 4</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-<!-- logged out -->
-            <!-- <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                    Login
-            </ul> -->
-          </a></li>
-
-<!-- logged in -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                  <div>
-                      <div>User: pacanele</div>
-                      <div>Rating: 12313</div>
-                  </div>
-                </a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <a href="#">
-                    <img src="../../static/app/misc/profile.png" style='height: 10%; width: 8%; float:right;'>
-                  </a>
-                </li>
-            </ul>
-
-
-        </div>
-
-
-    </div>
-
-</nav>
-
-
-<style>
-.btn-xlarge {
-    padding: 18px 28px;
-    font-size: 700%; //change this to your desired size
-    line-height: normal;
-    -webkit-border-radius: 8px;
-       -moz-border-radius: 8px;
-            border-radius: 8px;
-}
-</style>
-
-
-<style>
-#bg-video {
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-}
-.jumbovidtext {
-  z-index: 10;
-}
-</style>
+<body>
+<div th:fragment="main">
 
   <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted" width="100%">
       <source src="../../static/app/misc/small.mp4" type="video/mp4" />
@@ -104,47 +14,22 @@
   <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
 
     <div class="jumbovidtext">
-        <div id="button"
+        <div id="button" ng-click="vm.start()">
                 <p>
                 <center><a class="btn btn-primary btn-xlarge">Single player
-                </a><center>
-            </p>
+                </a></center>
+                </p>
         </div>
 
         &nbsp;&nbsp;&nbsp;&nbsp;
 
-        <div id="button"
+        <div id="button2">
                 <p>
                 <center> <a class="btn btn-primary btn-xlarge"> Multi player
-                </a><center>
-            </p>
+                </a> </center>
+                </p>
         </div>
-      </div>
-
+    </div>
 </div>
-
-
-<!-- vesion 1 -->
-  <!-- <div class="jumbotron">
-
-    <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted">
-      <source src="/PATH/TO/VIDEOFILE" type="video/TYPE" />
-    </video>
-
-    <div id="button"
-            <p>
-            <center><a class="btn btn-primary btn-xlarge">Single player
-            </a><center>
-        </p>
-    </div>
-
-    &nbsp;&nbsp;&nbsp;&nbsp;
-
-    <div id="button"
-            <p>
-            <center> <a class="btn btn-primary btn-xlarge"> Multi player
-            </a><center>
-        </p>
-    </div>
-
-  </div> -->
+</body>
+</html>

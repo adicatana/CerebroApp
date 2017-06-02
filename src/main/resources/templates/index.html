@@ -22,7 +22,8 @@
 <body ng-app="app" ng-controller="QuestionController as vm">
 
 <div th:include="includes/header::body"></div>
-<div th:include="includes/mock.question::body"></div>
+<div ng-if="vm.gameMode"><div th:include="includes/mock.main::body"></div></div>
+<div ng-if="!vm.gameMode"><div th:include="includes/mock.question::body"></div></div>
 <div th:include="includes/footer::body"></div>
 
 </body>

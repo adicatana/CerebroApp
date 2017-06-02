@@ -20,6 +20,7 @@
             vm.counter = 0;
             vm.maxQuestions = 5;
             vm.good = 0;
+            vm.lastGood = 0;
 
             init();
 
@@ -50,6 +51,7 @@
                 if (vm.counter < vm.maxQuestions) {
                     vm.getRandomQuestion();
                 } else {
+                    vm.lastGood = [vm.good];
                     vm.endGame = true;
                 }
             }

@@ -10,8 +10,8 @@
         {{question.question}}
         <div id="timer"></div>
     </h2></p></div></center></div>
-    <div ng-if="vm.endGame"><center><div class="jumbotron"><p> <h2>
-        Thank you for playing!
+    <div ng-if= "vm.endGame"><center><div class="jumbotron"><p> <h2>
+        Thank you for playing! You scored <label ng-repeat="good in vm.lastGood"> {{good * 20}} </label> %
         <div id="timer"></div>
     </h2></p></div></center></div>
 

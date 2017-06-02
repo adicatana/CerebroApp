@@ -9,6 +9,7 @@
         .controller('QuestionController', ['$scope', '$http', function($scope, $http) {
             var vm = this;
             vm.gameMode = true;
+            vm.endGame = false;
             vm.questions = [];
             vm.question = undefined;
             vm.getAll = getAll; // used for updates
@@ -29,41 +30,51 @@
             vm.gen = gen;
 
             function gen(good) {
-                if (vm.counter < vm.maxQuestions - 1) {
-                    if (good) {
-                        swal({title: 'Good job!', text: '', type: 'success', timer: 800, showConfirmButton: false});
-                        vm.good += 1;
-                    } else {
-                        swal({title:'Wrong!', text:'', type: 'error', timer: 800, showConfirmButton : false});
-                    }
-                } else {
-                    if (good)
-                        vm.good += 1;
+                if (vm.counter === vm.maxQuestions) {
+                    vm.counter = 0;
+                    vm.good = 0;
+                    vm.gameMode = !vm.gameMode;
+                    vm.endGame = false;
+                    survey();
+                    return;
                 }
                 vm.counter += 1;
+                swal({
+                    title: good ? 'Good job!' : "Wrong!",
+                    text: good ? '' : "Correct answer: " + vm.question[0].answer,
+                    type: good ? 'success' : 'error',
+                    timer: good ? 800 : 2000,
+                    showConfirmButton: false
+                });
+                vm.good += good ? 1 : 0;
                 if (vm.counter < vm.maxQuestions) {
                     vm.getRandomQuestion();
                 } else {
-                    swal({
-                            title: "Question",
-                            text: "Add a new question:",
-                            type: "input",
-                            showCancelButton: true,
-                            closeOnConfirm: false,
-                            animation: "slide-from-top",
-                            inputPlaceholder: "Write something"
-                        },
-                        function(inputValue){
-                            if (inputValue === false) return false;
+                    vm.endGame = true;
+                }
+            }
 
-                            if (inputValue === "") {
-                                swal.showInputError("You need to write something!");
-                                return false
-                            }
+            function survey() {
+                swal({
+                        title: "Contribute",
+                        text: "To contribute to our content, please add a question to be reponded by other players:",
+                        type: "input",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        animation: "slide-from-top",
+                        inputPlaceholder: "Write something"
+                    },
+                    function(inputValue){
+                        if (inputValue === false) return false;
 
-                            swal("Now please add a good answer to your question", "You wrote: " + inputValue, "success");
-                            swal({
-                                title: "Answer",
+                        if (inputValue === "") {
+                            swal.showInputError("You need to write something!");
+                            return false;
+                        }
+
+                        swal("Now please add a good answer to your question", "You wrote: " + inputValue, "success");
+                        swal({
+                                title: "Contribute: Answer",
                                 text: "Now please add a good answer to your question:",
                                 type: "input",
                                 showCancelButton: true,
@@ -71,21 +82,16 @@
                                 animation: "slide-from-top",
                                 inputPlaceholder: "Write something"
                             },
-                                function(inputValue){
-                                    if (inputValue === false) return false;
+                            function(inputValue){
+                                if (inputValue === false) return false;
 
-                                    if (inputValue === "") {
-                                        swal.showInputError("You need to write something!");
-                                        return false
-                                    }
-                                    swal("Thank you for your input!", "" + inputValue, "success");
+                                if (inputValue === "") {
+                                    swal.showInputError("You need to write something!");
+                                    return false
+                                }
+                                swal("Thank you for your input!", "" + inputValue, "success");
                             });
                     });
-                    //swal({title:'Wrong!', text:"You reponded to " + vm.good * 10 + "% good questions" , type: 'success', closeOnConfirm: true, timer: 160000, showConfirmButton : true});
-                    // vm.counter = 0;
-                    // vm.good = 0;
-                    // gen();
-                }
             }
 
             function init(){

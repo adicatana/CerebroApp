@@ -53,17 +53,54 @@ public class DatabaseSeeder implements CommandLineRunner {
              "Microsoft"
         ));
         bookings.add(makeQuestion(
-                "Cum e vremea?",
-                "E da bine",
-                "Sa moara bibi",
-                "Ploua"
+                "In C++, what does \0 mean?",
+                "Null",
+                "Tab",
+                "Newline"
         ));
         bookings.add(makeQuestion(
-                "Cum e Adi?",
-                "Valoros",
-                "Mare",
-                "Frumos"
+                "What does doctype in HTML do?",
+                "Tells the browser how to render the HTML markup",
+                "Loads all references to external JavaScript files",
+                "Adds CSS styles to the HTML page"
         ));
+        bookings.add(makeQuestion(
+                "What maybe a problem with serving pages as application/xhtml+xml?",
+                "Browsers that don't accept it render plain text/html",
+                "There are performance issues",
+                "The browser only displays the CSS and not the HTML"
+        ));
+        bookings.add(makeQuestion(
+                "How do you declare the language in HTML?",
+                "A language attribute can be added to the HTML tag",
+                "A language attribute should be added to the body tag",
+                "There's no way to declare it in HTML, it requires JavaScript"
+        ));
+        bookings.add(makeQuestion(
+                "What is the port number for HTTP?",
+                "80",
+                "22",
+                "120"
+        ));
+        bookings.add(makeQuestion(
+                "What is the port number for SMTP?",
+                "25",
+                "15",
+                "100"
+        ));
+        bookings.add(makeQuestion(
+                "How many layers are in the OSI model?",
+                "7",
+                "5",
+                "4"
+        ));
+        bookings.add(makeQuestion(
+                "What is NOT an HTML5 element?",
+                "block",
+                "audio",
+                "canvas"
+        ));
+
 
         questionRepository.save(bookings);
 

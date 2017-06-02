@@ -1,7 +1,7 @@
 .btn-xlarge-question {
     padding: 18px 28px;
-    font-size: 400%;
-    width: 80%;
+    font-size: 200%;
+    width: 50%;
     line-height: normal;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
@@ -10,8 +10,8 @@
 
 .btn-xlarge {
     padding: 18px 28px;
-    font-size: 700%;
-    width: 80%;
+    font-size: 200%;
+    width: 50%;
     line-height: normal;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;

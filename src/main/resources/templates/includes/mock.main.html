@@ -4,16 +4,16 @@
 <body>
 <div th:fragment="main">
 
-  <video id="bg-video" autoplay="true" loop="loop" preload="metadata" muted="muted" width="100%">
-      <source src="../../static/app/misc/small.mp4" type="video/mp4" />
-  </video>
-
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
-  <div> &nbsp;&nbsp;&nbsp;&nbsp; </div>
+  <!--<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>-->
+  <!--<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>-->
+  <!--<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>-->
+  <!--<div> &nbsp;&nbsp;&nbsp;&nbsp; </div>-->
 
     <div class="jumbovidtext">
+        <div>
+            <center><img th:src="@{app/misc/logo.png}" style='width: 20%;'/></center>
+        </div>
+
         <div id="button" ng-click="vm.start()">
                 <p>
                 <center><a class="btn btn-primary btn-xlarge">Single player
@@ -25,7 +25,7 @@
 
         <div id="button2">
                 <p>
-                <center> <a class="btn btn-primary btn-xlarge"> Multi player
+                <center> <a class="btn btn-primary btn-xlarge"> Multiplayer
                 </a> </center>
                 </p>
         </div>

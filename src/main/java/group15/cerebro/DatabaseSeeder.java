@@ -100,6 +100,36 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "audio",
                 "canvas"
         ));
+        bookings.add(makeQuestion(
+                "Which port number for DNS?",
+                "53",
+                "50",
+                "54"
+        ));
+        bookings.add(makeQuestion(
+                "Also known as one-to-all transmission:",
+                "broadcast",
+                "multicast",
+                "unicast"
+        ));
+        bookings.add(makeQuestion(
+                "OSPF is an implementation of:",
+                "distance-vector routing",
+                "path-vector routing",
+                "link-state routing"
+        ));
+        bookings.add(makeQuestion(
+                "Known as the physical address:",
+                "MAC",
+                "IP",
+                "SSID"
+        ));
+        bookings.add(makeQuestion(
+                "Routing metric for BGP:",
+                "hop count",
+                "ping",
+                "latency"
+        ));
 
 
         questionRepository.save(bookings);

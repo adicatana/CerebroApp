@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <link th:if="${mode ==   'development'}" rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}" />
+    <link th:if="${mode == 'production'}" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
 </head>
 <body>
-$END$
+
+<div th:include="includes/header::body"></div>
+
+<div ng-if="!vm.endGame"><center><div id="loginbutton"><p><a class="btn btn-primary btn-xlarge-question">
+    Login
+</a></p></div></center></div>
+
+<div ng-if="!vm.endGame"><center><div id="signupbutton"><p><a class="btn btn-primary btn-xlarge-question">
+    Sign up
+</a></p></div></center></div>
+
+<footer style="position: fixed;Width: 100%;bottom: 10%;">
+    <!-- Social Footer, Colour Matching Icons -->
+    <!-- Include Font Awesome Stylesheet in Header -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"/>
+    <!-- // -->
+    <div class="container">
+        <div class="text-center center-block">
+            <p class="txt-railway">Imperial College London 2017</p>
+            <a><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+            <a><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+            <a><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+            <a><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+        </div>
+    </div>
+
+</footer>
+
 </body>
 </html>

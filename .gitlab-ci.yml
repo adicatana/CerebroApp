@@ -11,13 +11,11 @@ stages:
 image: docker:latest
 image: maven:3.3.9-jdk-8
 
-before_script:
-  - chmod +x ./dbConnection.sh
-  - ./dbConnection.sh -global
-
 build:
   stage: build
   script:
+    - chmod +x ./dbConnection.sh
+    - ./dbConnection.sh -global
     - mvn compile
   artifacts:
     untracked: true

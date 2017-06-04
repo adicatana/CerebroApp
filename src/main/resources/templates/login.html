@@ -12,13 +12,29 @@
 
 <div th:include="includes/header::body"></div>
 
-<div ng-if="!vm.endGame"><center><div id="loginbutton"><p><a class="btn btn-primary btn-xlarge-question">
+<div ng-if="!vm.endGame"><center><div id="questionbutton"><p><a class="btn btn-primary btn-xlarge-question">
     Login
 </a></p></div></center></div>
 
-<div ng-if="!vm.endGame"><center><div id="signupbutton"><p><a class="btn btn-primary btn-xlarge-question">
+<div ng-if="!vm.endGame"><center><div id="questionbutton"><p><a class="btn btn-primary btn-xlarge-question">
     Sign up
 </a></p></div></center></div>
+
+<form name='f' action="login" method='POST'>
+    <table>
+        <tr>
+            <td>User:</td>
+            <td><input type='text' name='username' value='' /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type='password' name='password' /></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="submit"/></td>
+        </tr>
+    </table>
+</form>
 
 <footer style="position: fixed;Width: 100%;bottom: 10%;">
     <!-- Social Footer, Colour Matching Icons -->

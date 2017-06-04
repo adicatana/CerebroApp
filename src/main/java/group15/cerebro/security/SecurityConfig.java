@@ -15,7 +15,7 @@ import java.util.List;
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,7 +31,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout()
+                .logout()                      // TODO: logout
                 .permitAll();
 //                .and()
 //                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
@@ -45,7 +45,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user1").password("pass").roles("USER");
+//        auth.inMemoryAuthentication().withUser("user3").password("pass").roles("USER");
 
 		InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> configurer
 				= auth.inMemoryAuthentication();

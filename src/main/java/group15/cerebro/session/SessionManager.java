@@ -2,6 +2,10 @@
 
 package group15.cerebro.session;
 
+import group15.cerebro.MainApplication;
+import group15.cerebro.entities.Usr;
+import group15.cerebro.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +16,14 @@ import java.util.UUID;
 public class SessionManager {
     private Phase phase;
     private UUID uid;
+    private Usr user;
 
-    public SessionManager() {
+    private LoginChecker loginChecker;
+
+    @Autowired
+    public SessionManager(UserRepository userRepository) {
         this.phase = Phase.NONE;
+        this.loginChecker = new LoginChecker(userRepository);
     }
 
     public enum Phase {
@@ -24,11 +33,14 @@ public class SessionManager {
         SINGLE
     }
 
-    public void makeNewSession() {
-        if (phase == Phase.NONE) {
+    public void makeNewSession(Usr auth) {
+        MainApplication.logger.warn(auth.getLogin());
+        if (phase == Phase.NONE && loginChecker.validateAuthetication(auth)) {
+            uid = UUID.randomUUID();
+
             phase = Phase.LOGGED;
+            user = loginChecker.getUser();
         }
-        uid = UUID.randomUUID();
     }
 
     public Phase getPhase() {

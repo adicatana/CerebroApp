@@ -19,7 +19,7 @@
 
             function record() {
                 vm.user = $scope.inputUser;
-                vm.password = $scope.passUser;
+                vm.password = $scope.inputPass;
 
                 console.log(vm.user);
                 console.log(vm.password);
@@ -31,8 +31,8 @@
             function startSession() {
                 var url = "/session/start";
                 var data = {
-                    "login" : vm.user,
-                    "password" : vm.password
+                    login : vm.user,
+                    password : vm.password
                 };
 
                 console.log(vm.user);

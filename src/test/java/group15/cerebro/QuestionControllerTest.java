@@ -18,7 +18,8 @@ import static org.mockito.Mockito.when;
 public class QuestionControllerTest {
 
     private QuestionRepository repo = Mockito.mock(QuestionRepository.class);
-    private QuestionController ctrl = new QuestionController(repo, new SessionManager());
+    private SessionManager manager = Mockito.mock(SessionManager.class);
+    private QuestionController ctrl = new QuestionController(repo, manager);
 
     @Before
     public void setUp(){

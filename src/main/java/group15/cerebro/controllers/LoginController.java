@@ -5,10 +5,7 @@ import group15.cerebro.entities.Usr;
 import group15.cerebro.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/session")
@@ -22,12 +19,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public void startSession(@RequestBody Usr usr)
-    {
+    public void startSession(@RequestBody Usr usr) {
         MainApplication.logger.warn(usr.getLogin());
-
-        manager.makeNewSession();
-
-        MainApplication.logger.warn(manager.getUid().toString());
+        MainApplication.logger.warn(usr.getPassword());
+        manager.makeNewSession(usr);
     }
 }

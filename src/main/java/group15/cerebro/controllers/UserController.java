@@ -15,7 +15,7 @@ import java.util.List;
 @Scope("session")
 public class UserController {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public UserController(UserRepository userRepository) {

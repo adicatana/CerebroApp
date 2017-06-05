@@ -10,12 +10,14 @@
           crossorigin="anonymous"/>
     <script type="text/javascript" src="app/lib/angular.min.js" ></script>
     <script type="text/javascript" src="app/js/app.module.js" ></script>
+    <script type="text/javascript" src="app/js/login.controller.js" ></script>
 </head>
 
 <body ng-app="app">
 <div ng-include="'includes/header.html'"></div>
-<div>
-    <div class="container-fluid">
+
+<div ng-app="app" ng-controller="LoginController as vm">
+    <div class="container-fluid" name='form' action="login" method='POST'>
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
@@ -26,17 +28,17 @@
 
                 <div class="row">
                     <div class="col-sm-11">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" name='loginForm' action="login" method='POST'>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="email">Email:</label>
+                                <label class="control-label col-sm-2" for="inputUser">Login:</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email"/>
+                                    <input ng-model="inputUser" class="form-control" id="inputUser" name="username" placeholder="Enter login" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="pwd">Password:</label>
+                                <label class="control-label col-sm-2" for="inputPass">Password:</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"/>
+                                    <input ng-model="inputPass" class="form-control" id="inputPass" name="password" placeholder="Enter password" type="password"/>
                                 </div>
                             </div>
                         </form>
@@ -46,7 +48,7 @@
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
-                        <div ng-click="vm.start()">
+                        <div ng-click="vm.record()">
                             <p>
                                 <a class="btn btn-primary btn-block btn-lg">Login</a>
                             </p>

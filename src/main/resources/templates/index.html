@@ -21,27 +21,9 @@
 <body ng-app="app" ng-controller="QuestionController as vm">
 
 <div ng-include="'includes/header.html'"></div>
-<!--<div ng-if="vm.gameMode"><div th:include="includes/mock.main::body"></div></div>-->
-<!--<div ng-if="!vm.gameMode"><div th:include="includes/mock.question::body"></div></div>-->
-<!--<div th:include="includes/footer::body"></div>-->
-
-<footer style="position: fixed;Width: 100%;bottom: 10%;">
-    <!-- Social Footer, Colour Matching Icons -->
-    <!-- Include Font Awesome Stylesheet in Header -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"/>
-    <!-- // -->
-    <div class="container">
-        <div class="text-center center-block">
-            <p class="txt-railway">Imperial College London 2017</p>
-            <a><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-            <a><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-            <a><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-            <a><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-        </div>
-    </div>
-
-</footer>
+<div ng-if="vm.gameMode"><div ng-include="'includes/mock.main.html'"></div></div>
+<div ng-if="!vm.gameMode"><div ng-include="'includes/mock.question.html'"></div></div>
+<div ng-include="'includes/footer.html'"></div>
 
 </body>
 </html>

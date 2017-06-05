@@ -1,5 +1,6 @@
 package group15.cerebro.controllers;
 
+import group15.cerebro.DemoApplication;
 import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.entities.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class QuestionController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Question> getAll() {
+        DemoApplication.logger.info(" MY LOGGER : Get questions");
         return questionRepository.findAll();
     }
 

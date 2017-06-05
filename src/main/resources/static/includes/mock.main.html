@@ -1,24 +1,32 @@
 <div>
 
-    <div class="jumbovidtext">
-        <div>
-            <center><img src="app/misc/logo.png" style='width: 20%;'/></center>
-        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div>
+                    <img id="main-page-logo" src="app/misc/logo.png">
+                </div>
 
-        <div id="button" ng-click="vm.start()">
-                <p>
-                <center><a class="btn btn-primary btn-xlarge">Single player
-                </a></center>
-                </p>
-        </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div ng-click="vm.start()">
+                            <p>
+                            <a class="btn btn-primary btn-block btn-lg">Single player</a>
+                            </p>
+                        </div>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <div id="button2">
-                <p>
-                <center> <a class="btn btn-primary btn-xlarge"> Multiplayer
-                </a> </center>
-                </p>
+                        <div>
+                            <p>
+                            <a class="btn btn-primary btn-block btn-lg">Multiplayer</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
         </div>
     </div>
 </div>

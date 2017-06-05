@@ -5,7 +5,7 @@
 <div th:fragment="question">
 <div>
 
-<div class="jumbovidtext" ng-repeat="question in vm.question">
+<div ng-repeat="question in vm.question">
     <div ng-if="!vm.endGame"><center><div class="jumbotron"><p> <h2>
         {{question.question}}
         <div id="timer"></div>

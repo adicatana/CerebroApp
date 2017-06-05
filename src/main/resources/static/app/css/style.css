@@ -26,3 +26,16 @@
 .jumbovidtext {
     z-index: 10;
 }
+
+#main-page-logo {
+    width: 35%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.mode-select-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

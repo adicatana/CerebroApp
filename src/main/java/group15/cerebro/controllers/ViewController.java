@@ -17,15 +17,13 @@ public class ViewController {
 
     @RequestMapping("/")
     public String index(Model model){
-    model.addAttribute("mode", appMode);
-
+        model.addAttribute("mode", appMode);
         return "index";
     }
 
     @RequestMapping("/login")
     public String login(Model model){
         model.addAttribute("mode", appMode);
-
         return "login";
     }
 }

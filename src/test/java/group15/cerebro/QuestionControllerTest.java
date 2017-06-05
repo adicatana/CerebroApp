@@ -4,6 +4,7 @@ import group15.cerebro.controllers.QuestionController;
 import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Topic;
 import group15.cerebro.repositories.QuestionRepository;
+import group15.cerebro.session.SessionManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class QuestionControllerTest {
 
     private QuestionRepository repo = Mockito.mock(QuestionRepository.class);
-    private QuestionController ctrl = new QuestionController(repo);
+    private QuestionController ctrl = new QuestionController(repo, new SessionManager());
 
     @Before
     public void setUp(){

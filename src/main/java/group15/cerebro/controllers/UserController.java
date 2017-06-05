@@ -5,12 +5,14 @@ import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Usr;
 import group15.cerebro.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
+@Scope("session")
 public class UserController {
 
     UserRepository userRepository;

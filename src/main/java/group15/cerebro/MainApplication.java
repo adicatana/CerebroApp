@@ -6,10 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
-	public final static Logger logger = LoggerFactory.getLogger(DemoApplication.class);
+public class MainApplication {
+	public final static Logger logger = LoggerFactory.getLogger(MainApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(MainApplication.class, args);
 	}
 }

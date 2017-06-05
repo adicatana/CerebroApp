@@ -4,55 +4,29 @@
     <meta charset="UTF-8"/>
     <title>Title</title>
 
-    <link th:if="${mode ==   'development'}" rel="stylesheet" href="../static/app/lib/bootstrap.css" th:href="@{/bootstrap.css}" />
-    <link th:if="${mode == 'production'}" rel="stylesheet" href="../static/app/lib/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
-    <link rel="stylesheet" href="../static/app/css/style.css" th:href="@{/style.css}"/>
+    <script type="text/javascript" src="app/lib/angular.min.js" ></script>
+    <script type="text/javascript" src="app/js/app.module.js" ></script>
+    <script type="text/javascript" src="app/js/login.controller.js" ></script>
 </head>
 <body>
 
-<div th:include="includes/header::body"></div>
-
-<div ng-if="!vm.endGame"><center><div id="questionbutton"><p><a class="btn btn-primary btn-xlarge-question">
-    Login
-</a></p></div></center></div>
-
-<div ng-if="!vm.endGame"><center><div id="questionbutton"><p><a class="btn btn-primary btn-xlarge-question">
-    Sign up
-</a></p></div></center></div>
-
+<div ng-app="app" ng-controller="LoginController as vm">
 <form name='f' action="login" method='POST'>
     <table>
         <tr>
             <td>User:</td>
-            <td><input type='text' name='username' value='' /></td>
+            <td><input ng-model="inputUser" type='text' name='username' value='' /></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type='password' name='password' /></td>
+            <td><input ng-model="passUser" type='password' name='password' /></td>
         </tr>
         <tr>
-            <td><input name="submit" type="submit" value="submit"/></td>
+            <td><div ng-click="vm.record()"><input name="submit" type="submit" value="submit"/></div></td>
         </tr>
     </table>
 </form>
-
-<footer style="position: fixed;Width: 100%;bottom: 10%;">
-    <!-- Social Footer, Colour Matching Icons -->
-    <!-- Include Font Awesome Stylesheet in Header -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"/>
-    <!-- // -->
-    <div class="container">
-        <div class="text-center center-block">
-            <p class="txt-railway">Imperial College London 2017</p>
-            <a><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
-            <a><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
-            <a><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
-            <a><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
-        </div>
-    </div>
-
-</footer>
+</div>
 
 </body>
 </html>

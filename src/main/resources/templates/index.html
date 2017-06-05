@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Cerebro</title>
-    <link th:if="${mode ==   'development'}" rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}" />
-    <link th:if="${mode == 'production'}" rel="stylesheet" href="../static/bootstrap.min.css" th:href="@{/bootstrap.min.css}" />
-    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}"/>
-    <link rel="stylesheet" href="../static/sweetalert.css" th:href="@{/sweetalert.css}"/>
-    <script type="text/javascript" src="/static/sweetalert.min.js" th:src="@{/sweetalert.min.js}"></script>
-    <script type="text/javascript" src="/static/angular.min.js" th:src="@{/angular.min.js}"></script>
-    <script type="text/javascript" src="/static/app/app.module.js" th:src="@{/app/app.module.js}"></script>
-    <script type="text/javascript" src="/static/app/index.controller.js" th:src="@{/app/index.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/question.controller.js" th:src="@{/app/question.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/role.controller.js" th:src="@{/app/role.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/roleuser.controller.js" th:src="@{/app/roleuser.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/topic.controller.js" th:src="@{/app/topic.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/user.controller.js" th:src="@{/app/user.controller.js}"></script>
-    <script type="text/javascript" src="/static/app/userquestion.controller.js" th:src="@{/app/userquestion.controller.js}"></script>
+    <link rel="stylesheet" href="app/lib/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app/css/style.css" />
+    <link rel="stylesheet" href="app/lib/sweetalert.css" />
+    <script type="text/javascript" src="app/lib/sweetalert.min.js" ></script>
+    <script type="text/javascript" src="app/lib/angular.min.js" ></script>
+    <script type="text/javascript" src="app/js/app.module.js" ></script>
+    <script type="text/javascript" src="app/js/index.controller.js" ></script>
+    <script type="text/javascript" src="app/js/question.controller.js" ></script>
+    <script type="text/javascript" src="app/js/role.controller.js" ></script>
+    <script type="text/javascript" src="app/js/roleuser.controller.js" ></script>
+    <script type="text/javascript" src="app/js/topic.controller.js" ></script>
+    <script type="text/javascript" src="app/js/user.controller.js" ></script>
+    <script type="text/javascript" src="app/js/userquestion.controller.js" ></script>
 </head>
 
 <body ng-app="app" ng-controller="QuestionController as vm">
 
-<div th:include="includes/header::body"></div>
-<div ng-if="vm.gameMode"><div th:include="includes/mock.main::body"></div></div>
-<div ng-if="!vm.gameMode"><div th:include="includes/mock.question::body"></div></div>
+<div ng-include="'includes/header.html'"></div>
+<!--<div ng-if="vm.gameMode"><div th:include="includes/mock.main::body"></div></div>-->
+<!--<div ng-if="!vm.gameMode"><div th:include="includes/mock.question::body"></div></div>-->
 <!--<div th:include="includes/footer::body"></div>-->
 
 <footer style="position: fixed;Width: 100%;bottom: 10%;">

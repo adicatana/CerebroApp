@@ -16,3 +16,7 @@ spring.datasource.initialize=false
 app-mode=development
 # can change local port like this on server 8080 is exposed
 server.port = 8090
+
+# disable default security to not request login
+security.basic.enabled=false
+management.security.enabled=false

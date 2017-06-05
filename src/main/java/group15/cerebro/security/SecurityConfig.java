@@ -11,7 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import java.util.List;
 
-@EnableWebSecurity
+//@EnableWebSecurity
+//Uncomment to enable security, login, etc.
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -20,10 +21,6 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/", "/home", "/about").permitAll()
-//                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-//                .antMatchers("/user/**").hasAnyRole("USER")
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
@@ -33,20 +30,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()                      // TODO: logout
                 .permitAll();
-//                .and()
-//                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-
-        //        http
-//                .authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and()
-//                .httpBasic();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user3").password("pass").roles("USER");
-
 		InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> configurer
 				= auth.inMemoryAuthentication();
 

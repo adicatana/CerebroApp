@@ -10,3 +10,7 @@ spring.datasource.initialize=false
 
 # need to see what to do with this on yml
 app-mode=development
+
+# disable default security to not request login
+security.basic.enabled=false
+management.security.enabled=false

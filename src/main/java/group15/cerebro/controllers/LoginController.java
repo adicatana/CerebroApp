@@ -9,24 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.logging.Logger;
-
 @RestController
 @RequestMapping(value = "/session")
 @Scope("session")
 public class LoginController {
     private SessionManager manager;
-    static private Logger LOGGER;
+    private String log = "";
 
     @Autowired
     public LoginController(SessionManager manager) {
         this.manager = manager;
     }
 
+    @RequestMapping(value = "/log", method = RequestMethod.GET)
+    public String log() {
+        return log;
+    }
+
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public void startSession(@RequestBody Usr usr)
     {
-        LOGGER.info("!!!!!!!!!!!!!!!!!!!!!!!! LOGIN: " + usr.getLogin());
+        log = log.concat(usr.getLogin());
         manager.makeNewSession();
     }
 }

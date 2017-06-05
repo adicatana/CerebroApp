@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 .btn-xlarge-question {
     padding: 18px 28px;
     font-size: 200%;
@@ -18,16 +23,7 @@
     border-radius: 8px;
 }
 
-#bg-video {
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-}
-.jumbovidtext {
-    z-index: 10;
-}
-
-#main-page-logo {
+.main-page-logo {
     width: 35%;
     display: block;
     margin-left: auto;
@@ -38,4 +34,17 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.footer {
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+}
+
+#navbar-profile-picture {
+    height: 8%;
+    width: 8%;
+    float:right;
 }

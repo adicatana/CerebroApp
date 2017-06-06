@@ -2,49 +2,28 @@
 <div ng-repeat="question in vm.question">
     <div class="row">
         <div class="row">
-            <div ng-if="!vm.endGame">
                 <div class="jumbotron text-center">
                         <h2>
                             {{question.question}}
                         </h2>
                 </div>
-            </div>
-
-            <div ng-if= "vm.endGame">
-                <div class="jumbotron text-center">
-                    <h2>
-                        Thank you for playing! You scored <label ng-repeat="percent in vm.percent"> {{percent}} </label> %
-                    </h2>
-                </div>
-            </div>
         </div>
+        
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.answer)">
+                <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.answer)">
                     {{question.answer}}
-                    </a></p></div>
-                </div>
+                </a></p></div>
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong1)">
+                <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong1)">
                     {{question.wrong1}}
-                    </a></p></div>
-                </div>
+                </a></p></div>
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong2)">
+                <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong2)">
                     {{question.wrong2}}
-                    </a></p></div>
-                </div>
-
-                <div ng-if="vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">
-                        End Game
-                    </a></p></div>
-                </div>
+                </a></p></div>
             </div>
             <div class="col-sm-3"></div>
         </div>

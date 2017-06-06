@@ -25,4 +25,9 @@ public class SessionController {
         MainApplication.logger.warn(usr.getPassword());
         manager.makeNewSession(usr);
     }
+
+    @RequestMapping(value = "/phase", method = RequestMethod.GET, produces="text/plain")
+    public String getPhase() {
+        return manager.getPhaseName(manager.getPhase());
+    }
 }

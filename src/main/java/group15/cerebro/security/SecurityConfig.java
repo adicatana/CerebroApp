@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import java.util.List;
 
-//@EnableWebSecurity
+@EnableWebSecurity
 //Uncomment to enable security, login, etc.
 class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -21,6 +21,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/app/**", "/includes/**", "/session/**")
+                .permitAll()
+                .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()

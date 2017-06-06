@@ -12,21 +12,23 @@
     <script type="text/javascript" src="app/lib/sweetalert.min.js" ></script>
     <script type="text/javascript" src="app/lib/angular.min.js" ></script>
     <script type="text/javascript" src="app/js/app.module.js" ></script>
-    <script type="text/javascript" src="app/js/index.controller.js" ></script>
-    <script type="text/javascript" src="app/js/question.controller.js" ></script>
-    <script type="text/javascript" src="app/js/role.controller.js" ></script>
-    <script type="text/javascript" src="app/js/roleuser.controller.js" ></script>
-    <script type="text/javascript" src="app/js/topic.controller.js" ></script>
-    <script type="text/javascript" src="app/js/user.controller.js" ></script>
-    <script type="text/javascript" src="app/js/userquestion.controller.js" ></script>
+    <script type="text/javascript" src="app/js/navigation.controller.js" ></script>
+    <script type="text/javascript" src="app/js/single.player.controller.js" ></script>
+    <script type="text/javascript" src="app/js/feedback.controller.js" ></script>
+    <script type="text/javascript" src="app/js/login.controller.js" ></script>
 </head>
 
-<body ng-app="app" ng-controller="QuestionController as vm">
-
+<body ng-app="app" ng-controller="NavigationController as nav">
 <div ng-include="'includes/header.html'"></div>
-<div ng-if="vm.gameMode"><div ng-include="'includes/mock.main.html'"></div></div>
-<div ng-if="!vm.gameMode"><div ng-include="'includes/mock.question.html'"></div></div>
+
+<div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
+
 <div ng-controller="TopicController"><div ng-include="'includes/topics.html'"></div></div>
+
+<div ng-if="nav.gamePhase === 'SINGLE'"><div ng-include="'includes/single.player.html'"></div></div>
+
+<div ng-if="nav.gamePhase === 'FEEDBACK'"><div ng-include="'includes/feedback.html'"></div></div>
+
 <div ng-include="'includes/footer.html'"></div>
 
 </body>

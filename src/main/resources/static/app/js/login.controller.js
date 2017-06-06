@@ -13,9 +13,11 @@
 
             vm.record  = record;
             vm.startSession = startSession;
+            vm.getStatus = getStatus;
 
             vm.user = "";
             vm.password = "";
+            vm.token = "";
 
             function record() {
                 vm.user = $scope.inputUser;
@@ -25,6 +27,16 @@
                 console.log(vm.password);
 
                 startSession();
+            }
+
+            function getStatus() {
+                FB.getLoginStatus(function(response) {
+                    if (response.data.status === "connected") {
+                        vm.token = response.data.authResponse.accessToken;
+                        console.log(vm.token);
+                    }
+                });
+
             }
 
             function startSession() {

@@ -1,5 +1,6 @@
 package group15.cerebro.security;
 
+import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Usr;
 import group15.cerebro.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,13 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
 
     @Override
     public String execute(Connection<?> connection) {
-        Usr user = new Usr();
-        //UserProfile profile = connection.fetchUserProfile();
-        user.setName("ABC");
-                //profile.getFirstName() + profile.getLastName());
-        user.setLogin("mylogin");
-                //profile.getUsername());
-        user.setPassword("123456");
-        user.setEmail("mail@email.com");
-                //profile.getEmail());
-        userRepository.save(user);
+        final Usr user = new Usr();
+        MainApplication.logger.info(connection.createData().getAccessToken());
+
+        user.setLogin(connection.getDisplayName());
+        MainApplication.logger.info(connection.getDisplayName());
+       // user.setPassword(randomAlphabetic(8));
+        //userRepository.save(user);
         return user.getLogin();
     }
 }

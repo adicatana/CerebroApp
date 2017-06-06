@@ -28,6 +28,8 @@ public interface SessionManagerEngine {
         }
     }
 
+    void finishFeedbackPhase();
+
     enum Phase {
         NONE,
         LOGGED,

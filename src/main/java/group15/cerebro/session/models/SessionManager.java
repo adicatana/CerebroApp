@@ -62,4 +62,11 @@ public class SessionManager implements SessionManagerEngine {
             phase = Phase.FEEDBACK;
         }
     }
+
+    @Override
+    public void finishFeedbackPhase() {
+        if (phase == Phase.FEEDBACK) {
+            phase = Phase.LOGGED;
+        }
+    }
 }

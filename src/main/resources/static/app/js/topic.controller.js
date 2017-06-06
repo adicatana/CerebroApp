@@ -1,50 +1,14 @@
-/**
- * Created by andrei-octavian on 01.06.2017.
- */
-(function () {
-    'use strict';
+'use strict';
+app.controller('TopicController', ['$scope', '$http', function($scope, $http) {
 
-    angular
-        .module('app')
-        .controller('TopicController', ['$scope', '$http', function($scope, $http) {
+    function init() {
+        $http.get('/topics/all').then(function(data) {
+            $scope.topics = data;
+            console.log(data);
+        });
+    }
 
-            var vm = this;
+    init();
+    // $scope.topics = [{name: "Topic1"}, {name: "Topic2"}, {name: "Topic3"}, {name: "Topic4"}];
 
-
-            vm.topics = [];
-            vm.getAll = getAll;
-            vm.create = createTopic;
-            vm.delete = deleteTopic;
-
-            init();
-
-            function init(){
-                getAll();
-            }
-
-            function getAll(){
-                var url = "/topic/all";
-                var topicsPromise = $http.get(url);
-                topicsPromise.then(function(response){
-                    vm.topics = response.data;
-                });
-            }
-
-            //Caution: Not implemented in Java
-            function createTopic(){
-                var url = "/topics/create";
-                var topicsPromise = $http.post(url);
-                topicsPromise.then(function(response){
-                    vm.topics = response.data;
-                });
-            }
-
-            function deleteTopic(id) {
-                var url = "/topics/delete/" + id;
-                $http.get(url).then(function (response) {
-                    vm.topics = response.data;
-                });
-            }
-
-        }]);
-})();
+}]);

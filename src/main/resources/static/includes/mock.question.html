@@ -1,52 +1,54 @@
-<div ng-repeat="question in vm.question">
-    <div class="row">
-        <div class="row">
-            <div ng-if="!vm.endGame">
-                <div class="jumbotron text-center">
-                        <h2>
-                            {{question.question}}
-                        </h2>
-                </div>
-            </div>
+<div ng-app="app" ng-controller="QuestionController as vm">
+<!--<div ng-repeat="question in vm.question">-->
+    <!--<div class="row">-->
+        <!--<div class="row">-->
+            <!--<div ng-if="!vm.endGame">-->
+                <!--<div class="jumbotron text-center">-->
+                        <!--<h2>-->
+                            <!--{{question.question}}-->
+                        <!--</h2>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <div ng-if= "vm.endGame">
-                <div class="jumbotron text-center">
-                    <h2>
-                        Thank you for playing! You scored <label ng-repeat="good in vm.lastGood"> {{good * 20}} </label> %
-                    </h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
+            <!--<div ng-if= "vm.endGame">-->
+                <!--<div class="jumbotron text-center">-->
+                    <!--<h2>-->
+                        <!--Thank you for playing! You scored <label ng-repeat="good in vm.lastGood"> {{good * 20}} </label> %-->
+                    <!--</h2>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-sm-3"></div>-->
+            <!--<div class="col-sm-6">-->
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">
-                    {{question.answer}}
-                    </a></p></div>
-                </div>
+                <!--<div ng-if="!vm.endGame">-->
+                    <!--<div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">-->
+                    <!--{{question.answer}}-->
+                    <!--</a></p></div>-->
+                <!--</div>-->
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">
-                    {{question.wrong1}}
-                    </a></p></div>
-                </div>
+                <!--<div ng-if="!vm.endGame">-->
+                    <!--<div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">-->
+                    <!--{{question.wrong1}}-->
+                    <!--</a></p></div>-->
+                <!--</div>-->
 
-                <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">
-                    {{question.wrong2}}
-                    </a></p></div>
-                </div>
+                <!--<div ng-if="!vm.endGame">-->
+                    <!--<div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">-->
+                    <!--{{question.wrong2}}-->
+                    <!--</a></p></div>-->
+                <!--</div>-->
 
-                <div ng-if="vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">
-                        End Game
-                    </a></p></div>
-                </div>
-            </div>
-            <div class="col-sm-3"></div>
-        </div>
-    </div>
+                <!--<div ng-if="vm.endGame">-->
+                    <!--<div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">-->
+                        <!--End Game-->
+                    <!--</a></p></div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-3"></div>-->
+        <!--</div>-->
+    <!--</div>-->
 
+<!--</div>-->
 </div>

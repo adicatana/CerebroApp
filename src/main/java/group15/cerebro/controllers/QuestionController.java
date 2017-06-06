@@ -28,6 +28,7 @@ public class QuestionController {
     public List<Question> getAll() {
         MainApplication.logger.info(" MY LOGGER : Get questions");
         MainApplication.logger.warn(manager.getUid().toString());
+
         return questionRepository.findAll();
     }
 

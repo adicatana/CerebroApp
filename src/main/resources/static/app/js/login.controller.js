@@ -25,7 +25,6 @@
                 console.log(vm.password);
 
                 startSession();
-                document.forms[0].submit();
             }
 
             function startSession() {
@@ -38,8 +37,11 @@
                 console.log(vm.user);
                 console.log(vm.password);
 
-                $http.post(url, data).then(function () {
+                var promise = $http.post(url, data);
+                promise.then(function () {
                     console.log("Started new session for user " + vm.user);
+
+                    document.forms[0].submit();
                 });
             }
 

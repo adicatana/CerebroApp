@@ -29,7 +29,6 @@ public class SessionManager {
     public enum Phase {
         NONE,
         LOGGED,
-        NAVIGATE,
         SINGLE
     }
 
@@ -40,6 +39,12 @@ public class SessionManager {
 
             phase = Phase.LOGGED;
             user = loginChecker.getUser();
+        }
+    }
+
+    public void startNewGame() {
+        if (phase == Phase.LOGGED) {
+            phase = Phase.SINGLE;
         }
     }
 

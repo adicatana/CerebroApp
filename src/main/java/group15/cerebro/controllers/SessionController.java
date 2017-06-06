@@ -10,18 +10,25 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/session")
 @Scope("session")
-public class LoginController {
+public class SessionController {
     private SessionManager manager;
 
     @Autowired
-    public LoginController(SessionManager manager) {
+    public SessionController(SessionManager manager) {
         this.manager = manager;
     }
 
+    // Returns the session token and it starts the game
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public void startSession(@RequestBody Usr usr) {
         MainApplication.logger.warn(usr.getLogin());
         MainApplication.logger.warn(usr.getPassword());
         manager.makeNewSession(usr);
+    }
+
+    @RequestMapping(value = "/single", method = RequestMethod.GET)
+    public void startGame() {
+        MainApplication.logger.warn("Starting single game");
+        manager.startNewGame();
     }
 }

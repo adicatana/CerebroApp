@@ -1,14 +1,17 @@
 package group15.cerebro.controllers;
 
 import group15.cerebro.MainApplication;
-import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.entities.Question;
+import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping(value = "/questions")
@@ -24,25 +27,20 @@ public class QuestionController {
         this.manager = manager;
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Question> getAll() {
+    @RequestMapping(value = "/random", method = RequestMethod.GET)
+    public Question getRandom() {
         MainApplication.logger.info(" MY LOGGER : Get questions");
         MainApplication.logger.warn(manager.getUid().toString());
 
-        return questionRepository.findAll();
+        if (manager.getPhase() == SessionManager.Phase.SINGLE) {
+            List<Question> all = getAll();
+            int index = ThreadLocalRandom.current().nextInt(0, all.size());
+            return all.get(index);
+        }
+        return null;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public List<Question> create(@RequestBody Question question) {
-        questionRepository.save(question);
+    private List<Question> getAll() {
         return questionRepository.findAll();
     }
-
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public List<Question> remove(@PathVariable long id){
-        questionRepository.delete(id);
-        return questionRepository.findAll();
-
-    }
-
 }

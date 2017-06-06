@@ -1,4 +1,4 @@
-package group15.cerebro.session;
+package group15.cerebro.session.templates;
 
 import group15.cerebro.entities.Question;
 

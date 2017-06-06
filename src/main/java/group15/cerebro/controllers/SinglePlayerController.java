@@ -3,9 +3,9 @@ package group15.cerebro.controllers;
 import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.repositories.QuestionRepository;
-import group15.cerebro.session.Game;
-import group15.cerebro.session.GameEngine;
-import group15.cerebro.session.SessionManager;
+import group15.cerebro.session.models.Game;
+import group15.cerebro.session.templates.GameEngine;
+import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,19 +22,19 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SinglePlayerController {
 
     private QuestionRepository questionRepository;
-    private SessionManager manager;
+    private SessionManagerEngine manager;
     private GameEngine game;
 
 
     public SinglePlayerController(QuestionRepository questionRepository,
-                                  SessionManager manager, GameEngine game) {
+                                  SessionManagerEngine manager, GameEngine game) {
         this.questionRepository = questionRepository;
         this.manager = manager;
         this.game = game;
     }
 
     @Autowired
-    public SinglePlayerController(QuestionRepository questionRepository, SessionManager manager) {
+    public SinglePlayerController(QuestionRepository questionRepository, SessionManagerEngine manager) {
         this.questionRepository = questionRepository;
         this.manager = manager;
         this.game = new Game();
@@ -53,7 +53,7 @@ public class SinglePlayerController {
         MainApplication.logger.info(" MY LOGGER : Get questions");
         MainApplication.logger.warn(manager.getUid().toString());
 
-        if (manager.getPhase() == SessionManager.Phase.SINGLE
+        if (manager.getPhase() == SessionManagerEngine.Phase.SINGLE
                 && game.getGames() > 0) {
             game.play();
             game.setQuestion(getRandomQuestion());

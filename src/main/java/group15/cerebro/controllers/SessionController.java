@@ -2,7 +2,7 @@ package group15.cerebro.controllers;
 
 import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Usr;
-import group15.cerebro.session.SessionManager;
+import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/session")
 @Scope("session")
 public class SessionController {
-    private SessionManager manager;
+    private SessionManagerEngine manager;
 
     @Autowired
-    public SessionController(SessionManager manager) {
+    public SessionController(SessionManagerEngine manager) {
         this.manager = manager;
     }
 

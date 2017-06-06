@@ -1,6 +1,7 @@
-package group15.cerebro.session;
+package group15.cerebro.session.models;
 
 import group15.cerebro.entities.Question;
+import group15.cerebro.session.templates.GameEngine;
 
 import java.util.concurrent.ThreadLocalRandom;
 

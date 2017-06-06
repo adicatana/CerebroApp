@@ -86,4 +86,8 @@ public class Game {
     public Question getQuestion() {
         return question;
     }
+
+    public int getPercent() {
+        return (countGood * 100) / GAMES;
+    }
 }

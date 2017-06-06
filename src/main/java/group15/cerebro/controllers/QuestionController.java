@@ -56,6 +56,12 @@ public class QuestionController {
         return null;
     }
 
+    @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")
+    public String getAnswer() {
+        MainApplication.logger.info(" MY LOGGER : Percent: " + game.getPercent());
+        return "" + game.getPercent();
+    }
+
     @RequestMapping(value = "/answer/{answer}", method = RequestMethod.GET)
     public Question getAnswer(@PathVariable("answer") String response) {
         MainApplication.logger.info(" MY LOGGER : Responding: " + response);

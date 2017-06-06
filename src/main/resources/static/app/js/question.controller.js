@@ -16,7 +16,7 @@
             vm.percent = 0;
 
             function randomQuestion() {
-                $http.get("/questions/random").then(function (response) {
+                $http.get("/singleplayer/random").then(function (response) {
                     console.log("New question generated. ");
                     vm.question = [response.data];
                 }).then(function () {
@@ -29,7 +29,7 @@
             }
 
             function validateQuestion(answer) {
-                $http.get("/questions/answer/" + answer).then(function (response) {
+                $http.get("/singleplayer/answer/" + answer).then(function (response) {
                     console.log("You responded: " + answer);
                     var goodAnswer = response.data.answer;
                     console.log("Good answer: " + goodAnswer);
@@ -41,7 +41,7 @@
             }
 
             function getPercentage() {
-                $http.get("/questions/score/").then(function (response) {
+                $http.get("/singleplayer/score/").then(function (response) {
                     vm.percent = response.data;
                 });
             }

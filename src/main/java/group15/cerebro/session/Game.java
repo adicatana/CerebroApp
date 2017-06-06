@@ -4,7 +4,7 @@ import group15.cerebro.entities.Question;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Game {
+public class Game implements GameEngine {
     private final static int GAMES = 5;
     private int games;
     private Question question;
@@ -16,23 +16,28 @@ public class Game {
         countGood = 0;
     }
 
+    @Override
     public int getGames() {
         return games;
     }
 
+    @Override
     public void play() {
         games -= 1;
     }
 
+    @Override
     public void setQuestion(Question question) {
         accept = true;
         this.question = question;
     }
 
+    @Override
     public String getAnswer() {
         return question.getAnswer();
     }
 
+    @Override
     public Question genRandomOrder() {
         int index = ThreadLocalRandom.current().nextInt(0, 6) + 1;
         Question out = new Question();
@@ -70,6 +75,7 @@ public class Game {
         return out;
     }
 
+    @Override
     public boolean respond(String response) {
         boolean good = response.equals(question.getAnswer());
         if (accept && good) {
@@ -79,14 +85,17 @@ public class Game {
         return good;
     }
 
+    @Override
     public int getCountGood() {
         return countGood;
     }
 
+    @Override
     public Question getQuestion() {
         return question;
     }
 
+    @Override
     public int getPercent() {
         return (countGood * 100) / GAMES;
     }

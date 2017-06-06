@@ -4,6 +4,7 @@ import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.session.Game;
+import group15.cerebro.session.GameEngine;
 import group15.cerebro.session.SessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,18 +17,27 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
-@RequestMapping(value = "/questions")
+@RequestMapping(value = "/singleplayer")
 @Scope("session")
-public class QuestionController {
+public class SinglePlayerController {
 
     private QuestionRepository questionRepository;
     private SessionManager manager;
-    private Game game;
+    private GameEngine game;
 
-    @Autowired
-    public QuestionController(QuestionRepository questionRepository, SessionManager manager) {
+
+    public SinglePlayerController(QuestionRepository questionRepository,
+                                  SessionManager manager, GameEngine game) {
         this.questionRepository = questionRepository;
         this.manager = manager;
+        this.game = game;
+    }
+
+    @Autowired
+    public SinglePlayerController(QuestionRepository questionRepository, SessionManager manager) {
+        this.questionRepository = questionRepository;
+        this.manager = manager;
+        this.game = new Game();
     }
 
     @RequestMapping(value = "/single", method = RequestMethod.GET)
@@ -35,11 +45,7 @@ public class QuestionController {
         MainApplication.logger.warn("Starting single game");
         manager.startNewGame();
 
-        if (game == null) {
-            game = new Game();
-        } else {
-            // Game restarted abruptly
-        }
+        //TODO: flag for game
     }
 
     @RequestMapping(value = "/random", method = RequestMethod.GET)

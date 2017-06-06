@@ -55,4 +55,11 @@ public class SessionManager implements SessionManagerEngine {
     public UUID getUid() {
         return uid;
     }
+
+    @Override
+    public void finishGame() {
+        if (phase == Phase.SINGLE) {
+            phase = Phase.FEEDBACK;
+        }
+    }
 }

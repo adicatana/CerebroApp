@@ -6,13 +6,12 @@
 
     angular
         .module('app')
-        .controller('QuestionController', ['$scope', '$http', function($scope, $http) {
+        .controller('SinglePlayerController', ['$scope', '$http', function($scope, $http) {
             var vm = this;
 
             vm.getQuestion = randomQuestion;
             vm.validateQuestion = validateQuestion;
             vm.question = null;
-            vm.endGame = false;
             vm.percent = 0;
 
             function randomQuestion() {
@@ -23,7 +22,9 @@
                     if (vm.question[0].answer === undefined) {
                         console.log("Game finished");
                         getPercentage();
-                        vm.endGame = true;
+
+                        /* Call a public event. */
+                        $scope.$emit('getGamePhase');
                     }
                 });
             }

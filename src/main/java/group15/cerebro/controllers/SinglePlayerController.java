@@ -43,9 +43,9 @@ public class SinglePlayerController {
     @RequestMapping(value = "/single", method = RequestMethod.GET)
     public void startGame() {
         MainApplication.logger.warn("Starting single game");
-        manager.startNewGame();
 
-        //TODO: flag for game
+        manager.startNewGame();
+        game = new Game();
     }
 
     @RequestMapping(value = "/random", method = RequestMethod.GET)
@@ -58,8 +58,10 @@ public class SinglePlayerController {
             game.play();
             game.setQuestion(getRandomQuestion());
             return game.genRandomOrder();
+        } else {
+            manager.finishGame();
+            return null;
         }
-        return null;
     }
 
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")

@@ -30,6 +30,11 @@
 
             function init() {
                 getGamePhase();
+
+                /* Register a public service for getting game phase. */
+                $scope.$on('getGamePhase', function() {
+                    getGamePhase();
+                });
             }
 
             init();

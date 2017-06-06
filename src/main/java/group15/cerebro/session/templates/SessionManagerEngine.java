@@ -16,11 +16,14 @@ public interface SessionManagerEngine {
 
     UUID getUid();
 
+    void finishGame();
+
     default String getPhaseName(Phase phase) {
         switch (phase) {
             case NONE: return "NONE";
             case LOGGED: return "LOGGED";
             case SINGLE: return "SINGLE";
+            case FEEDBACK: return "FEEDBACK";
             default: return "";
         }
     }
@@ -28,6 +31,7 @@ public interface SessionManagerEngine {
     enum Phase {
         NONE,
         LOGGED,
-        SINGLE
+        SINGLE,
+        FEEDBACK
     }
 }

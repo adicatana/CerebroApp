@@ -9,24 +9,29 @@
         .controller('NavigationController', ['$scope', '$http', function($scope, $http) {
             var vm = this;
 
-            vm.gameMode = false;
             vm.startSingle = startSingle;
+            vm.getGamePhase = getGamePhase;
+            vm.gamePhase = "";
 
             function startSingle() {
-                vm.gameMode = !vm.gameMode;
-
-                var promise = $http.get("/singleplayer/single");
-                promise.then(function () {
+                $http.get("/singleplayer/single").then(function () {
                     console.log("Started new game.");
+                }).then(function () {
+                    getGamePhase();
+                });
+            }
+
+            function getGamePhase() {
+                $http.get("/session/phase").then(function (response) {
+                    vm.gamePhase = response.data;
+                    console.log("Game phase updated to:" + vm.gamePhase);
                 });
             }
 
             function init() {
-
+                getGamePhase();
             }
 
             init();
-
-
         }]);
 })();

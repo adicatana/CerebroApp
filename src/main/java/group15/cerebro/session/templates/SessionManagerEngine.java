@@ -28,6 +28,6 @@ public interface SessionManagerEngine {
     enum Phase {
         NONE,
         LOGGED,
-        SINGLE;
+        SINGLE
     }
 }

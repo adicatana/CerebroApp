@@ -12,6 +12,8 @@ public interface SessionManagerEngine {
 
     void startNewGame();
 
+    void selectTopic();
+
     Phase getPhase();
 
     UUID getUid();
@@ -22,6 +24,7 @@ public interface SessionManagerEngine {
         switch (phase) {
             case NONE: return "NONE";
             case LOGGED: return "LOGGED";
+            case TOPIC: return "TOPIC_SELECTION";
             case SINGLE: return "SINGLE";
             case FEEDBACK: return "FEEDBACK";
             default: return "";
@@ -33,6 +36,7 @@ public interface SessionManagerEngine {
     enum Phase {
         NONE,
         LOGGED,
+        TOPIC,
         SINGLE,
         FEEDBACK
     }

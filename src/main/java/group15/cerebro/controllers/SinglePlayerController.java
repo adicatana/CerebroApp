@@ -2,7 +2,9 @@ package group15.cerebro.controllers;
 
 import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
+import group15.cerebro.entities.Topic;
 import group15.cerebro.repositories.QuestionRepository;
+import group15.cerebro.repositories.TopicRepository;
 import group15.cerebro.session.models.Game;
 import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
@@ -22,28 +24,40 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SinglePlayerController {
 
     private QuestionRepository questionRepository;
+    private TopicRepository topicRepository;
     private SessionManagerEngine manager;
     private GameEngine game;
+    private Topic gameTopic;
 
 
-    public SinglePlayerController(QuestionRepository questionRepository,
+    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
                                   SessionManagerEngine manager, GameEngine game) {
         this.questionRepository = questionRepository;
+        this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = game;
     }
 
     @Autowired
-    public SinglePlayerController(QuestionRepository questionRepository, SessionManagerEngine manager) {
+    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository, SessionManagerEngine manager) {
         this.questionRepository = questionRepository;
+        this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = new Game();
     }
 
-    @RequestMapping(value = "/single", method = RequestMethod.GET)
-    public void startGame() {
-        MainApplication.logger.warn("Starting single game");
+    @RequestMapping(value = "/topic", method = RequestMethod.GET)
+    public void topicSelection() {
+        MainApplication.logger.warn("Topic selection stage");
 
+        manager.selectTopic();
+    }
+
+    @RequestMapping(value = "/single/{topic}", method = RequestMethod.GET)
+    public void startGame(@PathVariable Long topic) {
+        MainApplication.logger.warn("Starting single game");
+        MainApplication.logger.warn("The topic is" + topic);
+        gameTopic = topicRepository.findOne(topic);
         manager.startNewGame();
         game = new Game();
     }
@@ -87,6 +101,9 @@ public class SinglePlayerController {
     }
 
     private List<Question> getAll() {
+        if(gameTopic != null) {
+            return questionRepository.findQuestionsByTopic(gameTopic);
+        }
         return questionRepository.findAll();
     }
 }

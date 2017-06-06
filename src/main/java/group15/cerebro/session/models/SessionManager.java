@@ -41,8 +41,15 @@ public class SessionManager implements SessionManagerEngine {
 
     @Override
     public void startNewGame() {
-        if (phase == Phase.LOGGED) {
+        if (phase == Phase.TOPIC) {
             phase = Phase.SINGLE;
+        }
+    }
+
+    @Override
+    public void selectTopic() {
+        if (phase == Phase.LOGGED) {
+            phase = Phase.TOPIC;
         }
     }
 

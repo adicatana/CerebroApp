@@ -6,6 +6,7 @@ import group15.cerebro.entities.Question;
  * Created by andrei-octavian on 06.06.2017.
  */
 public interface GameEngine {
+
     int getGames();
 
     void play();

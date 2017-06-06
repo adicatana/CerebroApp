@@ -48,3 +48,8 @@ html, body {
     width: 8%;
     float:right;
 }
+
+.topic-icon {
+    height: 60%;
+    width: 60%;
+}

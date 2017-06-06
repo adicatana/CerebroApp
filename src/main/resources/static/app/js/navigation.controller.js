@@ -11,10 +11,20 @@
 
             vm.startSingle = startSingle;
             vm.getGamePhase = getGamePhase;
+            vm.topicSingle = topicSingle;
+
             vm.gamePhase = "";
 
-            function startSingle() {
-                $http.get("/singleplayer/single").then(function () {
+            function topicSingle() {
+                $http.get("/singleplayer/topic").then(function () {
+                    console.log("Topic selected.");
+                }).then(function () {
+                    getGamePhase();
+                });
+            }
+
+            function startSingle(topic) {
+                $http.get("/singleplayer/single/" + topic).then(function () {
                     console.log("Started new game.");
                 }).then(function () {
                     getGamePhase();

@@ -13,6 +13,7 @@
     <script type="text/javascript" src="app/lib/angular.min.js" ></script>
     <script type="text/javascript" src="app/js/app.module.js" ></script>
     <script type="text/javascript" src="app/js/navigation.controller.js" ></script>
+    <script type="text/javascript" src="app/js/topic.controller.js" ></script>
     <script type="text/javascript" src="app/js/single.player.controller.js" ></script>
     <script type="text/javascript" src="app/js/feedback.controller.js" ></script>
     <script type="text/javascript" src="app/js/login.controller.js" ></script>
@@ -23,7 +24,7 @@
 
 <div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
 
-<div ng-controller="TopicController"><div ng-include="'includes/topics.html'"></div></div>
+<div ng-if="nav.gamePhase === 'TOPIC_SELECTION'"><div ng-include="'includes/topics.html'"></div></div>
 
 <div ng-if="nav.gamePhase === 'SINGLE'"><div ng-include="'includes/single.player.html'"></div></div>
 

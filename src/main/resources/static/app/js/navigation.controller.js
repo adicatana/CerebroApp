@@ -15,7 +15,7 @@
             function startSingle() {
                 vm.gameMode = !vm.gameMode;
 
-                var promise = $http.get("/session/single");
+                var promise = $http.get("/questions/single");
                 promise.then(function () {
                     console.log("Started new game.");
                 });

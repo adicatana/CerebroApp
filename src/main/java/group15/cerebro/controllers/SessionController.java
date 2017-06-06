@@ -25,10 +25,4 @@ public class SessionController {
         MainApplication.logger.warn(usr.getPassword());
         manager.makeNewSession(usr);
     }
-
-    @RequestMapping(value = "/single", method = RequestMethod.GET)
-    public void startGame() {
-        MainApplication.logger.warn("Starting single game");
-        manager.startNewGame();
-    }
 }

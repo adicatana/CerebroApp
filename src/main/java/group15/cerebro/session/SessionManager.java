@@ -42,10 +42,6 @@ public class SessionManager {
         }
     }
 
-    public void randomQuestion() {
-
-    }
-
     public void startNewGame() {
         if (phase == Phase.LOGGED) {
             phase = Phase.SINGLE;

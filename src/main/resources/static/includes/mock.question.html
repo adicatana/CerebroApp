@@ -23,19 +23,19 @@
             <div class="col-sm-6">
 
                 <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(true)">
+                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.answer)">
                     {{question.answer}}
                     </a></p></div>
                 </div>
 
                 <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">
+                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong1)">
                     {{question.wrong1}}
                     </a></p></div>
                 </div>
 
                 <div ng-if="!vm.endGame">
-                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.gen(false)">
+                    <div><p><a class="btn btn-primary btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong2)">
                     {{question.wrong2}}
                     </a></p></div>
                 </div>

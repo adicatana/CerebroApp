@@ -9,10 +9,10 @@
         .controller('QuestionController', ['$scope', '$http', function($scope, $http) {
             var vm = this;
 
-            vm.endGame = false; // refactoring
+            vm.endGame = false; // TODO: refactoring
 
             vm.getQuestion = randomQuestion;
-            vm.gen = gen;
+            vm.validateQuestion = validateQuestion;
             vm.question = null;
 
             function randomQuestion() {
@@ -22,7 +22,26 @@
                 });
             }
 
-            function gen(mybool) {
+            function validateQuestion(answer) {
+                $http.get("/questions/answer/" + answer).then(function (response) {
+                    console.log("You responded: " + answer);
+                    var goodAnswer = response.data.answer;
+                    console.log("Good answer: " + goodAnswer);
+
+                    questionFeedback(goodAnswer === answer, goodAnswer);
+                }).then(function () {
+                    randomQuestion();
+                });
+            }
+
+            function questionFeedback(good, correct) {
+                swal({
+                    title: good ? 'Good job!' : "Wrong!",
+                    text: good ? '' : "Correct answer: " + correct,
+                    type: good ? 'success' : 'error',
+                    timer: good ? 800 : 2000,
+                    showConfirmButton: false
+                });
             }
 
             init();

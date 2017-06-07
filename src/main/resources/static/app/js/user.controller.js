@@ -20,11 +20,13 @@
 
             function getCurrentUser(){
                 console.log("Entered");
+
                 var url = "/profile/user";
                 $http.get(url).then(function(response){
-                    console.log("Entered2");
                     vm.currentUser = response.data;
+                    console.log(vm.currentUser.login);
                 });
+
             }
 
         }]);

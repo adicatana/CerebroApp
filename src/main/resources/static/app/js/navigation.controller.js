@@ -38,7 +38,7 @@
 
                     if (vm.gamePhase === "LOGGED") {
                         console.log("Logged !");
-                        document.getCurrentUser();
+                        //document.getCurrentUser();
                     }
                 });
             }

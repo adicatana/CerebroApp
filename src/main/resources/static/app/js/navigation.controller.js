@@ -35,6 +35,11 @@
                 $http.get("/session/phase").then(function (response) {
                     vm.gamePhase = response.data;
                     console.log("Game phase updated to:" + vm.gamePhase);
+
+                    if (vm.gamePhase === "LOGGED") {
+                        console.log("Logged !");
+                        document.getCurrentUser();
+                    }
                 });
             }
 

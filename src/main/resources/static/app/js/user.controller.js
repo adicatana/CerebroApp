@@ -1,43 +1,31 @@
-'use strict';
+(function () {
+    'use strict';
 
-app.controller('UserController', ['$http', function($http) {
+    angular
+        .module('app')
+        .controller('UserProfileController', ['$scope', '$http', function($scope, $http) {
+            var vm = this;
 
-    var vm = this;
+            vm.users = [];
+            vm.getCurrentUser = getCurrentUser;
+            document.getCurrentUser = getCurrentUser;
 
+            vm.currentUser = undefined;
 
-    vm.users = [];
-    vm.getAll = getAll;
-    vm.create = createUser;
-    vm.delete = deleteUser;
+            init();
 
-    init();
+            function init(){
+                getCurrentUser();
+            }
 
-    function init(){
-        getAll();
-    }
+            function getCurrentUser(){
+                console.log("Entered");
+                var url = "/profile/user";
+                $http.get(url).then(function(response){
+                    console.log("Entered2");
+                    vm.currentUser = response.data;
+                });
+            }
 
-    function getAll(){
-        var url = "/users/all";
-        var usersPromise = $http.get(url);
-        usersPromise.then(function(response){
-            vm.users = response.data;
-        });
-    }
-
-    //Caution: Not implemented in Java
-    function createUser(){
-        var url = "/users/create";
-        var usersPromise = $http.post(url);
-        usersPromise.then(function(response){
-            vm.users = response.data;
-        });
-    }
-
-    function deleteUser(id) {
-        var url = "/users/delete/" + id;
-        $http.get(url).then(function (response) {
-            vm.users = response.data;
-        });
-    }
-
-}]);
+        }]);
+})();

@@ -30,18 +30,17 @@
                 </li>
             </ul>
 
-            <!-- logged in -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul ng-controller="UserProfileController as vm" class="nav navbar-nav navbar-right">
                 <li><a href="#">
                     <div>
-                        <div><b>User:</b> Mark Wheelhouse</div>
-                        <div><b>Rating:</b> 5000 <b>(Grandmaster)</b></div>
+                        <div ng-if="vm.currentUser != undefined"><b>User:</b> {{vm.currentUser.name}}</div>
+                        <div ng-if="vm.currentUser != undefined"><b>Rating:</b> {{vm.currentUser.rating}} </div>
                     </div>
                 </a></li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
+            <ul ng-controller="UserProfileController as vm"  class="nav navbar-nav navbar-right">
+                <li ng-if="vm.currentUser != undefined">
                     <img id="navbar-profile-picture" src="app/misc/profile.png"/>
                 </li>
             </ul>

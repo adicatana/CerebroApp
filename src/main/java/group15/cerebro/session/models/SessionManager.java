@@ -78,4 +78,9 @@ public class SessionManager implements SessionManagerEngine {
             phase = Phase.LOGGED;
         }
     }
+
+    @Override
+    public Usr getUserForSession() {
+        return user;
+    }
 }

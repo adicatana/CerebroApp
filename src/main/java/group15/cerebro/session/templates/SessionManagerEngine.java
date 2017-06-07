@@ -1,5 +1,7 @@
 package group15.cerebro.session.templates;
 
+import group15.cerebro.entities.Usr;
+
 import java.util.UUID;
 
 /**
@@ -17,6 +19,8 @@ public interface SessionManagerEngine {
     UUID getUid();
 
     void finishGame();
+
+    Usr getUserForSession();
 
     default String getPhaseName(Phase phase) {
         switch (phase) {

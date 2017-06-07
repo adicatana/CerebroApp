@@ -73,6 +73,7 @@ public class SinglePlayerController {
             game.setQuestion(getRandomQuestion());
             return game.genRandomOrder();
         } else {
+            game = new Game();
             manager.finishGame();
         }
         return null;

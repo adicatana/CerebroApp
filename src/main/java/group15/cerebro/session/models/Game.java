@@ -1,5 +1,6 @@
 package group15.cerebro.session.models;
 
+import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.session.templates.GameEngine;
 
@@ -7,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Game implements GameEngine {
     private final static int GAMES = 5;
+
     private int games;
     private Question question;
     private boolean accept;
@@ -15,6 +17,8 @@ public class Game implements GameEngine {
     public Game() {
         games = GAMES;
         countGood = 0;
+        accept = true;
+        question = null;
     }
 
     @Override
@@ -83,6 +87,9 @@ public class Game implements GameEngine {
             countGood++;
         }
         accept = false;
+
+        MainApplication.logger.warn("Game: Good responses: " + countGood);
+
         return good;
     }
 

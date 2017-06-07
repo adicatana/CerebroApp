@@ -29,7 +29,7 @@
             }
 
             function validateQuestion(answer) {
-                $http.get("/singleplayer/answer/" + answer).then(function (response) {
+                $http.post("/singleplayer/answer", answer).then(function (response) {
                     console.log("You responded: " + answer);
                     var goodAnswer = response.data.answer;
                     console.log("Good answer: " + goodAnswer);

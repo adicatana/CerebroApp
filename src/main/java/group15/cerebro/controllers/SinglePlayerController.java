@@ -10,10 +10,7 @@ import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -59,6 +56,7 @@ public class SinglePlayerController {
         MainApplication.logger.warn("The topic is" + topic);
         gameTopic = topicRepository.findOne(topic);
 
+        game = new Game();
         manager.startNewGame();
     }
 
@@ -84,12 +82,12 @@ public class SinglePlayerController {
         return "" + game.getPercent();
     }
 
-    @RequestMapping(value = "/answer/{answer}", method = RequestMethod.GET)
-    public Question getAnswer(@PathVariable("answer") String response) {
-        MainApplication.logger.info(" MY LOGGER : Responding: " + response);
+    @RequestMapping(value = "/answer", method = RequestMethod.POST)
+    public Question getAnswer(@RequestBody String chosen) {
+        MainApplication.logger.info(" MY LOGGER : Responding: " + chosen);
         MainApplication.logger.info(" MY LOGGER : Correct response: " + game.getAnswer());
 
-        game.respond(response);
+        game.respond(chosen);
 
         return game.getQuestion();
     }

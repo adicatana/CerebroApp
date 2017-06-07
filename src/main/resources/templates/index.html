@@ -22,8 +22,11 @@
 </head>
 
 <body ng-app="app" ng-controller="NavigationController as nav">
+<div id="fb-root"></div>
+
 <div ng-include="'includes/header.html'"></div>
 
+<div ng-if="nav.gamePhase === 'NONE'"><div ng-include="'includes/login.failed.html'"></div></div>
 <div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
 
 <div ng-if="nav.gamePhase === 'TOPIC_SELECTION'"><div ng-include="'includes/topics.html'"></div></div>

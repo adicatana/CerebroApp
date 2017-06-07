@@ -58,8 +58,8 @@ public class SinglePlayerController {
         MainApplication.logger.warn("Starting single game");
         MainApplication.logger.warn("The topic is" + topic);
         gameTopic = topicRepository.findOne(topic);
+
         manager.startNewGame();
-        game = new Game();
     }
 
     @RequestMapping(value = "/random", method = RequestMethod.GET)
@@ -74,8 +74,8 @@ public class SinglePlayerController {
             return game.genRandomOrder();
         } else {
             manager.finishGame();
-            return null;
         }
+        return null;
     }
 
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")

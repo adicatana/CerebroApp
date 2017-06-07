@@ -29,13 +29,15 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
-    public void makeNewSession(Usr auth) {
-        MainApplication.logger.warn(auth.getLogin());
-        if (phase == Phase.NONE && loginChecker.validateAuthetication(auth)) {
+    public void makeNewSession(String auth) {
+        MainApplication.logger.warn("Session started for user:" + auth);
+        if (phase == Phase.NONE) {
             uid = UUID.randomUUID();
 
             phase = Phase.LOGGED;
-            user = loginChecker.getUser();
+
+            user = loginChecker.findUser(auth);
+            MainApplication.logger.warn("User name found in DB:" + user.getName());
         }
     }
 

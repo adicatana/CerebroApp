@@ -1,11 +1,13 @@
 package group15.cerebro.controllers;
 
 import group15.cerebro.MainApplication;
-import group15.cerebro.entities.Usr;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/session")
@@ -18,16 +20,15 @@ public class SessionController {
         this.manager = manager;
     }
 
-    // Returns the session token and it starts the game
-    @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public void startSession(@RequestBody Usr usr) {
-        MainApplication.logger.warn(usr.getLogin());
-        MainApplication.logger.warn(usr.getPassword());
-        manager.makeNewSession(usr);
+    @RequestMapping(value = "/start/{user_id}", method = RequestMethod.GET)
+    public String startSession(@PathVariable("user_id") String id) {
+        manager.makeNewSession(id);
+        return null;
     }
 
     @RequestMapping(value = "/phase", method = RequestMethod.GET, produces="text/plain")
     public String getPhase() {
+        MainApplication.logger.warn("Phase is now :" + manager.getPhase());
         return manager.getPhaseName(manager.getPhase());
     }
 }

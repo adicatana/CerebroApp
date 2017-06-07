@@ -8,40 +8,27 @@
 
     angular
         .module('app')
-        .controller('LoginController', ['$scope', '$http', function($scope, $http) {
+        .controller('LoginController', ['$rootScope', '$http', '$scope',
+            function($rootScope, $http, $scope) {
             var vm = this;
 
-            vm.record  = record;
-            vm.startSession = startSession;
+            vm.getUserInfo = getUserInfo;
+            $rootScope.getUserInfo = getUserInfo;
 
-            vm.user = "";
-            vm.password = "";
+            function getUserInfo() {
+                $rootScope.facebookAPI.api('/me', function(res) {
+                    $rootScope.$apply(function() {
+                        $rootScope.user = res;
 
-            function record() {
-                vm.user = $scope.inputUser;
-                vm.password = $scope.inputPass;
-
-                console.log(vm.user);
-                console.log(vm.password);
-
-                startSession();
-            }
-
-            function startSession() {
-                var url = "/session/start";
-                var data = {
-                    login : vm.user,
-                    password : vm.password
-                };
-
-                console.log(vm.user);
-                console.log(vm.password);
-
-                var promise = $http.post(url, data);
-                promise.then(function () {
-                    console.log("Started new session for user " + vm.user);
-
-                    document.forms[0].submit();
+                        console.log("Starting session for user: " + $rootScope.user.id);
+                        var getUri = "/session/start/" + $rootScope.user.id;
+                        console.log("Resources: " + getUri);
+                        $http.get(getUri).then(function () {
+                            console.log("Session started for user: " + $rootScope.user.id);
+                        }).then(function() {
+                            $scope.$emit('getGamePhase');
+                        });
+                    });
                 });
             }
 
@@ -49,6 +36,42 @@
 
             function init() {
             }
-        }])
-})();
+        }]);
 
+    angular.module('app').run(['$rootScope', '$window',
+        function($rootScope, $window) {
+
+            $rootScope.user = {};
+
+            $window.fbAsyncInit = function() {
+                FB.init({
+                    appId: '474282212910062',
+                    status: true,
+                    cookie: true,
+                    xfbml: true
+                });
+                $rootScope.facebookAPI = FB;
+
+                setTimeout(function(){
+                    $rootScope.getUserInfo();
+                }, 1000);
+            };
+
+            (function(d){
+                var js,
+                    id = 'facebook-jssdk',
+                    ref = d.getElementsByTagName('script')[0];
+
+                if (d.getElementById(id)) {
+                    return;
+                }
+
+                js = d.createElement('script');
+                js.id = id;
+                js.async = true;
+                js.src = "//connect.facebook.net/en_US/all.js";
+
+                ref.parentNode.insertBefore(js, ref);
+            }(document));
+        }]);
+})();

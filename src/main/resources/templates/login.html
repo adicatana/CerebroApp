@@ -13,52 +13,30 @@
     <script type="text/javascript" src="app/js/login.controller.js" ></script>
 </head>
 
-<body ng-app="app">
+<body ng-app="app" ng-controller="LoginController as vm">
 <div ng-include="'includes/header.html'"></div>
 
-<div ng-app="app" ng-controller="LoginController as vm">
-    <div class="container-fluid" name='form' action="login" method='POST'>
+<div id="fb-root"></div>
+
+<div class="container-fluid">
+    <div class="row">
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-
-                <div class="row">
+                <div>
                     <img class="main-page-logo" src="app/misc/logo.png"/>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-11">
-                        <form class="form-horizontal" name='loginForm' action="login" method='POST'>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="inputUser">Login:</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="inputUser" class="form-control" id="inputUser" name="username" placeholder="Enter login" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="inputPass">Password:</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="inputPass" class="form-control" id="inputPass" name="password" placeholder="Enter password" type="password"/>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-sm-10">
-                        <div ng-click="vm.record()">
-                            <p>
-                                <a class="btn btn-primary btn-block btn-lg">Login</a>
-                            </p>
-                        </div>
 
-                        <div>
-                            <p>
-                                <a class="btn btn-primary btn-block btn-lg">Sign Up</a>
-                            </p>
-                        </div>
+                            <form action="/signin/facebook" method="POST" id="facebookForm">
+                                <input type="hidden" name="scope" value="public_profile" />
+                                <input class="btn btn-primary btn-block btn-lg"
+                                       type="submit"
+                                       value="Login with Facebook"/>
+                            </form>
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
@@ -67,6 +45,7 @@
         </div>
     </div>
 </div>
+
 <div ng-include="'includes/footer.html'"></div>
 </body>
 </html>

@@ -9,7 +9,7 @@
         .module('app')
         .controller('RankingsController', ['$rootScope','$scope', '$http', function($rootScope, $scope, $http) {
             var vm = this;
-            
+
             vm.enterRankings = enterRankings;
             vm.exitRankings = exitRankings;
             vm.getRankings = getRankings;
@@ -35,6 +35,17 @@
                 $http.get("/rankings/all/sorted").then(function (result){
                     console.log("Getting rankings.");
                     vm.userList = result.data;
+                    console.log(vm.userList);
+                });
+            }
+
+            init();
+
+            function init() {
+                $http.get("/rankings/all/sorted").then(function (result){
+                    console.log("Getting rankings.");
+                    vm.userList = result.data;
+                    console.log(vm.userList);
                 });
             }
         }]);

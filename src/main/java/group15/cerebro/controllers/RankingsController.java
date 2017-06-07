@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,14 +27,10 @@ public class RankingsController {
 
     @RequestMapping(value = "/all/sorted", method = RequestMethod.GET)
     public List<Usr> getAll() {
-        if (manager.getPhase() == SessionManagerEngine.Phase.RANKINGS) {
-            List<Usr> ans = userRepository.findAll();
-            ans.sort((o1, o2) -> o1.getRating() == o2.getRating() ? 0 :
-                o1.getRating() > o2.getRating() ? 1 : -1);
-            return ans;
-        } else {
-            return new ArrayList<>();
-        }
+        List<Usr> ans = userRepository.findAll();
+        ans.sort((o1, o2) -> o1.getRating() == o2.getRating() ? 0 :
+                o1.getRating() > o2.getRating() ? -1 : 1);
+        return ans;
     }
 
     @RequestMapping(value = "/enter", method = RequestMethod.GET)

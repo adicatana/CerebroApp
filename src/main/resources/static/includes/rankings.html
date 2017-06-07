@@ -1,3 +1,16 @@
-<div ng-app="app" ng-controller="RankingsController as rank">
+<div ng-controller="RankingsController as rank">
     <div ng-click="rank.exitRankings()"> BACK </div>
+
+    <div>
+        <div>
+            <div> Name </div>
+            <div> Rating </div>
+        </div>
+
+            <div ng-repeat="user in rank.userList track by $index">
+                <div> {{$index + 1}} </div>
+                <div> {{user.name}} </div>
+                <div> {{user.rating}} </div>
+            </div>
+    </div>
 </div>

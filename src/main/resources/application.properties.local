@@ -15,8 +15,11 @@ spring.datasource.initialize=false
 # need to see what to do with this on yml
 app-mode=development
 # can change local port like this on server 8080 is exposed
-server.port = 8090
+server.port = 8099
 
 # disable default security to not request login
 security.basic.enabled=false
 management.security.enabled=false
+
+spring.social.facebook.appId=474282212910062
+spring.social.facebook.appSecret=1fbb7af3e997b5b32a8277b1357a3f15

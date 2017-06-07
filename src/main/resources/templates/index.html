@@ -19,8 +19,11 @@
 </head>
 
 <body ng-app="app" ng-controller="NavigationController as nav">
+<div id="fb-root"></div>
+
 <div ng-include="'includes/header.html'"></div>
 
+<div ng-if="nav.gamePhase === 'NONE'"><div ng-include="'includes/login.failed.html'"></div></div>
 <div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
 <div ng-if="nav.gamePhase === 'SINGLE'"><div ng-include="'includes/single.player.html'"></div></div>
 <div ng-if="nav.gamePhase === 'FEEDBACK'"><div ng-include="'includes/feedback.html'"></div></div>

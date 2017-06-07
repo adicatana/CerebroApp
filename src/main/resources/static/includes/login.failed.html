@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="jumbotron text-center">
+        <h2>
+            Please be patient while we log you in.
+        </h2>
+    </div>
+</div>
+
+<div class="row" ng-app="app" ng-controller="LoginController as login">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div ng-click="login.getUserInfo()">
+            <p>
+                <a class="btn btn-primary btn-block btn-lg">Try again</a>
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>

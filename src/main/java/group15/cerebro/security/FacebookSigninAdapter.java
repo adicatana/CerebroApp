@@ -7,6 +7,7 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.SignInAdapter;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**

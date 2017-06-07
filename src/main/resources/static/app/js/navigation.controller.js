@@ -12,6 +12,7 @@
             vm.startSingle = startSingle;
             vm.getGamePhase = getGamePhase;
             vm.topicSingle = topicSingle;
+            window.getGamePhase = getGamePhase;
 
             vm.gamePhase = "";
 

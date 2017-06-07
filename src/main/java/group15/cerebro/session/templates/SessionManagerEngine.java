@@ -29,15 +29,21 @@ public interface SessionManagerEngine {
             case TOPIC: return "TOPIC_SELECTION";
             case SINGLE: return "SINGLE";
             case FEEDBACK: return "FEEDBACK";
+            case RANKINGS: return "RANKINGS";
             default: return "";
         }
     }
 
     void finishFeedbackPhase();
 
+    void enterRankings();
+
+    void leaveRankings();
+
     enum Phase {
         NONE,
         LOGGED,
+        RANKINGS,
         TOPIC,
         SINGLE,
         FEEDBACK

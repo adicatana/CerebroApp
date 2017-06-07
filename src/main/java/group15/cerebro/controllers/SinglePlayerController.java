@@ -59,6 +59,7 @@ public class SinglePlayerController {
         MainApplication.logger.warn("The topic is" + topic);
         gameTopic = topicRepository.findOne(topic);
 
+        game = new Game();
         manager.startNewGame();
     }
 
@@ -73,7 +74,6 @@ public class SinglePlayerController {
             game.setQuestion(getRandomQuestion());
             return game.genRandomOrder();
         } else {
-            game = new Game();
             manager.finishGame();
         }
         return null;

@@ -3,17 +3,25 @@ app.controller('TopicController', ['$scope', '$http', function($scope, $http) {
 
     function init() {
         $http.get('/topics/all').then(function(response) {
-            var seq_length = 3;
-            var temparray;
-            $scope.topics = [];
-            for (var i = 0,j = response.data.length; i < j; i += seq_length) {
-                temparray = response.data.slice(i, i + seq_length);
-                $scope.topics.push(temparray);
-            }
+            $scope.topics = response.data;
         });
     }
 
     init();
+
+    $(function () {
+        $( '#searchable-container' ).searchable({
+            searchField: '#container-search',
+            selector: '.col-sm-11',
+            childSelector: '.panel-title',
+            show: function( elem ) {
+                elem.slideDown(100);
+            },
+            hide: function( elem ) {
+                elem.slideUp( 100 );
+            }
+        })
+    });
     // $scope.topics = [[{topicname: "Topic1"}, {topicname: "Topic2"}, {topicname: "Topic3"}]];
 
 }]);

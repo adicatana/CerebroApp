@@ -1,3 +1,5 @@
+@import url('http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+
 html, body {
     margin: 0;
     height: 100%;
@@ -52,4 +54,8 @@ html, body {
 .topic-icon {
     height: 60%;
     width: 60%;
+}
+
+.topic-select-bar {
+    margin: 2%;
 }

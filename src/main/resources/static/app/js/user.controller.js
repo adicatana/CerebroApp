@@ -3,14 +3,17 @@
 
     angular
         .module('app')
-        .controller('UserProfileController', ['$scope', '$http', function($scope, $http) {
+        .controller('UserProfileController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
             var vm = this;
 
             vm.users = [];
             vm.getCurrentUser = getCurrentUser;
-            document.getCurrentUser = getCurrentUser;
+            window.getCurrentUser = getCurrentUser;
+            $rootScope.rate = getCurrentUser;
+
 
             vm.currentUser = undefined;
+            vm.pictureSrc = undefined;
 
             init();
 
@@ -18,13 +21,17 @@
                 getCurrentUser();
             }
 
-            function getCurrentUser(){
+            function getCurrentUser() {
                 console.log("Entered");
 
                 var url = "/profile/user";
-                $http.get(url).then(function(response){
+                $http.get(url).then(function (response) {
                     vm.currentUser = response.data;
-                    console.log(vm.currentUser.login);
+                    var picSrc = "https://graph.facebook.com/" + vm.currentUser.login + "/picture?type=large&redirect=true&width=650&height=650"
+                    $http.get(picSrc).then(function (picResponse) {
+                        vm.pictureSrc = picResponse.data;
+                        console.log(picResponse);
+                    })
                 });
 
             }

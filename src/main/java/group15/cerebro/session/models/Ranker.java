@@ -17,11 +17,19 @@ public class Ranker {
 
     public Ranker(Usr user, UserRepository repository) {
         this.user = user;
-        this.segment = user.getRating() / SEGM_SIZE;
+        if (user == null) {
+            this.segment = 0;
+        }
+        else {
+            this.segment = user.getRating() / SEGM_SIZE;
+        }
         this.repository = repository;
     }
 
     public void update(boolean correct) {
+        if (user == null || repository == null) {
+            return;
+        }
         int newRating = user.getRating();
         int oldRating = newRating;
         if (correct) {

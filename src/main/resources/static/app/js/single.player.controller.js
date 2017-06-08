@@ -21,6 +21,7 @@
                 fillStyle: "#e0d4cc",
                 fontColor: '#000000',
                 autostart: false,
+                smooth: true,
                 onComplete: function () {
                     $http.post("/singleplayer/answer", " ").then(function (response) {
                         console.log("You responded: " + " ");

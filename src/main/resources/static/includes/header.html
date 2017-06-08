@@ -1,10 +1,10 @@
 <header ng-controller="UserProfileController as vm" class="clearfix">
-    <nav class="navbar navbar-default">
-        <div class="container">
+    <nav class="btn-trs navbar">
+        <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li><a href="" class="navbar-brand">Cerebro</a></li>
-                <li ng-if="vm.currentUser != undefined"><a href="">My profile</a></li>
-                <li ng-if="vm.currentUser != undefined"><a href="">Leaderboard</a></li>
+                <li><a href="" class="btn-nav navbar-brand">Cerebro</a></li>
+                <li ng-if="vm.currentUser != undefined"><a href="" class="btn-nav">My profile</a></li>
+                <li ng-if="vm.currentUser != undefined"><a href="" class="btn-nav">Leaderboard</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="vm.currentUser != undefined">

@@ -6,7 +6,8 @@
 
     angular
         .module('app')
-        .controller('NavigationController', ['$scope', '$http', function($scope, $http) {
+        .controller('NavigationController', ['$scope', '$http', '$rootScope', 'currentUser',
+            function($scope, $http, $rootScope, currentUser) {
             var vm = this;
 
             vm.startSingle = startSingle;
@@ -39,7 +40,9 @@
 
                     if (vm.gamePhase === "LOGGED") {
                         console.log("Logged !");
-                        //document.getCurrentUser();
+                    }
+                    if (vm.gamePhase !== "NONE") {
+                        currentUser();
                     }
                 });
             }

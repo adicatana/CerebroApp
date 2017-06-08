@@ -6,7 +6,8 @@
 
     angular
         .module('app')
-        .controller('SinglePlayerController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
+        .controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'currentUser',
+            function($scope, $http, $rootScope, currentUser) {
             var vm = this;
 
             vm.getQuestion = randomQuestion;
@@ -65,7 +66,7 @@
 
                     questionFeedback(goodAnswer === answer, goodAnswer);
                 }).then(function () {
-                    $rootScope.rate();
+                    currentUser();
                     randomQuestion();
                 });
             }
@@ -86,10 +87,6 @@
             function init() {
                 randomQuestion();
             }
-
-            // angular.element(document).ready(function () {
-            //     randomQuestion();
-            // });
 
         }]);
 })();

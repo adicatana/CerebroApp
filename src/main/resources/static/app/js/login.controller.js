@@ -1,77 +1,82 @@
+'use strict';
 
+app.controller('LoginController', ['$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
 
-/**
- * Created by ad5915 on 05/06/17.
- */
-(function () {
-    'use strict';
+    $rootScope.fbEnsureInit(function() {
+        console.log("This will be run once FB is initialized\n");
+        (function() {
+            FB.api('/me', function(res) {
+                $rootScope.$apply(function() {
+                    var user = res;
 
-    angular
-        .module('app')
-        .controller('LoginController', ['$rootScope', '$http', '$scope',
-            function($rootScope, $http, $scope) {
-            var vm = this;
+                    console.log(user);
 
-            vm.getUserInfo = getUserInfo;
-            $rootScope.getUserInfo = getUserInfo;
+                    if (user.error !== undefined) {
+                        console.log("User could not be found.\n");
+                        return;
+                    }
 
-            function getUserInfo() {
-                $rootScope.facebookAPI.api('/me', function(res) {
-                    $rootScope.$apply(function() {
-                        $rootScope.user = res;
+                    console.log("Starting session for user: " + user.id);
 
-                        console.log("Starting session for user: " + $rootScope.user.id);
-                        var getUri = "/session/start/" + $rootScope.user.id;
-                        console.log("Resources: " + getUri);
-                        $http.get(getUri).then(function () {
-                            console.log("Session started for user: " + $rootScope.user.id);
-                        }).then(function() {
-                            $scope.$emit('getGamePhase');
-                        });
+                    var getUri = "/session/start/" + user.id;
+                    console.log("Resources: " + getUri);
+
+                    $http.get(getUri).then(function() {
+                        console.log("Session started for user: " + user.id);
+                    }).then(function() {
+                        $scope.$emit('getGamePhase');
                     });
                 });
+            });
+        })();
+    });
+
+}]);
+
+app.run(['$http', '$window', '$rootScope', function($http, $window, $rootScope) {
+
+    $window.fbAsyncInit = function() {
+        window.fbApiInit = false;
+        FB.init({
+            appId: '474282212910062',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+
+        FB.getLoginStatus(function(response) {
+            window.fbApiInit = true;
+        });
+
+    };
+
+    $rootScope.fbEnsureInit = function(callback) {
+        if (!window.fbApiInit) {
+            setTimeout(function() {
+                $rootScope.fbEnsureInit(callback);
+            }, 50);
+        } else {
+            if (callback) {
+                callback();
             }
+        }
+    };
 
-            init();
+    (function(d) {
+        var js,
+            id = 'facebook-jssdk',
+            ref = d.getElementsByTagName('script')[0];
 
-            function init() {
-            }
-        }]);
+        if (d.getElementById(id)) {
+            return;
+        }
 
-    angular.module('app').run(['$rootScope', '$window',
-        function($rootScope, $window) {
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
 
-            $rootScope.user = {};
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
 
-            $window.fbAsyncInit = function() {
-                FB.init({
-                    appId: '474282212910062',
-                    status: true,
-                    cookie: true,
-                    xfbml: true
-                });
-                $rootScope.facebookAPI = FB;
-
-                setTimeout(function(){
-                    $rootScope.getUserInfo();
-                }, 1000);
-            };
-
-            (function(d){
-                var js,
-                    id = 'facebook-jssdk',
-                    ref = d.getElementsByTagName('script')[0];
-
-                if (d.getElementById(id)) {
-                    return;
-                }
-
-                js = d.createElement('script');
-                js.id = id;
-                js.async = true;
-                js.src = "//connect.facebook.net/en_US/all.js";
-
-                ref.parentNode.insertBefore(js, ref);
-            }(document));
-        }]);
-})();
+}]);

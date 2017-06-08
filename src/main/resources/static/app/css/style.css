@@ -55,9 +55,13 @@ html, body {
 }
 
 #navbar-profile-picture {
-    margin-top: 2.5%;
-    height: 20%;
-    width: 20%;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: 15%;
+    width: 15%;
     float:right;
 }
 
@@ -68,4 +72,33 @@ html, body {
 
 .topic-select-bar {
     margin: 2%;
+}
+
+/* Header style for navbar */
+
+.inset {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    box-shadow:
+            inset 0 0 0 2px rgba(255,255,255,0.6),
+            0 1px 1px rgba(0,0,0,0.1);
+    background-color: transparent !important;
+    z-index: 999;
+}
+
+.inset img {
+    border-radius: inherit;
+    width: inherit;
+    height: inherit;
+    display: block;
+    position: relative;
+    z-index: 998;
+}
+
+@media (min-width: 900px) {
+    .navbar-nav > li{
+    padding-top: 1em;
+    padding-left:1em;
+    }
 }

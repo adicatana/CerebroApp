@@ -1,50 +1,25 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="">Cerebro</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<header ng-controller="UserProfileController as vm" class="clearfix">
+    <nav class="navbar navbar-default">
+        <div class="container">
             <ul class="nav navbar-nav">
-                <li> <!-- Make it dynamic using JS -->
-                    <div id="_nav0"></div> <a id="nav0" href="/topics/all">Subjects</a>
-                </li>
-                <li>
-                    <div id="_nav1"></div> <a id="nav1" href="/users/all">Players</a>
-                </li>
-                <li class="dropdown">
-                    <div id="_nav2"></div> <a id="nav2" href="#" data-toggle="dropdown" class="dropdown-toggle">Rankings <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Item 1</a></li>
-                        <li><a href="#">Item 2</a></li>
-                        <li><a href="#">Item 3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Item 4</a></li>
-                    </ul>
-                </li>
+                <li><a href="" class="navbar-brand">Cerebro</a></li>
+                <li ng-if="vm.currentUser != undefined"><a href="">My profile</a></li>
+                <li ng-if="vm.currentUser != undefined"><a href="">Leaderboard</a></li>
             </ul>
-
-            <ul ng-controller="UserProfileController as vm" class="nav navbar-nav navbar-right">
-                <li><a href="#">
-                    <div>
-                        <div ng-if="vm.currentUser != undefined"><b>User:</b> {{vm.currentUser.name}}</div>
-                        <div ng-if="vm.currentUser != undefined"><b>Rating:</b> {{vm.currentUser.rating}} </div>
-                    </div>
-                </a></li>
-            </ul>
-
-            <ul ng-controller="UserProfileController as vm"  class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li ng-if="vm.currentUser != undefined">
-                    <img id="navbar-profile-picture"
-                         ng-src="https://graph.facebook.com/{{vm.currentUser.login}}/picture?type=large&redirect=true&width=650&height=650" style="float: bottom"/>
+                    <div>
+                        <div><b>User:</b> {{vm.currentUser.name}}</div>
+                        <div><b>Rating:</b> {{vm.currentUser.rating}} </div>
+                    </div>
+                </li>
+
+                <li ng-if="vm.currentUser != undefined">
+                    <div class="inset">
+                        <img ng-src="https://graph.facebook.com/{{vm.currentUser.login}}/picture?type=large&redirect=true&width=650&height=650"/>
+                    </div>
                 </li>
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

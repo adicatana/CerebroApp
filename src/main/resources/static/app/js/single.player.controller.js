@@ -14,6 +14,32 @@
             vm.question = null;
             vm.percent = 0;
 
+            var countdown = $("#countdown").countdown360({
+                radius: 60,
+                strokeStyle: '#ff6a00',
+                seconds: 10,
+                fillStyle: "#e0d4cc",
+                fontColor: '#000000',
+                autostart: false,
+                onComplete: function () {
+                    $http.post("/singleplayer/answer", " ").then(function (response) {
+                        console.log("You responded: " + " ");
+                        var goodAnswer = response.data.answer;
+                        console.log("Good answer: " + goodAnswer);
+
+                        questionFeedback(goodAnswer === " ", goodAnswer);
+                    }).then(function () {
+                        randomQuestion();
+                    });
+                }
+            });
+
+
+            var setTimer = function () {
+                countdown.start();
+                console.log('countdown360 ', countdown);
+            };
+
             function randomQuestion() {
                 $http.get("/singleplayer/random").then(function (response) {
                     console.log("New question generated. ");
@@ -21,9 +47,11 @@
                 }).then(function () {
                     if (vm.question[0].answer === undefined) {
                         console.log("Game finished");
-
+                        countdown.stop();
                         /* Call a public event. */
                         $scope.$emit('getGamePhase');
+                    } else {
+                        setTimer();
                     }
                 });
             }
@@ -41,6 +69,7 @@
             }
 
             function questionFeedback(good, correct) {
+                countdown.stop();
                 swal({
                     title: good ? 'Good job!' : "Wrong!",
                     text: good ? '' : "Correct answer: " + correct,
@@ -55,5 +84,10 @@
             function init() {
                 randomQuestion();
             }
+
+            // angular.element(document).ready(function () {
+            //     randomQuestion();
+            // });
+
         }]);
 })();

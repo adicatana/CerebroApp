@@ -3,6 +3,7 @@
 html, body {
     margin: 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 .btn-xlarge-question {
@@ -52,17 +53,6 @@ html, body {
     bottom: 10%;
     left: 0;
     right: 0;
-}
-
-#navbar-profile-picture {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: 30px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    height: 15%;
-    width: 15%;
-    float:right;
 }
 
 .topic-icon {

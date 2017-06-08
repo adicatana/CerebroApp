@@ -17,6 +17,7 @@
     <script type="text/javascript" src="app/js/topic.controller.js" ></script>
     <script type="text/javascript" src="app/js/single.player.controller.js" ></script>
     <script type="text/javascript" src="app/js/feedback.controller.js" ></script>
+    <script type="text/javascript" src="app/js/rankings.controller.js" ></script>
     <script type="text/javascript" src="app/js/login.controller.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app/lib/jquery.countdown360.min.js" type="text/javascript" charset="utf-8"></script>
@@ -26,6 +27,9 @@
 <div id="fb-root"></div>
 
 <div ng-include="'includes/header.html'"></div>
+
+
+<div ng-if="nav.gamePhase === 'RANKINGS'"><div ng-include="'includes/rankings.html'"></div></div>
 
 <div ng-if="nav.gamePhase === 'NONE'"><div ng-include="'includes/login.failed.html'"></div></div>
 <div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>

@@ -5,7 +5,9 @@ import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Topic;
 import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.repositories.TopicRepository;
+import group15.cerebro.repositories.UserRepository;
 import group15.cerebro.session.models.Game;
+import group15.cerebro.session.models.Ranker;
 import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,12 @@ public class SinglePlayerController {
 
     private QuestionRepository questionRepository;
     private TopicRepository topicRepository;
+    private UserRepository userRepository;
     private SessionManagerEngine manager;
     private GameEngine game;
     private Topic gameTopic;
 
-
+    // Add userRepository for testing
     public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
                                   SessionManagerEngine manager, GameEngine game) {
         this.questionRepository = questionRepository;
@@ -36,8 +39,10 @@ public class SinglePlayerController {
     }
 
     @Autowired
-    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository, SessionManagerEngine manager) {
+    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
+                                  SessionManagerEngine manager, UserRepository userRepository) {
         this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
         this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = new Game();
@@ -77,7 +82,7 @@ public class SinglePlayerController {
     }
 
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")
-    public String getAnswer() {
+    public String getPercent() {
         MainApplication.logger.info(" MY LOGGER : Percent: " + game.getPercent());
         return "" + game.getPercent();
     }
@@ -87,7 +92,10 @@ public class SinglePlayerController {
         MainApplication.logger.info(" MY LOGGER : Responding: " + chosen);
         MainApplication.logger.info(" MY LOGGER : Correct response: " + game.getAnswer());
 
-        game.respond(chosen);
+        (new Ranker(manager.getUserForSession(),
+                    userRepository)).update(
+                game.respond(chosen)
+        );
 
         return game.getQuestion();
     }

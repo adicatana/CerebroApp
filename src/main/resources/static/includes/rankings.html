@@ -1,0 +1,36 @@
+<div ng-controller="RankingsController as rank">
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="btn btn-primary btn-ranks col-sm-1"
+             ng-click="rank.exitRankings()"> BACK </div>
+        <div class="col-sm-10"></div>
+    </div>
+
+    <div ng-repeat="i in [0,1]">
+        <div>&nbsp;</div>
+    </div>
+
+    <div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="btn btn-primary btn-ranks col-sm-1"> Rank </div>
+            <div class="btn btn-primary btn-ranks col-sm-6"> Name </div>
+            <div class="btn btn-primary btn-ranks col-sm-3"> Rating </div>
+            <div class="col-sm-1"></div>
+        </div>
+
+        <div ng-repeat="i in [0]">
+            <div>&nbsp;</div>
+        </div>
+
+        <div class="row" ng-repeat="user in rank.userList track by $index">
+            <div class="col-sm-1"></div>
+            <div class="btn btn-primary btn-ranks col-sm-1"> {{$index + 1}} </div>
+            <div class="btn btn-primary btn-ranks col-sm-6"> {{user.name}} </div>
+            <div class="btn btn-primary btn-ranks col-sm-3"> {{user.rating}} </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+
+</div>

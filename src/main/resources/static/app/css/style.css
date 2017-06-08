@@ -25,6 +25,15 @@ html, body {
     border-radius: 8px;
 }
 
+.btn-ranks {
+    padding: 18px 28px;
+    font-size: 200%;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
 .main-page-logo {
     width: 35%;
     display: block;

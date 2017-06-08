@@ -80,6 +80,20 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
+    public void enterRankings() {
+        if (phase == Phase.LOGGED) {
+            phase = Phase.RANKINGS;
+        }
+    }
+
+    @Override
+    public void leaveRankings() {
+        if (phase == Phase.RANKINGS) {
+            phase = Phase.LOGGED;
+        }
+    }
+
+    @Override
     public Usr getUserForSession() {
         return user;
     }

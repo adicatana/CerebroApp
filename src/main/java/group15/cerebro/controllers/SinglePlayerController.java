@@ -29,19 +29,20 @@ public class SinglePlayerController {
     private GameEngine game;
     private Topic gameTopic;
 
+    // Add userRepository for testing
     public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
-                                  SessionManagerEngine manager, GameEngine game,
-                                  UserRepository userRepository) {
+                                  SessionManagerEngine manager, GameEngine game) {
         this.questionRepository = questionRepository;
         this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = game;
-        this.userRepository = userRepository;
     }
 
     @Autowired
-    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository, SessionManagerEngine manager) {
+    public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
+                                  SessionManagerEngine manager, UserRepository userRepository) {
         this.questionRepository = questionRepository;
+        this.userRepository = userRepository;
         this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = new Game();

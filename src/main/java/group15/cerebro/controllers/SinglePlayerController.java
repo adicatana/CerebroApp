@@ -92,10 +92,11 @@ public class SinglePlayerController {
         MainApplication.logger.info(" MY LOGGER : Responding: " + chosen);
         MainApplication.logger.info(" MY LOGGER : Correct response: " + game.getAnswer());
 
-//        (new Ranker(manager.getUserForSession(),
-//                    userRepository)).update(
-//                game.respond(chosen)
-//        );
+        if (manager != null)
+            (new Ranker(manager.getUserForSession(),
+                        userRepository)).update(
+                    game.respond(chosen)
+            );
 
         return game.getQuestion();
     }

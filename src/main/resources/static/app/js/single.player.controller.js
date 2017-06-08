@@ -6,7 +6,7 @@
 
     angular
         .module('app')
-        .controller('SinglePlayerController', ['$scope', '$http', function($scope, $http) {
+        .controller('SinglePlayerController', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
             var vm = this;
 
             vm.getQuestion = randomQuestion;
@@ -65,6 +65,7 @@
 
                     questionFeedback(goodAnswer === answer, goodAnswer);
                 }).then(function () {
+                    $rootScope.rate();
                     randomQuestion();
                 });
             }

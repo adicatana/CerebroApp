@@ -18,7 +18,7 @@
             var countdown = $("#countdown").countdown360({
                 radius: 60,
                 strokeStyle: '#ff6a00',
-                seconds: 10,
+                seconds: 15,
                 fillStyle: "#e0d4cc",
                 fontColor: '#000000',
                 autostart: false,

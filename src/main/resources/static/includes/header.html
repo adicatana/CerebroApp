@@ -1,11 +1,18 @@
-<header class="clearfix">
+<header class="clearfix" ng-controller="NavigationController as nav">
     <nav class="btn-trs navbar">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li><a href="" class="btn-nav navbar-brand">Cerebro</a></li>
                 <li ng-if="currentUser != undefined"><a href="" class="btn-nav">My profile</a></li>
-                <li ng-if="currentUser != undefined"><a href="" class="btn-nav">Leaderboard</a></li>
+
+                <li ng-if="currentUser != undefined"
+                    ng-controller="RankingsController as rank"
+                    ng-click="rank.enterRankings()">
+                    <a href="" class="btn-nav">Leaderboard</a>
+                </li>
+
             </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="currentUser != undefined">
                     <div>

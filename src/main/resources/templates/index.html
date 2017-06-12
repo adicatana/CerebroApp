@@ -12,6 +12,7 @@
     <script type="text/javascript" src="app/lib/sweetalert.min.js" ></script>
     <script type="text/javascript" src="app/lib/angular.min.js" ></script>
     <script type="text/javascript" src="app/js/app.module.js" ></script>
+    <script type="text/javascript" src="app/js/navigation.service.js" ></script>
     <script type="text/javascript" src="app/js/user.service.js" ></script>
     <script type="text/javascript" src="app/js/topic.controller.js" ></script>
     <script type="text/javascript" src="app/js/single.player.controller.js" ></script>
@@ -29,18 +30,18 @@
 <div ng-include="'includes/header.html'"></div>
 
 
-<div ng-if="nav.gamePhase === 'RANKINGS'"><div ng-include="'includes/rankings.html'"></div></div>
+<div ng-if="gamePhase === 'RANKINGS'"><div ng-include="'includes/rankings.html'"></div></div>
 
-<div ng-if="nav.gamePhase === 'NONE'"><div ng-include="'includes/login.failed.html'"></div></div>
-<div ng-if="nav.gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
+<div ng-if="gamePhase === 'NONE'"><div ng-include="'includes/login.failed.html'"></div></div>
+<div ng-if="gamePhase === 'LOGGED'"><div ng-include="'includes/main.html'"></div></div>
 
-<div ng-if="nav.gamePhase === 'TOPIC_SELECTION'"><div ng-include="'includes/topics.html'"></div></div>
+<div ng-if="gamePhase === 'TOPIC_SELECTION'"><div ng-include="'includes/topics.html'"></div></div>
 
-<div ng-if="nav.gamePhase === 'SINGLE'"><div ng-include="'includes/single.player.html'"></div></div>
+<div ng-if="gamePhase === 'SINGLE'"><div ng-include="'includes/single.player.html'"></div></div>
 
-<div ng-if="nav.gamePhase === 'FEEDBACK'"><div ng-include="'includes/feedback.html'"></div></div>
+<div ng-if="gamePhase === 'FEEDBACK'"><div ng-include="'includes/feedback.html'"></div></div>
 
-<div ng-if="nav.gamePhase === 'NONE' || nav.gamePhase === 'LOGGED'" ng-include="'includes/footer.html'"></div>
+<div ng-if="gamePhase === 'NONE' || gamePhase === 'LOGGED'" ng-include="'includes/footer.html'"></div>
 
 </body>
 </html>

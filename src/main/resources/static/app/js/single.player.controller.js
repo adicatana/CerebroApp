@@ -3,8 +3,8 @@
  */
 'use strict';
 
-app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'currentUser',
-    function($scope, $http, $rootScope, currentUser) {
+app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'currentUser', 'getGamePhase',
+    function($scope, $http, $rootScope, currentUser, getGamePhase) {
         var vm = this;
 
         vm.getQuestion = randomQuestion;
@@ -47,8 +47,8 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                 if (vm.question[0].answer === undefined) {
                     console.log("Game finished");
                     countdown.stop();
-                    /* Call a public event. */
-                    $scope.$emit('getGamePhase');
+
+                    getGamePhase();
                 } else {
                     setTimer();
                 }

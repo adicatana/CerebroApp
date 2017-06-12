@@ -3,7 +3,9 @@
  */
 'use strict';
 
-app.controller('FeedbackController', ['$scope', '$http', function($scope, $http) {
+app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
+    function($scope, $http, getGamePhase) {
+
     var vm = this;
 
     vm.percent = 0;
@@ -23,9 +25,7 @@ app.controller('FeedbackController', ['$scope', '$http', function($scope, $http)
     function gotoMainScreen() {
         $http.get("/feedback/end").then(function() {
             console.log("The game has ended. Returning to main screen.");
-
-            /* Call a public event. */
-            $scope.$emit('getGamePhase');
+            getGamePhase();
         });
     }
 

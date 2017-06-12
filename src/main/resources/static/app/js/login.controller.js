@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('LoginController', ['$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
+app.controller('LoginController', ['$rootScope', '$scope', '$http', 'getGamePhase',
+    function($rootScope, $scope, $http, getGamePhase) {
 
     $rootScope.fbEnsureInit(function() {
         console.log("This will be run once FB is initialized\n");
@@ -24,7 +25,7 @@ app.controller('LoginController', ['$rootScope', '$scope', '$http', function($ro
                     $http.get(getUri).then(function() {
                         console.log("Session started for user: " + user.id);
                     }).then(function() {
-                        $scope.$emit('getGamePhase');
+                        getGamePhase();
                     });
                 });
             });

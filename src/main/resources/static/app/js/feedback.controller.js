@@ -64,6 +64,9 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
 
     function sendUserData(userArrayInput) {
         var userJSONInput = {
+            topic: {
+                topicname: userArrayInput[0]
+            },
             question: userArrayInput[1],
             answer: userArrayInput[2],
             wrong1: userArrayInput[3],

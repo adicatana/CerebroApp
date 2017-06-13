@@ -3,6 +3,7 @@ package group15.cerebro.controllers;
 
 import group15.cerebro.entities.Question;
 import group15.cerebro.repositories.QuestionRepository;
+import group15.cerebro.repositories.TopicRepository;
 import group15.cerebro.session.models.UserInputProcessor;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class FeedbackController {
     private UserInputProcessor processor;
 
     @Autowired
-    public FeedbackController(SessionManagerEngine manager, QuestionRepository questionRepository) {
+    public FeedbackController(SessionManagerEngine manager, QuestionRepository questionRepository, TopicRepository topicRepository) {
         this.manager = manager;
-        this.processor = new UserInputProcessor(questionRepository);
+        this.processor = new UserInputProcessor(questionRepository, topicRepository);
     }
 
     @RequestMapping(value = "/end", method = RequestMethod.GET)

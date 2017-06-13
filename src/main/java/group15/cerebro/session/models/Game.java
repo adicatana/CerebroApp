@@ -7,7 +7,7 @@ import group15.cerebro.session.templates.GameEngine;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game implements GameEngine {
-    private final static int GAMES = 1;
+    private final static int GAMES = 5;
 
     private int games;
     private Question question;

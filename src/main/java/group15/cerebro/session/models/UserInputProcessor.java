@@ -21,7 +21,7 @@ public class UserInputProcessor {
         MainApplication.logger.info("Question received from " + user.getName());
 
         // This would be more efficient if we change the user interface accordingly
-        MainApplication.logger.info("Topic: " + proposedQuestion.getTopic().getTopicname());
+        MainApplication.logger.info("Topic id: " + proposedQuestion.getTopic().getId());
         MainApplication.logger.info("Question: " + proposedQuestion.getQuestion());
         MainApplication.logger.info("Answer: " + proposedQuestion.getAnswer());
         MainApplication.logger.info("Wrong1: " + proposedQuestion.getWrong1());
@@ -32,12 +32,12 @@ public class UserInputProcessor {
             return;
         }
 
-        // Find the topic by given name
-        Topic topic = topicRepository.findByTopicName(
-                proposedQuestion.getTopic().getTopicname());
+        // Find the topic by id
+        Topic topic = topicRepository.findOne(
+                proposedQuestion.getTopic().getId());
 
         if (topic == null) {
-            MainApplication.logger.info("Newly proposed or invalid topic.");
+            MainApplication.logger.error("Something went wrong: invalid topic. No user input registered.");
             return;
         }
 

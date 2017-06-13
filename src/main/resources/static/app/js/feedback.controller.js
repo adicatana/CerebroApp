@@ -96,7 +96,7 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
     function sendUserData(userArrayInput, topicId) {
         var userJSONInput = {
             topic: {
-                id: topicId
+                id: parseInt(topicId)
             },
             question: userArrayInput[0],
             answer: userArrayInput[1],
@@ -106,9 +106,9 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
         var userJSONString = JSON.stringify(userJSONInput);
 
         console.log("Sending: ", userJSONString);
-        // $http.post("/feedback/input", userJSONString).then(function() {
-        //     console.log("User feedback sent:", userJSONString);
-        // });
+        $http.post("/feedback/input", userJSONString).then(function() {
+            console.log("User feedback sent:", userJSONString);
+        });
     }
 
     init();

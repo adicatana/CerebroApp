@@ -29,16 +29,18 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
         });
     }
 
+    var swalHTMLContent =
+        '<p>To contribute to our content, please add a question for other players:</p>' +
+        '<input id="topic" class="swal2-input" placeholder="Topic">' +
+        '<input id="question" class="swal2-input" placeholder="Question">' +
+        '<input id="answer" class="swal2-input" placeholder="Correct answer">' +
+        '<input id="wrong1" class="swal2-input" placeholder="First wrong answer">' +
+        '<input id="wrong2" class="swal2-input" placeholder="Second wrong answer">';
+
     function collectFeedback() {
         swal({
             title: 'Contribute',
-            html:
-            '<p>To contribute to our content, please add a question for other players:</p>' +
-            '<input id="topic" class="swal2-input" placeholder="Topic">' +
-            '<input id="question" class="swal2-input" placeholder="Question">' +
-            '<input id="answer" class="swal2-input" placeholder="Correct answer">' +
-            '<input id="wrong1" class="swal2-input" placeholder="First wrong answer">' +
-            '<input id="wrong2" class="swal2-input" placeholder="Second wrong answer">',
+            html: swalHTMLContent,
             preConfirm: function () {
                 return new Promise(function (resolve) {
                     resolve([
@@ -53,49 +55,25 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
             onOpen: function () {
                 $('#swal-input1').focus();
             }
-        }).then(function (result) {
-            // swal(JSON.stringify(result))
+        }).then(function (userArrayInput) {
+            // swal(JSON.stringify(userInputJSON)) // used for debugging
+            sendUserData(userArrayInput);
         }).catch(swal.noop);
-        //
-        //
-        // swal({
-        //         title: "Contribute",
-        //         text: "To contribute to our content, please add a question to be reponded by other players:",
-        //         type: "input",
-        //         showCancelButton: true,
-        //         closeOnConfirm: false,
-        //         animation: "slide-from-top",
-        //         inputPlaceholder: "Write something"
-        //     },
-        //     function(inputValue) {
-        //         if (inputValue === false) return false;
-        //
-        //         if (inputValue === "") {
-        //             swal.showInputError("You need to write something!");
-        //             return false;
-        //         }
-        //
-        //         swal("Now please add a good answer to your question", "You wrote: " + inputValue, "success");
-        //         swal({
-        //                 title: "Contribute: Answer",
-        //                 text: "Now please add a good answer to your question:",
-        //                 type: "input",
-        //                 showCancelButton: true,
-        //                 closeOnConfirm: false,
-        //                 animation: "slide-from-top",
-        //                 inputPlaceholder: "Write something"
-        //             },
-        //             function(inputValue) {
-        //                 if (inputValue === false) return false;
-        //
-        //                 if (inputValue === "") {
-        //                     swal.showInputError("You need to write something!");
-        //                     return false
-        //                 }
-        //                 swal("Thank you for your input!", "" + inputValue, "success");
-        //             });
-        //     });
         gotoMainScreen();
+    }
+
+    function sendUserData(userArrayInput) {
+        var userJSONInput = {
+            question: userArrayInput[1],
+            answer: userArrayInput[2],
+            wrong1: userArrayInput[3],
+            wrong2: userArrayInput[4]
+        };
+        var userJSONString = JSON.stringify(userJSONInput);
+        console.log("Sending: ", userJSONString);
+        $http.post("/feedback/input", userJSONString).then(function() {
+            console.log("User feedback sent:", userJSONString);
+        });
     }
 
     init();

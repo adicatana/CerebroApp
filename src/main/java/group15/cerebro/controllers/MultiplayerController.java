@@ -8,6 +8,7 @@ import group15.cerebro.session.multi.SessionPool;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,6 +59,7 @@ public class MultiplayerController {
         return match != null && match.ping(manager.getUserForSession());
     }
 
+    // should send back the question shuffled
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question random() {
         if (match.getQuestion() == null) {
@@ -67,7 +69,13 @@ public class MultiplayerController {
         return match.getQuestion();
     }
 
-    
+    // should send back the question un-shuffled
+    @RequestMapping(value = "/answer", method = RequestMethod.POST)
+    public Question getAnswer(@RequestBody String chosen) {
+        MainApplication.logger.info("Player " + manager.getUserForSession().getName()
+                + " responded " + chosen);
+        return match.getQuestion();
+    }
 
     private Question getRandomQuestion() {
         List<Question> all = getAll();

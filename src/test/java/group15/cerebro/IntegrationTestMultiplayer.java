@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
@@ -67,11 +68,15 @@ public class IntegrationTestMultiplayer {
         mockMvc.perform(get("/multi/ping").session(mockSession2));
     }
 
-    private void getQustions() throws Exception {
+    private void getQuestions() throws Exception {
         mockMvc.perform(get("/multi/random").session(mockSession1));
         mockMvc.perform(get("/multi/random").session(mockSession2));
     }
 
+    private void respond() throws Exception {
+        mockMvc.perform(post("/multi/answer").content("Response 1").session(mockSession1));
+        mockMvc.perform(post("/multi/answer").content("Response 2").session(mockSession2));
+    }
 
     @Test
     public void twoPlayerGame() throws Exception {
@@ -79,6 +84,7 @@ public class IntegrationTestMultiplayer {
         joinRoom();
         makeMatch();
         ping();
-        getQustions();
+        getQuestions();
+        respond();
     }
 }

@@ -1,5 +1,6 @@
 package group15.cerebro.session.multi;
 
+import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Usr;
 
 import java.util.Timer;
@@ -14,12 +15,14 @@ public class Match {
 
     private TimerTask timerTask;
     private Timer timer;
+    private Question question;
 
     public Match(Usr player1, Usr player2) {
         this.player1 = player1;
         this.player2 = player2;
         pinged1 = false;
         pinged2 = false;
+        question = null;
 
         timerTask = new TimerTask() {
             @Override
@@ -49,5 +52,13 @@ public class Match {
             pinged2 = true;
         }
         return pinged1 && pinged2;
+    }
+
+    public synchronized Question getQuestion() {
+        return question;
+    }
+
+    public synchronized void setQuestion(Question question) {
+        this.question = question;
     }
 }

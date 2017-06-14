@@ -62,10 +62,23 @@ public class IntegrationTestMultiplayer {
         mockMvc.perform(get("/multi/match").session(mockSession2));
     }
 
+    private void ping() throws Exception {
+        mockMvc.perform(get("/multi/ping").session(mockSession1));
+        mockMvc.perform(get("/multi/ping").session(mockSession2));
+    }
+
+    private void getQustions() throws Exception {
+        mockMvc.perform(get("/multi/random").session(mockSession1));
+        mockMvc.perform(get("/multi/random").session(mockSession2));
+    }
+
+
     @Test
     public void twoPlayerGame() throws Exception {
         startSessions();
         joinRoom();
         makeMatch();
+        ping();
+        getQustions();
     }
 }

@@ -60,8 +60,14 @@ public class MultiplayerController {
 
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question random() {
-        return null;
+        if (match.getQuestion() == null) {
+            match.setQuestion(getRandomQuestion());
+        }
+        MainApplication.logger.info("Question:" + match.getQuestion().getQuestion());
+        return match.getQuestion();
     }
+
+    
 
     private Question getRandomQuestion() {
         List<Question> all = getAll();

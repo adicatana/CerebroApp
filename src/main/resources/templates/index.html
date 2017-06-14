@@ -22,13 +22,16 @@
     <script type="text/javascript" src="app/js/navigation.controller.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app/lib/jquery.countdown360.min.js" type="text/javascript" charset="utf-8"></script>
+
+
 </head>
+
 
 <body ng-app="app" ng-controller="NavigationController as nav">
 <div id="fb-root"></div>
 
-<div ng-include="'includes/header.html'"></div>
 
+<div ng-include="'includes/header.html'"></div>
 
 <div ng-if="gamePhase === 'RANKINGS'"><div ng-include="'includes/rankings.html'"></div></div>
 

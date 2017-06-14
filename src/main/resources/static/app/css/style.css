@@ -115,3 +115,14 @@ html, body {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: rgba(255, 106, 0, 0.5);
 }
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus  {
+    background-color: white;
+    color: black;
+}
+
+.nav-tabs > li > a  {
+    color: white;
+}

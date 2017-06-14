@@ -10,6 +10,8 @@ public class Topic {
     @SequenceGenerator(name = "topic_topicid_seq", sequenceName = "topic_topicid_seq", allocationSize = 1)
     private long id;
     private String topicname;
+    private boolean isBook;
+    private String author;
 
     public long getId() {
         return id;
@@ -25,6 +27,23 @@ public class Topic {
 
     public void setTopicname(String topicname) {
         this.topicname = topicname;
+    }
+
+
+    public boolean isBook() {
+        return isBook;
+    }
+
+    public void setBook(boolean book) {
+        isBook = book;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @Override

@@ -9,6 +9,8 @@ import java.util.TimerTask;
 public class Match {
     private Usr player1;
     private Usr player2;
+    public static final int TOTAL = 4;
+    private int remainingQuestions;
 
     private boolean pinged1;
     private boolean pinged2;
@@ -23,6 +25,7 @@ public class Match {
         pinged1 = false;
         pinged2 = false;
         question = null;
+        remainingQuestions = TOTAL;
 
         timerTask = new TimerTask() {
             @Override
@@ -36,11 +39,11 @@ public class Match {
         timer.scheduleAtFixedRate(timerTask, 30, 100);
     }
 
-    public Usr getPlayer1() {
+    public synchronized Usr getPlayer1() {
         return player1;
     }
 
-    public Usr getPlayer2() {
+    public synchronized Usr getPlayer2() {
         return player2;
     }
 
@@ -60,5 +63,13 @@ public class Match {
 
     public synchronized void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public synchronized void play() {
+        remainingQuestions--;
+    }
+
+    public synchronized int getRemainingQuestions() {
+        return remainingQuestions;
     }
 }

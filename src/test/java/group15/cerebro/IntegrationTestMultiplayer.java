@@ -1,5 +1,6 @@
 package group15.cerebro;
 
+import group15.cerebro.session.multi.Match;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,8 +84,10 @@ public class IntegrationTestMultiplayer {
         startSessions();
         joinRoom();
         makeMatch();
-        ping();
-        getQuestions();
-        respond();
+        for (int i = 0; i <= Match.TOTAL / 2; ++i) {
+            ping();
+            getQuestions();
+            respond();
+        }
     }
 }

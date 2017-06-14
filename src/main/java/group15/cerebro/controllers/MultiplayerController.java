@@ -56,16 +56,31 @@ public class MultiplayerController {
     // Sync. mechanism.
     @RequestMapping(value = "/ping", method = RequestMethod.GET)
     public boolean ping() {
+        MainApplication.logger.info(manager.getUserForSession().getName() + " sync");
         return match != null && match.ping(manager.getUserForSession());
     }
 
     // should send back the question shuffled
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question random() {
+        // If there are no more questions remaining we return null to the front-end
+        if (match.getRemainingQuestions() == 0) {
+            MainApplication.logger.info("Finished game");
+            return null;
+        }
+
         if (match.getQuestion() == null) {
             match.setQuestion(getRandomQuestion());
         }
         MainApplication.logger.info("Question:" + match.getQuestion().getQuestion());
+
+        // Each player does play
+        match.play();
+        if (match.getRemainingQuestions() % 2 == 0) {
+            // Resets question to null if both players have got it.
+            match.setQuestion(null);
+        }
+
         return match.getQuestion();
     }
 
@@ -75,6 +90,11 @@ public class MultiplayerController {
         MainApplication.logger.info("Player " + manager.getUserForSession().getName()
                 + " responded " + chosen);
         return match.getQuestion();
+    }
+
+    @RequestMapping(value = "/lost", method = RequestMethod.GET)
+    public void connectionLost() {
+        // TODO!!!!!
     }
 
     private Question getRandomQuestion() {

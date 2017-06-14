@@ -1,0 +1,32 @@
+<div ng-app="app" ng-controller="MultiController as vm">
+    <div ng-repeat="question in vm.question">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron text-center">
+                    <h2>
+                        {{question.question}}
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="vm.validateQuestion(question.answer)">
+                        {{question.answer}}
+                    </a></p></div>
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong1)">
+                        {{question.wrong1}}
+                    </a></p></div>
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="vm.validateQuestion(question.wrong2)">
+                        {{question.wrong2}}
+                    </a></p></div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    </div>
+</div>

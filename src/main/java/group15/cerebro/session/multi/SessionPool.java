@@ -14,14 +14,19 @@ public class SessionPool {
         users = new ArrayList<>();
     }
 
-    public synchronized Match match(Usr usr) {
+    public synchronized Match match(Usr usr) throws InterruptedException {
+        // should push this to the front-end
+        while (users.size() < 2) {
+            wait();
+        }
+
         Match match = tryMatch(usr);
         if (match != null) {
             return match;
         }
-        if (users.size() < 2) {
-            return null;
-        }
+//        if (users.size() < 2) {
+//            return null;
+//        }
 
         match = new Match(getRemoveUser(usr), getFirstUser());
         matches.add(match);
@@ -65,5 +70,6 @@ public class SessionPool {
             }
         }
         users.add(newUser);
+        notifyAll();
     }
 }

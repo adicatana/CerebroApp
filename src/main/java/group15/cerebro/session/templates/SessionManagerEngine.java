@@ -43,6 +43,8 @@ public interface SessionManagerEngine {
 
     void multiplayerJoin();
 
+    void endMultiplayerGame();
+
     enum Phase {
         NONE,
         LOGGED,

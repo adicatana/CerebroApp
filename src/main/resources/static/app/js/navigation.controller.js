@@ -8,6 +8,7 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
 
         vm.startSingle = startSingle;
         vm.topicSingle = topicSingle;
+        vm.startMulti = startMulti;
 
         function topicSingle() {
             $http.get("/singleplayer/topic").then(function() {
@@ -22,6 +23,18 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                 console.log("Started new game.");
             }).then(function() {
                 getGamePhase();
+            });
+        }
+
+        function startMulti() {
+            $http.get("multi/join").then(function() {
+                console.log("Joining game room.");
+                $http.get("multi/match").then(function (response) {
+                    console.log("Started match.");
+                    vm.match = response.data;
+                }).then(function () {
+                    getGamePhase();
+                });
             });
         }
 

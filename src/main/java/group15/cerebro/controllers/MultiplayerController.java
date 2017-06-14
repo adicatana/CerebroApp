@@ -41,7 +41,7 @@ public class MultiplayerController {
     }
 
     @RequestMapping(value = "/match", method = RequestMethod.GET)
-    public Match match() {
+    public Match match() throws InterruptedException {
         match = sessionPool.match(manager.getUserForSession());
         if (match != null) {
             MainApplication.logger.info("Match made!");
@@ -79,6 +79,7 @@ public class MultiplayerController {
         if (match.getRemainingQuestions() % 2 == 0) {
             // Resets question to null if both players have got it.
             match.setQuestion(null);
+            manager.endMultiplayerGame();
         }
 
         return match.getQuestion();

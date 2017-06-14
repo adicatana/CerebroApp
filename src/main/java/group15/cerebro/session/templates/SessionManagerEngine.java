@@ -30,6 +30,7 @@ public interface SessionManagerEngine {
             case SINGLE: return "SINGLE";
             case FEEDBACK: return "FEEDBACK";
             case RANKINGS: return "RANKINGS";
+            case MULTI: return "MULTI";
             default: return "";
         }
     }
@@ -40,12 +41,15 @@ public interface SessionManagerEngine {
 
     void leaveRankings();
 
+    void multiplayerJoin();
+
     enum Phase {
         NONE,
         LOGGED,
         RANKINGS,
         TOPIC,
         SINGLE,
-        FEEDBACK
+        FEEDBACK,
+        MULTI
     }
 }

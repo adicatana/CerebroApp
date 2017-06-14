@@ -94,6 +94,13 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
+    public void multiplayerJoin() {
+        if (phase == Phase.LOGGED) {
+            phase = Phase.MULTI;
+        }
+    }
+
+    @Override
     public Usr getUserForSession() {
         return user;
     }

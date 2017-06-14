@@ -16,13 +16,18 @@ public class SessionPool {
 
     public synchronized Match match(Usr usr) throws InterruptedException {
         // should push this to the front-end
-        while (users.size() < 2) {
-            wait();
-        }
-
+        // TODO: check for all possible scenarios
         Match match = tryMatch(usr);
         if (match != null) {
             return match;
+        }
+
+        while (users.size() < 2) {
+            wait();
+            match = tryMatch(usr);
+            if (match != null) {
+                return match;
+            }
         }
 //        if (users.size() < 2) {
 //            return null;

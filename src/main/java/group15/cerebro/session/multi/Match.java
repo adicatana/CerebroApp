@@ -9,7 +9,7 @@ import java.util.TimerTask;
 public class Match {
     private Usr player1;
     private Usr player2;
-    public static final int TOTAL = 4;
+    public static final int TOTAL = 10;
     private int remainingQuestions;
 
     private boolean pinged1;
@@ -71,5 +71,11 @@ public class Match {
 
     public synchronized int getRemainingQuestions() {
         return remainingQuestions;
+    }
+
+    public synchronized void checkNullSetQuestion(Question randomQuestion) {
+        if (question == null) {
+            question = randomQuestion;
+        }
     }
 }

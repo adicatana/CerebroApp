@@ -66,23 +66,24 @@ public class MultiplayerController {
         // If there are no more questions remaining we return null to the front-end
         if (match.getRemainingQuestions() == 0) {
             MainApplication.logger.info("Finished game");
+            manager.endMultiplayerGame();
             return null;
         }
 
-        if (match.getQuestion() == null) {
-            match.setQuestion(getRandomQuestion());
-        }
+        match.checkNullSetQuestion(getRandomQuestion());
         MainApplication.logger.info("Question:" + match.getQuestion().getQuestion());
 
         // Each player does play
         match.play();
+
+        // we need this as the question is set to null for second player
+        Question ret = match.getQuestion();
         if (match.getRemainingQuestions() % 2 == 0) {
             // Resets question to null if both players have got it.
             match.setQuestion(null);
-            manager.endMultiplayerGame();
         }
 
-        return match.getQuestion();
+        return ret;
     }
 
     // should send back the question un-shuffled

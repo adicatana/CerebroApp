@@ -30,7 +30,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         // needs to call getQuestion to generate a new question
         function validateQuestion(answer) {
-            $http.post("/singleplayer/answer", answer).then(function(response) {
+            $http.post("/multi/answer", answer).then(function(response) {
                 console.log("You responded: " + answer);
                 var goodAnswer = response.data.answer;
                 console.log("Good answer: " + goodAnswer);

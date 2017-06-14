@@ -1,6 +1,8 @@
 package group15.cerebro.controllers;
 
 import group15.cerebro.MainApplication;
+import group15.cerebro.entities.Question;
+import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.session.multi.Match;
 import group15.cerebro.session.multi.SessionPool;
 import group15.cerebro.session.templates.SessionManagerEngine;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 @RestController
 @RequestMapping(value = "/multi")
 @Scope("session")
@@ -17,11 +22,13 @@ public class MultiplayerController {
     private Match match;
     private SessionManagerEngine manager;
     private SessionPool sessionPool = MainApplication.pool;
+    private QuestionRepository questionRepository;
 
     @Autowired
-    public MultiplayerController(SessionManagerEngine manager) {
+    public MultiplayerController(SessionManagerEngine manager, QuestionRepository questionRepository) {
         this.manager = manager;
         this.match = null;
+        this.questionRepository = questionRepository;
     }
 
     @RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -45,8 +52,24 @@ public class MultiplayerController {
         return match;
     }
 
+    // Sync. mechanism.
     @RequestMapping(value = "/ping", method = RequestMethod.GET)
     public boolean ping() {
         return match != null && match.ping(manager.getUserForSession());
+    }
+
+    @RequestMapping(value = "/random", method = RequestMethod.GET)
+    public Question random() {
+        return null;
+    }
+
+    private Question getRandomQuestion() {
+        List<Question> all = getAll();
+        int index = ThreadLocalRandom.current().nextInt(0, all.size());
+        return all.get(index);
+    }
+
+    private List<Question> getAll() {
+        return questionRepository.findAll();
     }
 }

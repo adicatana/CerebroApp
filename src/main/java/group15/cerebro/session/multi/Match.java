@@ -41,7 +41,7 @@ public class Match {
         return player2;
     }
 
-    public boolean ping(Usr user) {
+    public synchronized boolean ping(Usr user) {
         if (user.getLogin().equals(player1.getLogin())) {
             pinged1 = true;
         }

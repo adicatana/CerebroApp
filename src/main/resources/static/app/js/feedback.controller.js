@@ -41,6 +41,7 @@ app.controller('FeedbackController', ['$scope', '$http', 'getGamePhase',
         swal({
             title: 'Contribute',
             html: swalHTMLContent,
+            showCancelButton: true,
             preConfirm: function () {
                 return new Promise(function (resolve) {
                     resolve([

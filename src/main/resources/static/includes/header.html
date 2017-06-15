@@ -4,12 +4,12 @@
             <ul class="nav navbar-nav">
                 <li><a href="" class="btn-nav navbar-brand">Cerebro</a></li>
 
-                <li ng-if="currentUser != undefined"
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE'"
                     ng-controller="ProfileController as profile"
                     ng-click="profile.enterProfile()">
                     <a href="" class="btn-nav">My profile</a></li>
 
-                <li ng-if="currentUser != undefined"
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE'"
                     ng-controller="RankingsController as rank"
                     ng-click="rank.enterRankings()">
                     <a href="" class="btn-nav">Leaderboard</a>

@@ -12,7 +12,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
         $scope.validateQuestion = validateQuestion;
 
 
-        
+
         // Used so clicks responding to same question have no effect.
         var canValidate = true;
         var connectionLost = true;
@@ -46,7 +46,6 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         var setTimer = function() {
             countdown.start();
-            console.log('countdown360 ', countdown);
         };
 
         // Todo: CONNECTION STATUS with pings
@@ -163,7 +162,11 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 text: good ? '' : "Correct answer: " + correct,
                 type: good ? 'success' : 'error',
                 timer: good ? 800 : 2000,
-                showConfirmButton: false
+                showConfirmButton: false,
+                onClose: function () {
+                    setTimer();
+                    getQuestion();
+                }
             });
         }
 

@@ -8,6 +8,7 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
 
         vm.startSingle = startSingle;
         vm.topicSingle = topicSingle;
+        vm.startMulti = startMulti;
 
         function topicSingle() {
             $http.get("/singleplayer/topic").then(function() {
@@ -22,6 +23,47 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                 console.log("Started new game.");
             }).then(function() {
                 getGamePhase();
+            });
+        }
+
+        // Used so double click has no effect.
+        var canStartMulti = true;
+
+        function startMulti() {
+            if (!canStartMulti) {
+                return;
+            }
+            $http.get("multi/join").then(function() {
+                canStartMulti = false;
+                console.log("Joining game room.");
+                swal({
+                    title: 'Waiting for an opponent.',
+                    showConfirmButton: false,
+                    //showCancelButton: true,
+                    html: '<button id="custom-button" class="button-custom-swal">Cancel</button>' ,
+                    onOpen: function() {
+                        return new Promise(function () {
+                            $('#custom-button').click(function () {
+                                swal.closeModal();
+                                $http.get("multi/exit-room").then(function () {
+                                    console.log("User force exited room");
+                                });
+                            });
+
+                            swal.showLoading();
+                            $http.get("multi/match").then(function (response) {
+                                canStartMulti = true;
+                                console.log("Started match.");
+                                vm.match = response.data;
+                            }).then(function () {
+                                getGamePhase();
+                                swal.closeModal();
+                            });
+                        });
+                    },
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                });
             });
         }
 

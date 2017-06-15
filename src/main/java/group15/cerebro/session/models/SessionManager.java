@@ -101,11 +101,37 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
+    public void multiplayerJoin() {
+        if (phase == Phase.LOGGED) {
+            phase = Phase.MULTI;
+        }
+    }
+
+    @Override
     public void leaveProfile() {
         if (phase == Phase.PROFILE || phase == Phase.LOGGED
                 || phase == Phase.RANKINGS || phase == Phase.TOPIC) {
             phase = Phase.LOGGED;
         }
+    }
+
+    @Override
+    public void endMultiplayerGame() {
+        if (phase == Phase.MULTI) {
+            phase = Phase.MULTIEND;
+        }
+    }
+
+    @Override
+    public void returnMainScreenMultiplayerGame() {
+        if (phase == Phase.MULTIEND || phase == Phase.MULTI) {
+            phase = Phase.LOGGED;
+        }
+    }
+
+    @Override
+    public void lostConnection() {
+        phase = Phase.LOGGED;
     }
 
     @Override

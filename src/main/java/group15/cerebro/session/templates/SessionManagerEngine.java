@@ -31,6 +31,8 @@ public interface SessionManagerEngine {
             case FEEDBACK: return "FEEDBACK";
             case RANKINGS: return "RANKINGS";
             case PROFILE: return "PROFILE";
+            case MULTI: return "MULTI";
+            case MULTIEND: return "MULTIEND";
             default: return "";
         }
     }
@@ -45,6 +47,14 @@ public interface SessionManagerEngine {
 
     void leaveProfile();
 
+    void multiplayerJoin();
+
+    void endMultiplayerGame();
+
+    void returnMainScreenMultiplayerGame();
+
+    void lostConnection();
+
     enum Phase {
         NONE,
         LOGGED,
@@ -52,6 +62,8 @@ public interface SessionManagerEngine {
         TOPIC,
         SINGLE,
         PROFILE,
-        FEEDBACK
+        FEEDBACK,
+        MULTI,
+        MULTIEND
     }
 }

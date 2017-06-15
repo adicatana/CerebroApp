@@ -1,0 +1,90 @@
+<div ng-app="app" ng-controller="MultiController as vm">
+    <div id="container" class="text-center">
+        <div id="countdown" class="center-block"></div>
+    </div>
+    <div ng-repeat="question in question">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron text-center">
+                    <h2>
+                        {{question.question}}
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="col-sm-4">
+                                <div class="progress vertical">
+                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                         aria-valuenow="{{stats.correct1}}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="{{totalQuestions}}"
+                                         ng-style="progressBarStyle1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="col-sm-3">
+                                    <div class="inset">
+                                        <img ng-src="https://graph.facebook.com/{{stats.player1.login}}/picture?type=large&redirect=true&width=650&height=650"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 text-center multi-player-stats">
+                                    <div><b>User:</b> {{stats.player1.name}}</div>
+                                    <div><b>Rating:</b> {{stats.player1.rating}} </div>
+                                    <div> Correct answers: {{stats.correct1}} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="validateQuestion(question.answer)">
+                        {{question.answer}}
+                    </a></p></div>
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="validateQuestion(question.wrong1)">
+                        {{question.wrong1}}
+                    </a></p></div>
+
+                    <div><p><a class="btn btn-default btn-block btn-lg" ng-click="validateQuestion(question.wrong2)">
+                        {{question.wrong2}}
+                    </a></p></div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="col-sm-8">
+                                <div class="col-sm-9 text-center multi-player-stats">
+                                    <div><b>User:</b> {{stats.player2.name}}</div>
+                                    <div><b>Rating:</b> {{stats.player2.rating}} </div>
+                                    <div> Correct answers: {{stats.correct2}} </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="inset">
+                                        <img ng-src="https://graph.facebook.com/{{stats.player2.login}}/picture?type=large&redirect=true&width=650&height=650"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="progress vertical pull-right">
+                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                         aria-valuenow="{{stats.correct2}}"
+                                         aria-valuemin="0"
+                                         aria-valuemax="{{totalQuestions}}"
+                                         ng-style="progressBarStyle2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

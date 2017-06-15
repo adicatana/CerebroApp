@@ -155,3 +155,37 @@ html, body {
 .panel-body {
     background: rgba(255, 255, 255, 0.7);
 }
+
+.multi-player-stats {
+    color: white;
+}
+
+.vertical {
+    display: inline-block;
+    width: 200%;
+    height: 40px;
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+}
+.vertical {
+    box-shadow: inset 0px 4px 6px #ccc;
+    margin-top: 75%;
+}
+.progress-bar {
+    box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
+}
+
+.button-custom-swal {
+    background-color: #d33;
+    border-left-color: #d33;
+    border-right-color: #d33;
+    border: 0;
+    border-radius: 3px;
+    box-shadow: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 30px 5px 0px 5px;
+    padding: 10px 32px;
+}

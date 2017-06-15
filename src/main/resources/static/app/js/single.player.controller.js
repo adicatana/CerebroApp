@@ -27,16 +27,14 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                     console.log("Good answer: " + goodAnswer);
 
                     questionFeedback(goodAnswer === " ", goodAnswer);
-                }).then(function() {
-                    randomQuestion();
                 });
             }
         });
 
 
         var setTimer = function() {
+            console.log("I want to start the timer");
             countdown.start();
-            console.log('countdown360 ', countdown);
         };
 
         function randomQuestion() {
@@ -49,8 +47,6 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                     countdown.stop();
                     incrementGames();
                     getGamePhase();
-                } else {
-                    setTimer();
                 }
             });
         }
@@ -71,7 +67,6 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                 questionFeedback(goodAnswer === answer, goodAnswer);
             }).then(function() {
                 currentUser();
-                randomQuestion();
             });
         }
 
@@ -81,14 +76,19 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                 title: good ? 'Good job!' : "Wrong!",
                 text: good ? '' : "Correct answer: " + correct,
                 type: good ? 'success' : 'error',
-                timer: good ? 800 : 2000,
-                showConfirmButton: false
+                timer: good ? 1000 : 2500,
+                showConfirmButton: false,
+                onClose: function () {
+                    setTimer();
+                    randomQuestion();
+                }
             });
         }
 
         init();
 
         function init() {
+            setTimer();
             randomQuestion();
         }
 

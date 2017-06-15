@@ -21,6 +21,7 @@
     <script type="text/javascript" src="app/js/login.controller.js" ></script>
     <script type="text/javascript" src="app/js/navigation.controller.js" ></script>
     <script type="text/javascript" src="app/js/profile.controller.js" ></script>
+    <script type="text/javascript" src="app/js/multi.controller.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app/lib/jquery.countdown360.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -46,6 +47,9 @@
 <div ng-if="gamePhase === 'NONE' || gamePhase === 'LOGGED'" ng-include="'includes/footer.html'"></div>
 
 <div ng-if="gamePhase === 'PROFILE'"><div ng-include="'includes/profile.html'"></div></div>
+<div ng-if="gamePhase === 'MULTI'" ng-include="'includes/multi.html'"></div>
+
+<div ng-if="gamePhase === 'MULTIEND'" ng-include="'includes/multi.end.html'"></div>
 
 </body>
 </html>

@@ -117,23 +117,23 @@ public class SinglePlayerController {
 
         /* Needed for user question progress in profile. */
         Question currentQuestion = game.getQuestion();
-        Usr currentUser = manager.getUserForSession();
-
-        List<UserQuestion> userQuestions = userQuestionRepository.findAll();
-
-        for (UserQuestion uq : userQuestions) {
-            if (uq.getQuestion().equals(currentQuestion) && uq.getUserid().equals(currentUser)) {
-                uq.setLastattempt(ans);
-                userQuestionRepository.save(uq);
-                return currentQuestion;
-            }
-        }
-
-        UserQuestion userQuestion = new UserQuestion();
-        userQuestion.setQuestion(currentQuestion);
-        userQuestion.setUserid(currentUser);
-        userQuestion.setLastattempt(ans);
-        userQuestionRepository.save(userQuestion);
+//        Usr currentUser = manager.getUserForSession();
+//
+//        List<UserQuestion> userQuestions = userQuestionRepository.findAll();
+//
+//        for (UserQuestion uq : userQuestions) {
+//            if (uq.getQuestion().equals(currentQuestion) && uq.getUserid().equals(currentUser)) {
+//                uq.setLastattempt(ans);
+//                userQuestionRepository.save(uq);
+//                return currentQuestion;
+//            }
+//        }
+//
+//        UserQuestion userQuestion = new UserQuestion();
+//        userQuestion.setQuestion(currentQuestion);
+//        userQuestion.setUserid(currentUser);
+//        userQuestion.setLastattempt(ans);
+//        userQuestionRepository.save(userQuestion);
 
         return currentQuestion;
     }

@@ -103,6 +103,13 @@ public class SessionManager implements SessionManagerEngine {
     @Override
     public void endMultiplayerGame() {
         if (phase == Phase.MULTI) {
+            phase = Phase.MULTIEND;
+        }
+    }
+
+    @Override
+    public void returnMainScreenMultiplayerGame() {
+        if (phase == Phase.MULTIEND) {
             phase = Phase.LOGGED;
         }
     }

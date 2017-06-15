@@ -60,6 +60,12 @@ public class MultiplayerController {
         return match != null && match.ping(manager.getUserForSession());
     }
 
+    @RequestMapping(value = "/end", method = RequestMethod.GET)
+    public void endMultiplayer() {
+        MainApplication.logger.info("Ending game.");
+        manager.returnMainScreenMultiplayerGame();
+    }
+
     // should send back the question shuffled
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question random() {

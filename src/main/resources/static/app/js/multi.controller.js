@@ -11,12 +11,46 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         vm.stats = undefined;
         vm.match = undefined;
+        vm.endMessage = "";
         vm.question = [];
+        vm.returnMainScreen = returnMainScreen;
 
         vm.validateQuestion = validateQuestion;
 
         // Todo: CONNECTION STATUS with pings
 
+        function returnMainScreen() {
+            $http.get("/multi/end").then(function() {
+                console.log("Return to main screen. ");
+                getGamePhase();
+            });
+        }
+
+        function setEndMessage() {
+            $http.get("/multi/stats").then(function(response) {
+                vm.stats = response.data;
+                console.log(vm.stats);
+
+                if (vm.stats.correct1 === vm.stats.correct2) {
+                    vm.endMessage = "Tie!";
+                    return;
+                }
+                if (vm.stats.player1.name === $rootScope.currentUser.name) {
+                    if (vm.stats.correct1 > vm.stats.correct2) {
+                        vm.endMessage = "You won!";
+                    } else {
+                        vm.endMessage = "You lost!";
+                    }
+                } else {
+                    if (vm.stats.correct1 < vm.stats.correct2) {
+                        vm.endMessage = "You won!";
+                    } else {
+                        vm.endMessage = "You lost!";
+                    }
+                }
+            });
+        }
+        
         function getQuestion() {
             $http.get("/multi/random").then(function(response) {
                 console.log("New question generated. ");
@@ -24,6 +58,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
             }).then(function() {
                 if (vm.question[0].answer === undefined) {
                     console.log("Game finished");
+                    setEndMessage();
                     getGamePhase();
                 }
             });

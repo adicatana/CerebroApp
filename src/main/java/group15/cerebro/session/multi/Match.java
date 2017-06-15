@@ -124,4 +124,10 @@ public class Match {
         }
         MainApplication.logger.info("Correct1: " + correct1 + " Correct2: " + correct2);
     }
+
+    // Used to break the monitors when the object is set for garbage collection.
+    public synchronized void unblock() {
+        ctr = 1000;
+        notifyAll();
+    }
 }

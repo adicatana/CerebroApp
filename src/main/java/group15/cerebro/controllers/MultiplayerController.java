@@ -53,6 +53,18 @@ public class MultiplayerController {
         return match;
     }
 
+    @RequestMapping(value = "/connection_lost", method = RequestMethod.GET)
+    public void lostConnection() {
+        MainApplication.logger.info("Lost connection");
+        manager.lostConnection();
+
+        // TODO: THE OTHER SESSION REMAINS HANGING IF THE INTERNET CONNECTION FOR OPPONENT
+        // TODO: HAS BEEN LOST
+        // unblocks match object so it is allowed to be garbage collected
+        match.unblock();
+        match = null; // Allows match to be garbage collected
+    }
+
     // Sync. mechanism.
     @RequestMapping(value = "/ping", method = RequestMethod.GET)
     public boolean ping() {
@@ -64,6 +76,7 @@ public class MultiplayerController {
     public void endMultiplayer() {
         MainApplication.logger.info("Ending game.");
         manager.returnMainScreenMultiplayerGame();
+        match = null; // Allows match to be garbage collected
     }
 
     // should send back the question shuffled

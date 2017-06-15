@@ -115,6 +115,11 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
+    public void lostConnection() {
+        phase = Phase.LOGGED;
+    }
+
+    @Override
     public Usr getUserForSession() {
         return user;
     }

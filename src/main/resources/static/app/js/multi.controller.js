@@ -78,13 +78,26 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 currentUser();
 
                 canValidate = false;
+                var connectionLost = true;
 
                 setTimeout(function () {
+                    if (connectionLost) {
+                        $http.get("/multi/connection_lost").then(function () {
+                            console.log("Connection with the other player has been lost.");
+                            getGamePhase();
 
+                            swal(
+                                'Connection lost',
+                                'Connection with the other player has been lost.',
+                                'warning'
+                            );
+                        });
+                    }
                 }, 30000);
 
                 // sync. players on next questions
                 $http.get("/multi/next").then(function () {
+                    connectionLost = false;
                     updateStatsView();
 
                     getQuestion();

@@ -36,41 +36,66 @@
                                         <td>{{currentUser.rating}}</td>
                                     </tr>
 
-                                    <tr>
-                                        <td>Topic Name</td>
-                                        <td>Right</td>
-                                        <td>Wrong</td>
-                                        <td>Total</td>
-                                    </tr>
 
+                                    <!--<tr>-->
 
-                                    <tr ng-repeat="right in rightList">
-
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar">
-                                                <!--AICI-->
-                                                Aici: {{right}}
-                                            </div>
-                                            <!--rightList[$index]-->
-                                            <!--<div class="progress-bar progress-bar-warning" role="progressbar" ng-style="wrong">-->
-                                                <!--{{progress.wrong * 100 / progress.totalAnswers}}-->
+                                        <!--<div class="progress">-->
+                                            <!--<div class="progress-bar progress-bar-success" role="progressbar" style="width:{{rightList[0]}}%">-->
+                                                <!--{{rightList[0]}}-->
                                             <!--</div>-->
-                                            <!--<div class="progress-bar progress-bar-danger" role="progressbar" ng-style="rest">-->
-                                                <!--0-->
+                                            <!--<div class="progress-bar progress-bar-warning" role="progressbar" style="width:{{wrongList[0]}}%">-->
+                                                <!--{{wrongList[0]}}-->
                                             <!--</div>-->
-                                        </div>
+                                            <!--<div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{100 - rightList[0] - wrongList[0]}}%">-->
+                                                <!--{{100 - rightList[0] - wrongList[0]}}-->
+                                            <!--</div>-->
+                                        <!--</div>-->
 
-                                        <!--<td>{{progress.topic.topicname}}</td>-->
-                                        <!--<td>{{progress.rightAnswers}}</td>-->
-                                        <!--<td>{{progress.wrongAnswers}}</td>-->
-                                        <!--<td>{{progress.totalAnswers}}</td>-->
-                                    </tr>
+                                    <!--</tr>-->
 
                                     </tbody>
                                 </table>
 
                                 <!--<a href="#" class="btn btn-primary">My Sales Performance</a>-->
                                 <!--<a href="#" class="btn btn-primary">Team Sales Performance</a>-->
+
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:33.3%">
+                                        Correct
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:33.3%">
+                                        Wrong
+                                    </div>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:33.4%">
+                                        Not answered
+                                    </div>
+                                </div>
+
+                                <div ng-repeat="progress in progressList track by $index">
+                                        <!--<td>{{progressList[i].topic.topicname}}</td>-->
+                                        <!--<td>{{rightList[i]}}</td>-->
+                                        <!--<td>{{wrongList[i]}}</td>-->
+                                        <!--<td>{{progress.totalAnswers}}</td>-->
+                                    <div>
+
+                                        {{progress.topic.topicname}}
+
+                                    </div>
+
+                                    <div class="progress">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:{{rightList[$index]}}%">
+                                                    {{rightList[$index]}}%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{wrongList[$index]}}%">
+                                                    {{wrongList[$index]}}%
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:{{100 - rightList[$index] - wrongList[$index]}}%">
+                                                    {{100 - rightList[$index] - wrongList[$index]}}%
+                                                </div>
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>

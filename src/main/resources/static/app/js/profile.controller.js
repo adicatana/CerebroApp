@@ -36,8 +36,8 @@ app.controller('ProfileController', ['$scope', '$rootScope', '$http', 'getGamePh
                 $rootScope.rightList = [];
                 $rootScope.wrongList = [];
                 for (var i = 0; i < result.data.length; i++) {
-                    $rootScope.rightList.push(result.data[i].rightAnswers * 100 / result.data[i].totalAnswers);
-                    $rootScope.wrongList.push(result.data[i].wrongAnswers * 100 / result.data[i].totalAnswers);
+                    $rootScope.rightList.push(Math.floor(result.data[i].rightAnswers * 100 / result.data[i].totalAnswers));
+                    $rootScope.wrongList.push(Math.floor(result.data[i].wrongAnswers * 100 / result.data[i].totalAnswers));
                 }
             }).then(function () {
                 console.log($rootScope.rightList);

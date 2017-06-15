@@ -98,6 +98,13 @@ public class MultiplayerController {
         return match.getQuestionRandomized();
     }
 
+    @RequestMapping(value = "/exit-room", method = RequestMethod.GET)
+    public void exitRoom(){
+        MainApplication.logger.info("Ending game.");
+        sessionPool.dismiss(manager.getUserForSession());
+        manager.returnMainScreenMultiplayerGame();
+    }
+
     @RequestMapping(value = "/next", method = RequestMethod.GET)
     public void nextQuestionSync() throws InterruptedException {
         match.next();

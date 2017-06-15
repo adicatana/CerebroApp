@@ -129,7 +129,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                             );
                         });
                     }
-                }, 30000);
+                }, 17000);
 
                 // sync. players on next questions
                 $http.get("/multi/next").then(function () {

@@ -81,7 +81,7 @@ public class SessionManager implements SessionManagerEngine {
 
     @Override
     public void enterRankings() {
-        if (phase == Phase.LOGGED || phase == Phase.TOPIC) {
+        if (phase != Phase.NONE) {
             phase = Phase.RANKINGS;
         }
     }
@@ -89,6 +89,20 @@ public class SessionManager implements SessionManagerEngine {
     @Override
     public void leaveRankings() {
         if (phase == Phase.RANKINGS) {
+            phase = Phase.LOGGED;
+        }
+    }
+
+    @Override
+    public void enterProfile() {
+        if (phase != Phase.NONE) {
+            phase = Phase.PROFILE;
+        }
+    }
+
+    @Override
+    public void leaveProfile() {
+        if (phase == Phase.PROFILE) {
             phase = Phase.LOGGED;
         }
     }

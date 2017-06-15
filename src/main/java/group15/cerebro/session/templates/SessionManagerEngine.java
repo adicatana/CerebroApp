@@ -30,6 +30,7 @@ public interface SessionManagerEngine {
             case SINGLE: return "SINGLE";
             case FEEDBACK: return "FEEDBACK";
             case RANKINGS: return "RANKINGS";
+            case PROFILE: return "PROFILE";
             default: return "";
         }
     }
@@ -40,12 +41,17 @@ public interface SessionManagerEngine {
 
     void leaveRankings();
 
+    void enterProfile();
+
+    void leaveProfile();
+
     enum Phase {
         NONE,
         LOGGED,
         RANKINGS,
         TOPIC,
         SINGLE,
+        PROFILE,
         FEEDBACK
     }
 }

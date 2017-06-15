@@ -1,0 +1,53 @@
+<div ng-controller="ProfileController as profile">
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="btn btn-default btn-ranks col-sm-1"
+             ng-click="profile.exitProfile()"> BACK </div>
+        <div class="col-sm-10"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
+
+                <div class="panel panel-info prof">
+                    <!--<div class="panel-heading">-->
+                        <!--&lt;!&ndash;<h3 class="panel-title">{{currentUser.name}}</h3>&ndash;&gt;-->
+                    <!--</div>-->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center"> <img ng-src="https://graph.facebook.com/{{currentUser.login}}/picture?type=large&redirect=true&width=400&height=400" class="img-circle img-responsive"> </div>
+
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td>Name:</td>
+                                        <td>{{currentUser.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Games played:</td>
+                                        <td>30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rating</td>
+                                        <td>{{currentUser.rating}}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <!--<a href="#" class="btn btn-primary">My Sales Performance</a>-->
+                                <!--<a href="#" class="btn btn-primary">Team Sales Performance</a>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

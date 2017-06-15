@@ -26,9 +26,19 @@ public class UserProfileController {
         this.userRepository = userRepository;
     }
 
-
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public Usr getUserProfile() {
         return manager.getUserForSession();
     }
+
+    @RequestMapping(value = "/enter", method = RequestMethod.GET)
+    public void enter() {
+        manager.enterProfile();
+    }
+
+    @RequestMapping(value = "/exit", method = RequestMethod.GET)
+    public void leave() {
+        manager.leaveProfile();
+    }
+
 }

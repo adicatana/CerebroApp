@@ -3,7 +3,11 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li><a href="" class="btn-nav navbar-brand">Cerebro</a></li>
-                <li ng-if="currentUser != undefined"><a href="" class="btn-nav">My profile</a></li>
+
+                <li ng-if="currentUser != undefined"
+                    ng-controller="ProfileController as profile"
+                    ng-click="profile.enterProfile()">
+                    <a href="" class="btn-nav">My profile</a></li>
 
                 <li ng-if="currentUser != undefined"
                     ng-controller="RankingsController as rank"

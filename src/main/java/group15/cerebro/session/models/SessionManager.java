@@ -102,7 +102,8 @@ public class SessionManager implements SessionManagerEngine {
 
     @Override
     public void leaveProfile() {
-        if (phase == Phase.PROFILE) {
+        if (phase == Phase.PROFILE || phase == Phase.LOGGED
+                || phase == Phase.RANKINGS || phase == Phase.TOPIC) {
             phase = Phase.LOGGED;
         }
     }

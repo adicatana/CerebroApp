@@ -46,6 +46,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         var setTimer = function() {
             countdown.start();
+            console.log('countdown360 ', countdown);
         };
 
         // Todo: CONNECTION STATUS with pings
@@ -81,7 +82,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 }
             });
         }
-        
+
         function getQuestion() {
             $http.get("/multi/random").then(function(response) {
                 console.log("New question generated. ");
@@ -162,11 +163,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 text: good ? '' : "Correct answer: " + correct,
                 type: good ? 'success' : 'error',
                 timer: good ? 800 : 2000,
-                showConfirmButton: false,
-                onClose: function () {
-                    setTimer();
-                    getQuestion();
-                }
+                showConfirmButton: false
             });
         }
 

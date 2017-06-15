@@ -115,3 +115,21 @@ html, body {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: rgba(255, 106, 0, 0.5);
 }
+
+.multi-player-stats {
+    color: white;
+}
+
+.vertical {
+    display: inline-block;
+    width: 90%;
+    height: 40px;
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+}
+.vertical {
+    box-shadow: inset 0px 4px 6px #ccc;
+}
+.progress-bar {
+    box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
+}

@@ -36,12 +36,22 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
             $http.get("multi/join").then(function() {
                 canStartMulti = false;
                 console.log("Joining game room.");
-                $http.get("multi/match").then(function (response) {
-                    canStartMulti = true;
-                    console.log("Started match.");
-                    vm.match = response.data;
-                }).then(function () {
-                    getGamePhase();
+                swal({
+                    title: 'Waiting for an opponent.',
+                    showConfirmButton: false,
+                    onOpen: function() {
+                        return new Promise(function () {
+                            $http.get("multi/match").then(function (response) {
+                                canStartMulti = true;
+                                console.log("Started match.");
+                                vm.match = response.data;
+                            }).then(function () {
+                                getGamePhase();
+                                swal.closeModal();
+                            });
+                        });
+                    },
+                    allowOutsideClick: false
                 });
             });
         }

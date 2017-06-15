@@ -13,6 +13,7 @@ import group15.cerebro.session.models.Game;
 import group15.cerebro.session.models.Ranker;
 import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
+import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -104,13 +105,37 @@ public class SinglePlayerController {
         MainApplication.logger.info(" MY LOGGER : Responding: " + chosen);
         MainApplication.logger.info(" MY LOGGER : Correct response: " + game.getAnswer());
 
-        if (manager != null)
-            (new Ranker(manager.getUserForSession(),
-                        userRepository)).update(
-                    game.respond(chosen)
-            );
+        boolean ans = false;
 
-        return game.getQuestion();
+        if (manager != null) {
+            ans = game.respond(chosen);
+            (new Ranker(manager.getUserForSession(),
+                    userRepository)).update(
+                    ans
+            );
+        }
+
+        /* Needed for user question progress in profile. */
+        Question currentQuestion = game.getQuestion();
+        Usr currentUser = manager.getUserForSession();
+
+        List<UserQuestion> userQuestions = userQuestionRepository.findAll();
+
+        for (UserQuestion uq : userQuestions) {
+            if (uq.getQuestion().equals(currentQuestion) && uq.getUserid().equals(currentUser)) {
+                uq.setLastattempt(ans);
+                userQuestionRepository.save(uq);
+                return currentQuestion;
+            }
+        }
+
+        UserQuestion userQuestion = new UserQuestion();
+        userQuestion.setQuestion(currentQuestion);
+        userQuestion.setUserid(currentUser);
+        userQuestion.setLastattempt(ans);
+        userQuestionRepository.save(userQuestion);
+
+        return currentQuestion;
     }
 
     @RequestMapping(value = "/gamecount", method = RequestMethod.GET)
@@ -130,6 +155,7 @@ public class SinglePlayerController {
         int index = ThreadLocalRandom.current().nextInt(0, all.size());
         Question question = all.get(index);
 
+        /* Keep a list of already answered questions for a round. */
         if (all.size() >= gameLength)
             while (alreadyAsked.contains(question)) {
                 index = ThreadLocalRandom.current().nextInt(0, all.size());
@@ -138,20 +164,6 @@ public class SinglePlayerController {
 
         alreadyAsked.add(question);
 
-//        Usr usr = manager.getUserForSession();
-//        UserQuestion userQuestion = new UserQuestion();
-//        userQuestion.setQuestion(question);
-//        userQuestion.setUserid(usr);
-//
-//        List<UserQuestion> allQU = userQuestionRepository.findAll();
-//
-//        for (UserQuestion uq : allQU) {
-//            if (uq.getQuestion().equals(question) && uq.getUserid().equals(usr)) {
-//                return question;
-//            }
-//        }
-//
-//        userQuestionRepository.save(userQuestion);
         return question;
     }
 

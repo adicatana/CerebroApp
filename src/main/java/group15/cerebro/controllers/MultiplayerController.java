@@ -58,18 +58,9 @@ public class MultiplayerController {
         MainApplication.logger.info("Lost connection");
         manager.lostConnection();
 
-        // TODO: THE OTHER SESSION REMAINS HANGING IF THE INTERNET CONNECTION FOR OPPONENT
-        // TODO: HAS BEEN LOST
         // unblocks match object so it is allowed to be garbage collected
         match.unblock();
         match = null; // Allows match to be garbage collected
-    }
-
-    // Sync. mechanism.
-    @RequestMapping(value = "/ping", method = RequestMethod.GET)
-    public boolean ping() {
-        MainApplication.logger.info(manager.getUserForSession().getName() + " sync");
-        return match != null && match.ping(manager.getUserForSession());
     }
 
     @RequestMapping(value = "/end", method = RequestMethod.GET)
@@ -120,11 +111,6 @@ public class MultiplayerController {
                 + " responded " + chosen);
         match.verify(manager.getUserForSession(), chosen);
         return match.getQuestion();
-    }
-
-    @RequestMapping(value = "/lost", method = RequestMethod.GET)
-    public void connectionLost() {
-        // TODO!!!!!
     }
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)

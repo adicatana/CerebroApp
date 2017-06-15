@@ -48,7 +48,7 @@ public class SessionPool {
         return match;
     }
 
-    private Usr getRemoveUser(Usr usr) {
+    private synchronized Usr getRemoveUser(Usr usr) {
         for (Usr user : users) {
             if (user.getLogin().equals(usr.getLogin())) {
                 users.remove(user);
@@ -60,7 +60,7 @@ public class SessionPool {
         return null;
     }
 
-    private Match tryMatch(Usr usr) {
+    private synchronized Match tryMatch(Usr usr) {
         for (Match tryMatch : matches) {
             if (tryMatch.getPlayer1().getLogin().equals(usr.getLogin())
                     || tryMatch.getPlayer2().getLogin().equals(usr.getLogin())) {
@@ -71,7 +71,7 @@ public class SessionPool {
         return null;
     }
 
-    private Usr getFirstUser() {
+    private synchronized Usr getFirstUser() {
         Usr user = users.get(0);
         users.remove(0);
         return user;

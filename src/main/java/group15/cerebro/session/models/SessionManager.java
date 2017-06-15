@@ -109,7 +109,7 @@ public class SessionManager implements SessionManagerEngine {
 
     @Override
     public void returnMainScreenMultiplayerGame() {
-        if (phase == Phase.MULTIEND) {
+        if (phase == Phase.MULTIEND || phase == Phase.MULTI) {
             phase = Phase.LOGGED;
         }
     }

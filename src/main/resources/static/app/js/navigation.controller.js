@@ -39,8 +39,17 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                 swal({
                     title: 'Waiting for an opponent.',
                     showConfirmButton: false,
+                    //showCancelButton: true,
+                    html: '<button id="custom-button" class="button-custom-swal">Cancel</button>' ,
                     onOpen: function() {
                         return new Promise(function () {
+                            $('#custom-button').click(function () {
+                                swal.closeModal();
+                                $http.get("multi/exit-room").then(function () {
+                                    console.log("User force exited room");
+                                });
+                            });
+
                             swal.showLoading();
                             $http.get("multi/match").then(function (response) {
                                 canStartMulti = true;

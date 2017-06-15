@@ -8,10 +8,12 @@ import java.util.List;
 public class SessionPool {
     private List<Usr> users;
     private List<Match> matches;
+    private List<Usr> dismissed;
 
     public SessionPool() {
         matches = new ArrayList<>();
         users = new ArrayList<>();
+        dismissed = new ArrayList<>();
     }
 
     public synchronized Match match(Usr usr) throws InterruptedException {
@@ -24,6 +26,13 @@ public class SessionPool {
 
         while (users.size() < 2) {
             wait();
+
+            // Abrupt exit code -- see dismiss
+            if (checkDismissed(usr)) {
+                return null;
+            }
+
+            // Trying to solve matcher
             match = tryMatch(usr);
             if (match != null) {
                 return match;
@@ -75,6 +84,22 @@ public class SessionPool {
             }
         }
         users.add(newUser);
+        notifyAll();
+    }
+
+    private synchronized boolean checkDismissed(Usr user) {
+        for (Usr check : dismissed) {
+            if (user.getLogin().equals(check.getLogin())) {
+                dismissed.remove(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public synchronized void dismiss(Usr user) {
+        dismissed.add(user);
+        users.remove(user);
         notifyAll();
     }
 }

@@ -8,13 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Long> {
-    default Topic findByTopicName(String topicName) {
-        List<Topic> topics = findAll();
-        for(Topic topic : topics) {
-            if(topic.getTopicname().equals(topicName)) {
-                return topic;
-            }
-        }
-        return null;
-    }
+
 }

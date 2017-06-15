@@ -29,7 +29,7 @@ public class FbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        final Usr user = userRepository.findByLogin(username);
+        final Usr user = userRepository.findUsrByLogin(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

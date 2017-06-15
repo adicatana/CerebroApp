@@ -34,7 +34,7 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
         user.setRating(0);
 
 
-        Usr foundUser = userRepository.findByLogin(user.getLogin());
+        Usr foundUser = userRepository.findUsrByLogin(user.getLogin());
         if (foundUser == null) {
             userRepository.save(user);
         }

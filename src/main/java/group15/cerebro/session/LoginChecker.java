@@ -18,11 +18,6 @@ public class LoginChecker {
     }
 
     public Usr findUser(String login) {
-        for (Usr usr : userRepository.findAll()) {
-            if (login.equals(usr.getLogin())) {
-                return usr;
-            }
-        }
-        return null;
+        return userRepository.findUsrByLogin(login);
     }
 }

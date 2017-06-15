@@ -56,14 +56,14 @@ public class UserProfileController {
 
     @RequestMapping(value = "/progress", method = RequestMethod.GET)
     public List<Progress> getQuestionsPerTopic() {
-        List<UserQuestion> uqs = userQuestionRepository.findAll();
+
+
+        List<UserQuestion> uqs = userQuestionRepository.findUserQuestionsByUserId(manager.getUserForSession());
         HashMap<Topic, Progress> map = new HashMap<>();
 
         /* All user-questions mappings. */
         for (UserQuestion uq : uqs) {
             /* Look for current user's questions. */
-            if (uq.getUserid().equals(manager.getUserForSession())) {
-                /* Need topic for the list of progresses. */
                 Topic currentTopic = uq.getQuestion().getTopic();
 
                 Progress currentProgress = map.get(currentTopic);
@@ -79,7 +79,6 @@ public class UserProfileController {
                 } else {
                     currentProgress.incrementWrong();
                 }
-            }
         }
 
         return new ArrayList<>(map.values());

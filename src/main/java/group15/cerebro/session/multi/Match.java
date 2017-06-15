@@ -78,4 +78,16 @@ public class Match {
             question = randomQuestion;
         }
     }
+
+    private int ctr = 0;
+
+    // Always 2.
+    public synchronized void next() throws InterruptedException {
+        ctr++;
+        if (ctr < 2) {
+            wait();
+        }
+        ctr = 0;
+        notifyAll();
+    }
 }

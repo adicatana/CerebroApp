@@ -86,6 +86,11 @@ public class MultiplayerController {
         return ret;
     }
 
+    @RequestMapping(value = "/next", method = RequestMethod.GET)
+    public void nextQuestionSync() throws InterruptedException {
+        match.next();
+    }
+
     // should send back the question un-shuffled
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
     public Question getAnswer(@RequestBody String chosen) {

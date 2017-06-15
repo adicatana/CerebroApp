@@ -28,8 +28,14 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
             });
         }
 
+        var canValidate = true;
+
         // needs to call getQuestion to generate a new question
         function validateQuestion(answer) {
+            if (!canValidate) {
+                return;
+            }
+
             $http.post("/multi/answer", answer).then(function(response) {
                 console.log("You responded: " + answer);
                 var goodAnswer = response.data.answer;
@@ -38,7 +44,13 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 questionFeedback(goodAnswer === answer, goodAnswer);
             }).then(function() {
                 currentUser();
-                getQuestion();
+
+                canValidate = false;
+                // sync. players on next questions
+                $http.get("/multi/next").then(function () {
+                    getQuestion();
+                    canValidate = true;
+                });
             });
         }
 

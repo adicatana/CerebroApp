@@ -48,6 +48,8 @@ public interface SessionManagerEngine {
 
     void returnMainScreenMultiplayerGame();
 
+    void lostConnection();
+
     enum Phase {
         NONE,
         LOGGED,

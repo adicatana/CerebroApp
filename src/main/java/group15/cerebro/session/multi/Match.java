@@ -1,5 +1,6 @@
 package group15.cerebro.session.multi;
 
+import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Usr;
 
@@ -12,6 +13,9 @@ public class Match {
     public static final int TOTAL = 10;
     private int remainingQuestions;
 
+    private int correct1;
+    private int correct2;
+
     private boolean pinged1;
     private boolean pinged2;
 
@@ -22,8 +26,12 @@ public class Match {
     public Match(Usr player1, Usr player2) {
         this.player1 = player1;
         this.player2 = player2;
+
+        correct1 = 0;
+        correct2 = 0;
         pinged1 = false;
         pinged2 = false;
+
         question = null;
         remainingQuestions = TOTAL;
 
@@ -47,11 +55,19 @@ public class Match {
         return player2;
     }
 
+    public synchronized int getCorrect1() {
+        return correct1;
+    }
+
+    public synchronized int getCorrect2() {
+        return correct2;
+    }
+
     public synchronized boolean ping(Usr user) {
         if (user.getLogin().equals(player1.getLogin())) {
             pinged1 = true;
         }
-        if (user.getLogin().equals(player1.getLogin())) {
+        if (user.getLogin().equals(player2.getLogin())) {
             pinged2 = true;
         }
         return pinged1 && pinged2;
@@ -89,5 +105,15 @@ public class Match {
         }
         ctr = 0;
         notifyAll();
+    }
+
+    public synchronized void verify(Usr user, String chosen) {
+        if (user.getLogin().equals(player1.getLogin())) {
+            correct1 += chosen.equals(question.getAnswer()) ? 1 : 0;
+        }
+        if (user.getLogin().equals(player2.getLogin())) {
+            correct2 += chosen.equals(question.getAnswer()) ? 1 : 0;
+        }
+        MainApplication.logger.info("Correct1: " + correct1 + " Correct2: " + correct2);
     }
 }

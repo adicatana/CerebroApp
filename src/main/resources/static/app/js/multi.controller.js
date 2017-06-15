@@ -9,6 +9,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
     function($scope, $http, $rootScope, currentUser, getGamePhase) {
         var vm = this;
 
+        vm.stats = undefined;
         vm.match = undefined;
         vm.question = [];
 
@@ -42,6 +43,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 var goodAnswer = response.data.answer;
                 console.log("Good answer: " + goodAnswer);
 
+                updateStatsView();
                 questionFeedback(goodAnswer === answer, goodAnswer);
             }).then(function() {
                 currentUser();
@@ -49,9 +51,18 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 canValidate = false;
                 // sync. players on next questions
                 $http.get("/multi/next").then(function () {
+                    updateStatsView();
+
                     getQuestion();
                     canValidate = true;
                 });
+            });
+        }
+
+        function updateStatsView() {
+            $http.get("/multi/stats").then(function(response) {
+                vm.stats = response.data;
+                console.log(vm.stats);
             });
         }
 
@@ -66,6 +77,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
         }
 
         function init() {
+            updateStatsView();
             getQuestion();
         }
 

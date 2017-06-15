@@ -76,19 +76,15 @@ public class MultiplayerController {
         // Each player does play
         match.play();
 
-        // we need this as the question is set to null for second player
-        Question ret = match.getQuestion();
-        if (match.getRemainingQuestions() % 2 == 0) {
-            // Resets question to null if both players have got it.
-            match.setQuestion(null);
-        }
-
-        return ret;
+        return match.getQuestion();
     }
 
     @RequestMapping(value = "/next", method = RequestMethod.GET)
     public void nextQuestionSync() throws InterruptedException {
         match.next();
+
+        // They both synchronize on next, so we need to reset it after the sync. is done.
+        match.setQuestion(null);
     }
 
     // should send back the question un-shuffled
@@ -96,12 +92,18 @@ public class MultiplayerController {
     public Question getAnswer(@RequestBody String chosen) {
         MainApplication.logger.info("Player " + manager.getUserForSession().getName()
                 + " responded " + chosen);
+        match.verify(manager.getUserForSession(), chosen);
         return match.getQuestion();
     }
 
     @RequestMapping(value = "/lost", method = RequestMethod.GET)
     public void connectionLost() {
         // TODO!!!!!
+    }
+
+    @RequestMapping(value = "/stats", method = RequestMethod.GET)
+    public Match stats() {
+        return match;
     }
 
     private Question getRandomQuestion() {

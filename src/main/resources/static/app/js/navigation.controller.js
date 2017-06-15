@@ -41,6 +41,7 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                     showConfirmButton: false,
                     onOpen: function() {
                         return new Promise(function () {
+                            swal.showLoading();
                             $http.get("multi/match").then(function (response) {
                                 canStartMulti = true;
                                 console.log("Started match.");
@@ -51,7 +52,8 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                             });
                         });
                     },
-                    allowOutsideClick: false
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
                 });
             });
         }

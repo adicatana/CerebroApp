@@ -4,8 +4,8 @@
 
 'use strict';
 
-app.controller('ProfileController', ['$rootScope', '$http', 'getGamePhase',
-    function($rootScope, $http, getGamePhase) {
+app.controller('ProfileController', ['$scope', '$rootScope', '$http', 'getGamePhase',
+    function($scope, $rootScope, $http, getGamePhase) {
 
         var vm = this;
 
@@ -33,7 +33,22 @@ app.controller('ProfileController', ['$rootScope', '$http', 'getGamePhase',
             $http.get("/profile/progress").then(function(result) {
                 console.log("Get progress info.");
                 $rootScope.progressList = result.data;
+                $rootScope.rightList = [];
+                $rootScope.wrongList = [];
+                for (var i = 0; i < result.data.length; i++) {
+                    $rootScope.rightList.push(result.data[i].rightAnswers * 100 / result.data[i].totalAnswers);
+                    $rootScope.wrongList.push(result.data[i].wrongAnswers * 100 / result.data[i].totalAnswers);
+                }
+            }).then(function () {
+                console.log($rootScope.rightList);
+                console.log($rootScope.wrongList);
             });
+        }
+
+        $scope.functionThatReturnsStyle = function(number) {
+            console.log("NUMBER HERE " + number);
+            var style1 = "width: " + number + "%";
+            return style1;
         }
 
     }

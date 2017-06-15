@@ -3,9 +3,11 @@ package group15.cerebro.controllers;
 import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Topic;
+import group15.cerebro.entities.UserQuestion;
 import group15.cerebro.entities.Usr;
 import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.repositories.TopicRepository;
+import group15.cerebro.repositories.UserQuestionRepository;
 import group15.cerebro.repositories.UserRepository;
 import group15.cerebro.session.models.Game;
 import group15.cerebro.session.models.Ranker;
@@ -13,8 +15,10 @@ import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -29,6 +33,10 @@ public class SinglePlayerController {
     private SessionManagerEngine manager;
     private GameEngine game;
     private Topic gameTopic;
+    private UserQuestionRepository userQuestionRepository;
+    private List<Question> alreadyAsked = new ArrayList<>();
+    private final int gameLength = 5;
+
 
     // Add userRepository for testing
     public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
@@ -41,12 +49,14 @@ public class SinglePlayerController {
 
     @Autowired
     public SinglePlayerController(QuestionRepository questionRepository, TopicRepository topicRepository,
-                                  SessionManagerEngine manager, UserRepository userRepository) {
+                                  SessionManagerEngine manager, UserRepository userRepository,
+                                  UserQuestionRepository userQuestionRepository) {
         this.questionRepository = questionRepository;
         this.userRepository = userRepository;
         this.topicRepository = topicRepository;
         this.manager = manager;
         this.game = new Game();
+        this.userQuestionRepository = userQuestionRepository;
     }
 
     @RequestMapping(value = "/topic", method = RequestMethod.GET)
@@ -85,6 +95,7 @@ public class SinglePlayerController {
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")
     public String getPercent() {
         MainApplication.logger.info(" MY LOGGER : Percent: " + game.getPercent());
+        alreadyAsked.clear();
         return "" + game.getPercent();
     }
 
@@ -117,7 +128,31 @@ public class SinglePlayerController {
     private Question getRandomQuestion() {
         List<Question> all = getAll();
         int index = ThreadLocalRandom.current().nextInt(0, all.size());
-        return all.get(index);
+        Question question = all.get(index);
+
+        if (all.size() >= gameLength)
+            while (alreadyAsked.contains(question)) {
+                index = ThreadLocalRandom.current().nextInt(0, all.size());
+                question = all.get(index);
+            }
+
+        alreadyAsked.add(question);
+
+//        Usr usr = manager.getUserForSession();
+//        UserQuestion userQuestion = new UserQuestion();
+//        userQuestion.setQuestion(question);
+//        userQuestion.setUserid(usr);
+//
+//        List<UserQuestion> allQU = userQuestionRepository.findAll();
+//
+//        for (UserQuestion uq : allQU) {
+//            if (uq.getQuestion().equals(question) && uq.getUserid().equals(usr)) {
+//                return question;
+//            }
+//        }
+//
+//        userQuestionRepository.save(userQuestion);
+        return question;
     }
 
     private List<Question> getAll() {

@@ -1,21 +1,15 @@
-/**
- * Created by ad5915 on 14/06/17.
- */
-
-
 'use strict';
 
 app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser', 'getGamePhase',
     function($scope, $http, $rootScope, currentUser, getGamePhase) {
-        var vm = this;
 
-        vm.stats = undefined;
-        vm.match = undefined;
-        vm.endMessage = "";
-        vm.question = [];
-        vm.returnMainScreen = returnMainScreen;
+        $scope.stats = undefined;
+        $scope.match = undefined;
+        $scope.endMessage = "";
+        $scope.question = [];
+        $scope.returnMainScreen = returnMainScreen;
 
-        vm.validateQuestion = validateQuestion;
+        $scope.validateQuestion = validateQuestion;
 
         // Todo: CONNECTION STATUS with pings
 
@@ -28,24 +22,24 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         function setEndMessage() {
             $http.get("/multi/stats").then(function(response) {
-                vm.stats = response.data;
-                console.log(vm.stats);
+                $scope.stats = response.data;
+                console.log($scope.stats);
 
-                if (vm.stats.correct1 === vm.stats.correct2) {
-                    vm.endMessage = "Tie!";
+                if ($scope.stats.correct1 === $scope.stats.correct2) {
+                    $scope.endMessage = "Tie!";
                     return;
                 }
-                if (vm.stats.player1.name === $rootScope.currentUser.name) {
-                    if (vm.stats.correct1 > vm.stats.correct2) {
-                        vm.endMessage = "You won!";
+                if ($scope.stats.player1.name === $rootScope.currentUser.name) {
+                    if ($scope.stats.correct1 > $scope.stats.correct2) {
+                        $scope.endMessage = "You won!";
                     } else {
-                        vm.endMessage = "You lost!";
+                        $scope.endMessage = "You lost!";
                     }
                 } else {
-                    if (vm.stats.correct1 < vm.stats.correct2) {
-                        vm.endMessage = "You won!";
+                    if ($scope.stats.correct1 < $scope.stats.correct2) {
+                        $scope.endMessage = "You won!";
                     } else {
-                        vm.endMessage = "You lost!";
+                        $scope.endMessage = "You lost!";
                     }
                 }
             });
@@ -54,9 +48,9 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
         function getQuestion() {
             $http.get("/multi/random").then(function(response) {
                 console.log("New question generated. ");
-                vm.question = [response.data];
+                $scope.question = [response.data];
             }).then(function() {
-                if (vm.question[0].answer === undefined) {
+                if ($scope.question[0].answer === undefined) {
                     console.log("Game finished");
                     setEndMessage();
                     getGamePhase();
@@ -101,8 +95,14 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         function updateStatsView() {
             $http.get("/multi/stats").then(function(response) {
-                vm.stats = response.data;
-                console.log(vm.stats);
+                $scope.stats = response.data;
+                console.log($scope.stats);
+                $scope.progressBarStyle1 = {
+                    "width": $scope.stats.correct1 / $scope.totalQuestions * 100 + "%"
+                }
+                $scope.progressBarStyle2 = {
+                    "width": $scope.stats.correct2 / $scope.totalQuestions * 100 + "%"
+                }
             });
         }
 
@@ -119,6 +119,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
         function init() {
             updateStatsView();
             getQuestion();
+            $scope.totalQuestions = 5;
         }
 
         init();

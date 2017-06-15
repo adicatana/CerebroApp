@@ -84,7 +84,7 @@ public class IntegrationTestMultiplayer {
         startSessions();
         joinRoom();
         makeMatch();
-        for (int i = 0; i <= Match.TOTAL / 2; ++i) {
+        for (int i = 0; i <= Match.getTOTAL() / 2; ++i) {
             ping();
             getQuestions();
             respond();

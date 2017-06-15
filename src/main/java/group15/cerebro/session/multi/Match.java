@@ -10,7 +10,7 @@ import java.util.TimerTask;
 public class Match {
     private Usr player1;
     private Usr player2;
-    public static final int TOTAL = 10;
+    private static final int TOTAL = 10;
     private int remainingQuestions;
 
     private int correct1;
@@ -33,7 +33,7 @@ public class Match {
         pinged2 = false;
 
         question = null;
-        remainingQuestions = TOTAL;
+        remainingQuestions = getTOTAL();
 
         timerTask = new TimerTask() {
             @Override
@@ -45,6 +45,10 @@ public class Match {
 
         timer = new Timer("timer");
         timer.scheduleAtFixedRate(timerTask, 30, 100);
+    }
+
+    public static int getTOTAL() {
+        return TOTAL;
     }
 
     public synchronized Usr getPlayer1() {

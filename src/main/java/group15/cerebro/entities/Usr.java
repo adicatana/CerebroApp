@@ -17,6 +17,7 @@ public class Usr {
     private int rating;
     private String email;
     private String name;
+    private int gamesPlayed;
 
     public String getLogin() {
         return login;
@@ -58,6 +59,14 @@ public class Usr {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
     }
 
     @Override

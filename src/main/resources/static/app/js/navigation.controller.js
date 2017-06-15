@@ -26,10 +26,18 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
             });
         }
 
+        // Used so double click has no effect.
+        var canStartMulti = true;
+
         function startMulti() {
+            if (!canStartMulti) {
+                return;
+            }
             $http.get("multi/join").then(function() {
+                canStartMulti = false;
                 console.log("Joining game room.");
                 $http.get("multi/match").then(function (response) {
+                    canStartMulti = true;
                     console.log("Started match.");
                     vm.match = response.data;
                 }).then(function () {

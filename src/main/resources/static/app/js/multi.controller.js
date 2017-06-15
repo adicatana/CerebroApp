@@ -28,6 +28,7 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
             });
         }
 
+        // Used so clicks responding to same question have no effect.
         var canValidate = true;
 
         // needs to call getQuestion to generate a new question

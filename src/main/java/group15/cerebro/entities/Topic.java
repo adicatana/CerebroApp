@@ -13,6 +13,16 @@ public class Topic {
     private boolean isBook;
     private String author;
 
+    private int questionNo;
+
+    public int getQuestionNo() {
+        return questionNo;
+    }
+
+    public void setQuestionNo(int questionNo) {
+        this.questionNo = questionNo;
+    }
+
     public long getId() {
         return id;
     }

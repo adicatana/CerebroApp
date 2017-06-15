@@ -45,8 +45,11 @@ public class UserInputProcessor {
         proposedQuestion.setTopic(topic);
 
         // Save proposed question
-        // MainApplication.logger.info("Saving the new question.");
-        // questionRepository.save(proposedQuestion);
+        MainApplication.logger.info("Saving the new question.");
+        questionRepository.save(proposedQuestion);
+
+        topic.setQuestionNo(topic.getQuestionNo() + 1);
+        topicRepository.save(topic);
     }
 
     private boolean validate(Question proposedQuestion) {

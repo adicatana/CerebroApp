@@ -36,6 +36,20 @@
                                         <td>{{currentUser.rating}}</td>
                                     </tr>
 
+                                    <tr>
+                                        <td>Topic Name</td>
+                                        <td>Right</td>
+                                        <td>Wrong</td>
+                                        <td>Total</td>
+                                    </tr>
+
+                                    <tr ng-repeat="progress in progressList">
+                                        <td>{{progress.topic.topicname}}</td>
+                                        <td>{{progress.rightAnswers}}</td>
+                                        <td>{{progress.wrongAnswers}}</td>
+                                        <td>{{progress.totalAnswers}}</td>
+                                    </tr>
+
                                     </tbody>
                                 </table>
 

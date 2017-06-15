@@ -4,13 +4,15 @@
 
 'use strict';
 
-app.controller('ProfileController', ['$http', 'getGamePhase',
-    function($http, getGamePhase) {
+app.controller('ProfileController', ['$rootScope', '$http', 'getGamePhase',
+    function($rootScope, $http, getGamePhase) {
 
         var vm = this;
 
         vm.enterProfile = enterProfile;
         vm.exitProfile = exitProfile;
+
+        getTopicStatistics();
 
         function enterProfile() {
             $http.get("/profile/enter").then(function() {
@@ -26,5 +28,13 @@ app.controller('ProfileController', ['$http', 'getGamePhase',
                 getGamePhase();
             });
         }
+
+        function getTopicStatistics() {
+            $http.get("/profile/progress").then(function(result) {
+                console.log("Get progress info.");
+                $rootScope.progressList = result.data;
+            });
+        }
+
     }
 ]);

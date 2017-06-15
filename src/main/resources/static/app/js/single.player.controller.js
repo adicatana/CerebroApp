@@ -47,11 +47,18 @@ app.controller('SinglePlayerController', ['$scope', '$http', '$rootScope', 'curr
                 if (vm.question[0].answer === undefined) {
                     console.log("Game finished");
                     countdown.stop();
-
+                    incrementGames();
                     getGamePhase();
                 } else {
                     setTimer();
                 }
+            });
+        }
+
+        function incrementGames() {
+            $http.get("/singleplayer/gamecount").then(function() {
+                console.log("No. of games a user played. ");
+                currentUser();
             });
         }
 

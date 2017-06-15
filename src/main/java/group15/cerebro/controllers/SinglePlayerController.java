@@ -3,6 +3,7 @@ package group15.cerebro.controllers;
 import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Question;
 import group15.cerebro.entities.Topic;
+import group15.cerebro.entities.Usr;
 import group15.cerebro.repositories.QuestionRepository;
 import group15.cerebro.repositories.TopicRepository;
 import group15.cerebro.repositories.UserRepository;
@@ -100,6 +101,18 @@ public class SinglePlayerController {
 
         return game.getQuestion();
     }
+
+    @RequestMapping(value = "/gamecount", method = RequestMethod.GET)
+    public void getGamesPlayed() {
+        if (manager != null) {
+            Usr usr = manager.getUserForSession();
+            MainApplication.logger.info("Updating number of Games for " + usr.getName());
+
+            usr.setGamesPlayed(usr.getGamesPlayed() + 1);
+            userRepository.save(usr);
+        }
+    }
+
 
     private Question getRandomQuestion() {
         List<Question> all = getAll();

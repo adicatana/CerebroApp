@@ -1,8 +1,11 @@
-package group15.cerebro.session.models;
+package group15.cerebro.session.multi;
 import group15.cerebro.entities.Question;
 
 public class QuestionRandomizer {
     public synchronized Question randomizeOrder(Question question) {
+        if (question == null) {
+            return null;
+        }
         int index = (int)(Math.random() * 6) + 1;
         if (index > 6) {
             index -= 1;

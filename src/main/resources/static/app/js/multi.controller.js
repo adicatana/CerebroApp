@@ -84,6 +84,11 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 currentUser();
 
                 canValidate = false;
+
+                setTimeout(function () {
+
+                }, 30000);
+
                 // sync. players on next questions
                 $http.get("/multi/next").then(function () {
                     updateStatsView();

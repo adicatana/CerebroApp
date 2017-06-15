@@ -82,7 +82,7 @@ public class MultiplayerController {
         // Each player does play
         match.play();
 
-        return match.getQuestion();
+        return match.getQuestionRandomized();
     }
 
     @RequestMapping(value = "/next", method = RequestMethod.GET)

@@ -73,6 +73,10 @@ public class Match {
         return pinged1 && pinged2;
     }
 
+    public synchronized Question getQuestionRandomized() {
+        return new QuestionRandomizer().randomizeOrder(question);
+    }
+
     public synchronized Question getQuestion() {
         return question;
     }

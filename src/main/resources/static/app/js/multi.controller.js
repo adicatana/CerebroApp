@@ -11,6 +11,44 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
 
         $scope.validateQuestion = validateQuestion;
 
+
+        
+        // Used so clicks responding to same question have no effect.
+        var canValidate = true;
+        var connectionLost = true;
+
+        var countdown = $("#countdown").countdown360({
+            radius: 60,
+            strokeStyle: '#ff6a00',
+            seconds: 15,
+            fillStyle: "#e0d4cc",
+            fontColor: '#000000',
+            autostart: false,
+            smooth: true,
+            onComplete: function() {
+                $http.post("/multi/answer", " ").then(function(response) {
+                    console.log("You responded: " + " ");
+                    var goodAnswer = response.data.answer;
+                    console.log("Good answer: " + goodAnswer);
+
+                    questionFeedback(goodAnswer === " ", goodAnswer);
+                }).then(function() {
+                    $http.get("/multi/next").then(function () {
+                        connectionLost = false;
+                        updateStatsView();
+
+                        getQuestion();
+                        canValidate = true;
+                    });
+                });
+            }
+        });
+
+        var setTimer = function() {
+            countdown.start();
+            console.log('countdown360 ', countdown);
+        };
+
         // Todo: CONNECTION STATUS with pings
 
         function returnMainScreen() {
@@ -53,13 +91,13 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 if ($scope.question[0].answer === undefined) {
                     console.log("Game finished");
                     setEndMessage();
+                    countdown.stop();
                     getGamePhase();
+                } else {
+                    setTimer();
                 }
             });
         }
-
-        // Used so clicks responding to same question have no effect.
-        var canValidate = true;
 
         // needs to call getQuestion to generate a new question
         function validateQuestion(answer) {
@@ -78,7 +116,6 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 currentUser();
 
                 canValidate = false;
-                var connectionLost = true;
 
                 setTimeout(function () {
                     if (connectionLost) {
@@ -112,14 +149,15 @@ app.controller('MultiController', ['$scope', '$http', '$rootScope', 'currentUser
                 console.log($scope.stats);
                 $scope.progressBarStyle1 = {
                     "width": $scope.stats.correct1 / $scope.totalQuestions * 100 + "%"
-                }
+                };
                 $scope.progressBarStyle2 = {
                     "width": $scope.stats.correct2 / $scope.totalQuestions * 100 + "%"
-                }
+                };
             });
         }
 
         function questionFeedback(good, correct) {
+            countdown.stop();
             swal({
                 title: good ? 'Good job!' : "Wrong!",
                 text: good ? '' : "Correct answer: " + correct,

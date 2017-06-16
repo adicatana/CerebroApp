@@ -8,6 +8,10 @@
                 <div class="jumbotron text-center">
                     <h2>
                         {{question.question}}
+
+                        <img ng-if="question.question === 'Who painted the following picture?'" src="app/misc/tiganca.jpg" height="250">
+                        <img ng-if="question.question === 'The Sistine Chapel was painted by...'" src="app/misc/manuta.jpg">
+                        <img ng-if="question.question === 'The following picture is part of a series by...'" src="app/misc/flore.jpg">
                     </h2>
                 </div>
             </div>

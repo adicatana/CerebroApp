@@ -152,13 +152,13 @@ public class SinglePlayerController {
         Question question = all.get(index);
 
         /* Keep a list of already answered questions for a round. */
-//        if (all.size() >= gameLength)
-//            while (alreadyAsked.contains(question)) {
-//                index = ThreadLocalRandom.current().nextInt(0, all.size());
-//                question = all.get(index);
-//            }
-//
-//        alreadyAsked.add(question);
+        if (all.size() >= gameLength)
+            while (alreadyAsked.contains(question)) {
+                index = ThreadLocalRandom.current().nextInt(0, all.size());
+                question = all.get(index);
+            }
+
+        alreadyAsked.add(question);
 
         return question;
     }

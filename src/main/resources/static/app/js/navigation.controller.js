@@ -36,12 +36,12 @@ app.controller('NavigationController', ['$scope', '$http', '$rootScope', 'getGam
                     html: '<button id="custom-button" class="button-custom-swal">Cancel</button>' ,
                     onOpen: function() {
                         return new Promise(function () {
-                            // $('#custom-button').click(function () {
-                            //     swal.closeModal();
-                            //     $http.get("multi/exit-room").then(function () {
-                            //         console.log("User force exited room");
-                            //     });
-                            // });
+                            $('#custom-button').click(function () {
+                                swal.closeModal();
+                                $http.get("multi/exit-room").then(function () {
+                                    console.log("User force exited room");
+                                });
+                            });
 
                             swal.showLoading();
                             $http.get("multi/match").then(function (response) {

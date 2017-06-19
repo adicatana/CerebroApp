@@ -88,10 +88,17 @@ public class MultiplayerController {
         return match.getQuestionRandomized();
     }
 
+    // Will be called only when Cancel button is pressed.
     @RequestMapping(value = "/exit-room", method = RequestMethod.GET)
     public void exitRoom(){
         MainApplication.log(match, manager, "Ending game.");
         sessionPool.dismiss(manager.getUserForSession());
+
+        // Cleans the reference to match.
+        if (match != null) {
+            match.unblock();
+            match = null;
+        }
         manager.returnMainScreenMultiplayerGame();
     }
 

@@ -58,9 +58,9 @@ public class SessionPool {
             wait();
 
             // Abrupt exit code -- see dismiss
-//            if (checkDismissed(usr)) {
-//                return null;
-//            }
+            if (checkDismissed(usr)) {
+                return null;
+            }
 
             // Trying to solve matcher
             match = tryMatch(usr);
@@ -107,7 +107,7 @@ public class SessionPool {
         return users.remove(0);
     }
 
-
+    // Clean references for grabage collection.
     private synchronized boolean checkDismissed(Usr user) {
         for (Usr check : dismissed) {
             if (user.getLogin().equals(check.getLogin())) {
@@ -120,7 +120,14 @@ public class SessionPool {
 
     public synchronized void dismiss(Usr user) {
         dismissed.add(user);
-       // users.remove(user);
+
+        if (users.contains(user)) {
+            // I did not entered in a match
+            users.remove(user);
+        } else {
+            // I entered in a match. So I exit during the game.
+            // HANDLED in exit-room in MultiplayerController
+        }
         notifyAll();
     }
 }

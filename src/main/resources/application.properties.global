@@ -17,3 +17,5 @@ management.security.enabled=false
 
 spring.social.facebook.appId=474282212910062
 spring.social.facebook.appSecret=1fbb7af3e997b5b32a8277b1357a3f15
+
+logging.file=log_file.log

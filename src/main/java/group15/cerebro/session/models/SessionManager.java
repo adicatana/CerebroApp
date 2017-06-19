@@ -137,7 +137,7 @@ public class SessionManager implements SessionManagerEngine {
     @Override
     public String dumpManager() {
         return "; user: " + this.getUserForSession().getName() +
-                ", phase: " + this.phase.name();s
+                ", phase: " + this.phase.name();
     }
 
     @Override

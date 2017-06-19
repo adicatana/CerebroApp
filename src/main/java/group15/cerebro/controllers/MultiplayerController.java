@@ -36,7 +36,7 @@ public class MultiplayerController {
     public void join() {
         manager.multiplayerJoin();
 
-        MainApplication.log(manager, manager.getUserForSession().getName() + " joined the room");
+        MainApplication.log(match, manager, manager.getUserForSession().getName() + " joined the room");
         sessionPool.join(manager.getUserForSession());
     }
 
@@ -44,17 +44,17 @@ public class MultiplayerController {
     public Match match() throws InterruptedException {
         match = sessionPool.match(manager.getUserForSession());
         if (match != null) {
-            MainApplication.log(manager, "Match made: player1:" + match.getPlayer1().getName() +
+            MainApplication.log(match, manager, "Match made: player1:" + match.getPlayer1().getName() +
                     "player2:" + match.getPlayer2().getName());
         } else {
-            MainApplication.log(manager, "No match was made.");
+            MainApplication.log(match, manager, "No match was made.");
         }
         return match;
     }
 
     @RequestMapping(value = "/connection_lost", method = RequestMethod.GET)
     public void lostConnection() {
-        MainApplication.log(manager, "Lost connection");
+        MainApplication.log(match, manager, "Lost connection");
         manager.lostConnection();
 
         // unblocks match object so it is allowed to be garbage collected
@@ -64,7 +64,7 @@ public class MultiplayerController {
 
     @RequestMapping(value = "/end", method = RequestMethod.GET)
     public void endMultiplayer() {
-        MainApplication.log(manager, "Ending game.");
+        MainApplication.log(match, manager, "Ending game.");
         manager.returnMainScreenMultiplayerGame();
         match = null; // Allows match to be garbage collected
     }
@@ -74,13 +74,13 @@ public class MultiplayerController {
     public Question random() {
         // If there are no more questions remaining we return null to the front-end
         if (match.getRemainingQuestions() == 0) {
-            MainApplication.log(manager, "Finished game");
+            MainApplication.log(match, manager, "Finished game");
             manager.endMultiplayerGame();
             return null;
         }
 
         match.checkNullSetQuestion(getRandomQuestion());
-        MainApplication.log(manager, "Question:" + match.getQuestion().getQuestion());
+        MainApplication.log(match, manager, "Question:" + match.getQuestion().getQuestion());
 
         // Each player does play
         match.play();
@@ -90,7 +90,7 @@ public class MultiplayerController {
 
     @RequestMapping(value = "/exit-room", method = RequestMethod.GET)
     public void exitRoom(){
-        MainApplication.log(manager, "Ending game.");
+        MainApplication.log(match, manager, "Ending game.");
         sessionPool.dismiss(manager.getUserForSession());
         manager.returnMainScreenMultiplayerGame();
     }
@@ -106,7 +106,7 @@ public class MultiplayerController {
     // should send back the question un-shuffled
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
     public Question getAnswer(@RequestBody String chosen) {
-        MainApplication.log(manager, "Player " + manager.getUserForSession().getName()
+        MainApplication.log(match, manager, "Player " + manager.getUserForSession().getName()
                 + " responded " + chosen);
         match.verify(manager.getUserForSession(), chosen);
         return match.getQuestion();

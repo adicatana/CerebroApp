@@ -1,5 +1,6 @@
 package group15.cerebro;
 
+import group15.cerebro.session.multi.Match;
 import group15.cerebro.session.multi.SessionPool;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.slf4j.Logger;
@@ -18,5 +19,13 @@ public class MainApplication {
 
     public static void log(SessionManagerEngine manager, String s) {
 		logger.info(s + manager.dumpManager());
+	}
+
+	public static void log(Match match, SessionManagerEngine manager, String s) {
+		if (match != null) {
+			logger.info("MATCH id " + match + " :" + s + manager.dumpManager());
+		} else {
+			logger.error("NULL MATCH:" + s + manager.dumpManager());
+		}
 	}
 }

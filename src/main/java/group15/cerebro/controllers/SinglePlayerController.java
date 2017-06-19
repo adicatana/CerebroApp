@@ -161,7 +161,7 @@ public class SinglePlayerController {
 
     private List<Question> getAll() {
         if(gameTopic != null) {
-            return questionRepository.findQuestionsByTopic(gameTopic);
+            return questionRepository.findQuestionsByTopicAndValid(gameTopic, true);
         }
         return questionRepository.findAll();
     }

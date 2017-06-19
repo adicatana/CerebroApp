@@ -15,6 +15,7 @@ public class Question {
     private String answer;
     private String wrong1;
     private String wrong2;
+    private boolean valid;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "topic")
@@ -52,6 +53,14 @@ public class Question {
         this.wrong2 = wrong2;
     }
 
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,7 +84,6 @@ public class Question {
     public void setId(long id) {
         this.id = id;
     }
-
 
     public Topic getTopic() {
         return topic;

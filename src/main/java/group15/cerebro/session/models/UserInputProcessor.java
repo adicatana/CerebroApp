@@ -44,6 +44,8 @@ public class UserInputProcessor {
         // Set the found-by-name topic
         proposedQuestion.setTopic(topic);
 
+        proposedQuestion.setValid(false);
+
         // Save proposed question
         MainApplication.logger.info("Saving the new question.");
         questionRepository.save(proposedQuestion);

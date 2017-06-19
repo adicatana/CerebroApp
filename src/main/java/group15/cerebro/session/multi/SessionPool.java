@@ -13,23 +13,10 @@ public class SessionPool {
     private List<Match> matches;
     private List<Usr> dismissed;
 
-    private synchronized String printUsers() {
-        String ret = "[";
-        for (Usr user : users) {
-            ret += user.getName() + ", ";
-        }
-        ret += "]";
-        return ret;
-    }
-
     public SessionPool() {
         matches = new ArrayList<>();
         users = new ArrayList<>();
         dismissed = new ArrayList<>();
-    }
-
-    private synchronized void p() {
-        MainApplication.logger.warn(printUsers());
     }
 
     public synchronized void join(Usr newUser) {
@@ -38,7 +25,6 @@ public class SessionPool {
             return;
         }
         users.add(newUser);
-        p();
     }
 
     private synchronized Match tryMatch(Usr usr) {
@@ -49,8 +35,6 @@ public class SessionPool {
                 return tryMatch;
             }
         }
-        p();
-
         return null;
     }
 
@@ -62,12 +46,8 @@ public class SessionPool {
         if (match != null) {
             return match;
         }
-        p();
-
         while (users.size() < 2) {
             wait();
-            p();
-
 
             // Abrupt exit code -- see dismiss
             if (checkDismissed(usr)) {
@@ -81,17 +61,11 @@ public class SessionPool {
                 return match;
             }
         }
-        p();
-
         getRemoveUser(usr);
         Usr usr2 = getFirstUser();
-        p();
-
         match = new Match(usr, usr2);
         matches.add(match);
         notifyAll();
-        p();
-
         return match;
     }
 
@@ -99,11 +73,8 @@ public class SessionPool {
     private synchronized void getRemoveUser(Usr usr) {
         if (users.contains(usr)) {
             users.remove(usr);
-            p();
-
             return;
         }
-        p();
 
         // Should not get here
         MainApplication.logger.warn("User not found.");
@@ -114,15 +85,11 @@ public class SessionPool {
         if (users.isEmpty()) {
             MainApplication.logger.warn("User list empty. Strange behaviour with users list.");
         }
-        p();
-
         return users.remove(0);
     }
 
     // Clean references for grabage collection.
     private synchronized boolean checkDismissed(Usr user) {
-        p();
-
         for (Usr check : dismissed) {
             if (user.getLogin().equals(check.getLogin())) {
                 dismissed.remove(user);
@@ -134,8 +101,6 @@ public class SessionPool {
 
     public synchronized void dismiss(Usr user) {
         dismissed.add(user);
-        p();
-
         if (users.contains(user)) {
             // I did not entered in a match
             users.remove(user);
@@ -143,8 +108,6 @@ public class SessionPool {
             // I entered in a match. So I exit during the game.
             // HANDLED in exit-room in MultiplayerController
         }
-        p();
-
         notifyAll();
     }
 }

@@ -28,7 +28,7 @@ public class SessionController {
 
     @RequestMapping(value = "/phase", method = RequestMethod.GET, produces="text/plain")
     public String getPhase() {
-        MainApplication.logger.warn("Phase is now :" + manager.getPhase());
+        MainApplication.log(manager, "Phase is now :" + manager.getPhase());
         return manager.getPhaseName(manager.getPhase());
     }
 }

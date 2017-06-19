@@ -13,10 +13,8 @@ import group15.cerebro.session.models.Game;
 import group15.cerebro.session.models.Ranker;
 import group15.cerebro.session.templates.GameEngine;
 import group15.cerebro.session.templates.SessionManagerEngine;
-import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -62,15 +60,14 @@ public class SinglePlayerController {
 
     @RequestMapping(value = "/topic", method = RequestMethod.GET)
     public void topicSelection() {
-        MainApplication.logger.warn("Topic selection stage");
+        MainApplication.log(manager, "Topic selection stage");
 
         manager.selectTopic();
     }
 
     @RequestMapping(value = "/single/{topic}", method = RequestMethod.GET)
     public void startGame(@PathVariable Long topic) {
-        MainApplication.logger.warn("Starting single game");
-        MainApplication.logger.warn("The topic is" + topic);
+        MainApplication.log(manager, "Starting single game with topic " + topic);
         gameTopic = topicRepository.findOne(topic);
 
         game = new Game();
@@ -79,8 +76,7 @@ public class SinglePlayerController {
 
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question getRandom() {
-        MainApplication.logger.info(" MY LOGGER : Get questions");
-        MainApplication.logger.warn(manager.getUid().toString());
+        MainApplication.log(manager, "Get questions");
 
         if (manager.getPhase() == SessionManagerEngine.Phase.SINGLE
                 && game.getGames() > 0) {
@@ -95,15 +91,15 @@ public class SinglePlayerController {
 
     @RequestMapping(value = "/score", method = RequestMethod.GET, produces="text/plain")
     public String getPercent() {
-        MainApplication.logger.info(" MY LOGGER : Percent: " + game.getPercent());
+        MainApplication.log(manager, " Percent: " + game.getPercent());
         alreadyAsked.clear();
         return "" + game.getPercent();
     }
 
     @RequestMapping(value = "/answer", method = RequestMethod.POST)
     public Question getAnswer(@RequestBody String chosen) {
-        MainApplication.logger.info(" MY LOGGER : Responding: " + chosen);
-        MainApplication.logger.info(" MY LOGGER : Correct response: " + game.getAnswer());
+        MainApplication.log(manager, " Responding: " +
+                chosen + "; and correct response: " + game.getAnswer());
 
         boolean ans = false;
 
@@ -138,7 +134,7 @@ public class SinglePlayerController {
     public void getGamesPlayed() {
         if (manager != null) {
             Usr usr = manager.getUserForSession();
-            MainApplication.logger.info("Updating number of Games for " + usr.getName());
+            MainApplication.log(manager, "Updating number of games for " + usr.getName());
 
             usr.setGamesPlayed(usr.getGamesPlayed() + 1);
             userRepository.save(usr);

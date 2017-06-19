@@ -45,7 +45,7 @@ public class Ranker {
 
         repository.save(user);
         MainApplication.logger.warn("Rating update: old(" + oldRating
-                +  "), new(" + newRating + ")");
+                +  "), new(" + newRating + ") for user " + user.getName());
     }
 
 }

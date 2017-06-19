@@ -1,6 +1,7 @@
 package group15.cerebro;
 
 import group15.cerebro.session.multi.SessionPool;
+import group15.cerebro.session.templates.SessionManagerEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,5 +14,9 @@ public class MainApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MainApplication.class, args);
+	}
+
+    public static void log(SessionManagerEngine manager, String s) {
+		logger.info(s + manager.dumpManager());
 	}
 }

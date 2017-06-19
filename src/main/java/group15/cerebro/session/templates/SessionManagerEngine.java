@@ -55,6 +55,8 @@ public interface SessionManagerEngine {
 
     void lostConnection();
 
+    String dumpManager();
+
     enum Phase {
         NONE,
         LOGGED,

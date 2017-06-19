@@ -1,11 +1,13 @@
 package group15.cerebro.session.multi;
 
+import group15.cerebro.MainApplication;
 import group15.cerebro.entities.Usr;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SessionPool {
+
     private List<Usr> users;
     private List<Match> matches;
     private List<Usr> dismissed;
@@ -16,48 +18,18 @@ public class SessionPool {
         dismissed = new ArrayList<>();
     }
 
-    public synchronized Match match(Usr usr) throws InterruptedException {
-        // should push this to the front-end
-        // TODO: check for all possible scenarios
-        Match match = tryMatch(usr);
-        if (match != null) {
-            return match;
-        }
-
-        while (users.size() < 2) {
-            wait();
-
-            // Abrupt exit code -- see dismiss
-            if (checkDismissed(usr)) {
-                return null;
-            }
-
-            // Trying to solve matcher
-            match = tryMatch(usr);
-            if (match != null) {
-                return match;
-            }
-        }
-//        if (users.size() < 2) {
-//            return null;
+    public synchronized void join(Usr newUser) {
+//        for (Usr user : users) {
+//            if (newUser.getLogin().equals(user.getLogin())) {
+//                return;
+//            }
 //        }
-
-        match = new Match(getRemoveUser(usr), getFirstUser());
-        matches.add(match);
-
-        return match;
-    }
-
-    private synchronized Usr getRemoveUser(Usr usr) {
-        for (Usr user : users) {
-            if (user.getLogin().equals(usr.getLogin())) {
-                users.remove(user);
-                return user;
-            }
+        if (users.contains(newUser)) {
+            /* Frontend sent two requests for same user. */
+            return;
         }
-
-        // Should not get here
-        return null;
+        users.add(newUser);
+        //notifyAll();
     }
 
     private synchronized Match tryMatch(Usr usr) {
@@ -71,21 +43,70 @@ public class SessionPool {
         return null;
     }
 
-    private synchronized Usr getFirstUser() {
-        Usr user = users.get(0);
-        users.remove(0);
-        return user;
-    }
+    /**
+     * Creates match or finds an already created one.
+     */
+    public synchronized Match match(Usr usr) throws InterruptedException {
+        // should push this to the front-end
+        // TODO: check for all possible scenarios
+        Match match = tryMatch(usr);
+        if (match != null) {
+            return match;
+        }
 
-    public synchronized void join(Usr newUser) {
-        for (Usr user : users) {
-            if (newUser.getLogin().equals(user.getLogin())) {
-                return;
+        while (users.size() < 2) {
+            wait();
+
+            // Abrupt exit code -- see dismiss
+//            if (checkDismissed(usr)) {
+//                return null;
+//            }
+
+            // Trying to solve matcher
+            match = tryMatch(usr);
+            if (match != null) {
+                return match;
             }
         }
-        users.add(newUser);
+//        if (users.size() < 2) {
+//            return null;
+//        }
+
+        getRemoveUser(usr);
+        Usr usr2 = getFirstUser();
+
+        match = new Match(usr, usr2);
+        matches.add(match);
         notifyAll();
+
+        return match;
     }
+
+    /* Removes user usr from users list and returns it. */
+    private synchronized void getRemoveUser(Usr usr) {
+        if (users.contains(usr)) {
+            users.remove(usr);
+            return;
+        }
+//        for (Usr user : users) {
+//            if (user.getLogin().equals(usr.getLogin())) {
+//                users.remove(user);
+//                return user;
+//            }
+//        }
+
+        // Should not get here
+        MainApplication.logger.warn("User not found.");
+    }
+
+
+    private synchronized Usr getFirstUser() {
+        if (users.isEmpty()) {
+            MainApplication.logger.warn("User list empty. Strange behaviour with users list.");
+        }
+        return users.remove(0);
+    }
+
 
     private synchronized boolean checkDismissed(Usr user) {
         for (Usr check : dismissed) {
@@ -99,7 +120,7 @@ public class SessionPool {
 
     public synchronized void dismiss(Usr user) {
         dismissed.add(user);
-        users.remove(user);
+       // users.remove(user);
         notifyAll();
     }
 }

@@ -73,7 +73,7 @@ public class MultiplayerController {
     @RequestMapping(value = "/random", method = RequestMethod.GET)
     public Question random() {
         // If there are no more questions remaining we return null to the front-end
-        if (match.getRemainingQuestions() == 0) {
+        if (match.getRemainingQuestions() <= 0) {
             MainApplication.log(match, manager, "Finished game");
             manager.endMultiplayerGame();
             return null;
@@ -97,7 +97,7 @@ public class MultiplayerController {
 
     @RequestMapping(value = "/next", method = RequestMethod.GET)
     public void nextQuestionSync() throws InterruptedException {
-        match.next();
+        match.next(manager.getUserForSession());
 
         // They both synchronize on next, so we need to reset it after the sync. is done.
         match.setQuestion(null);

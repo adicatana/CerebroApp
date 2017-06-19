@@ -13,6 +13,9 @@ public class Match {
     private int correct1;
     private int correct2;
 
+    private boolean player1answered;
+    private boolean player2answered;
+
     private Question question;
 
     public Match(Usr player1, Usr player2) {
@@ -23,6 +26,8 @@ public class Match {
         correct2 = 0;
 
         question = null;
+        player1answered = false;
+        player2answered = false;
         remainingQuestions = getTOTAL();
     }
 
@@ -72,15 +77,16 @@ public class Match {
         }
     }
 
-    private int ctr = 0;
-
-    // Always 2.
-    public synchronized void next() throws InterruptedException {
-        ctr++;
-        if (ctr < 2) {
+    public synchronized void next(Usr current) throws InterruptedException {
+        if(current.getLogin().equals(player1.getLogin())) {
+            player1answered = true;
+        } else {
+            player2answered = true;
+        }
+        if (!player1answered || !player2answered) {
             wait();
         }
-        ctr = 0;
+        player1answered = player2answered = false;
         notifyAll();
     }
 
@@ -96,7 +102,7 @@ public class Match {
 
     // Used to break the monitors when the object is set for garbage collection.
     public synchronized void unblock() {
-        ctr = 1000;
+        player1answered = player2answered = true;
         notifyAll();
     }
 }

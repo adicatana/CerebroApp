@@ -55,7 +55,9 @@ public class UserInputProcessor {
     }
 
     private boolean validate(Question proposedQuestion) {
-        // Can add supplemental validation
-        return true;
+        return !proposedQuestion.getQuestion().isEmpty()
+                && !proposedQuestion.getAnswer().isEmpty()
+                && !proposedQuestion.getWrong1().isEmpty()
+                && !proposedQuestion.getWrong2().isEmpty();
     }
 }

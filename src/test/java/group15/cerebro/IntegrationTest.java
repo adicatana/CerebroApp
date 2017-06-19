@@ -54,8 +54,6 @@ public class IntegrationTest {
     @Test
     public void getRandomQuestionTest() throws Exception {
 
-        String loginDemo = "{\"login\" : \"demo\", \"password\" : \"demo\"}";
-
         mockMvc.perform(get("/session/start/demo").session(mockSession))
                 .andExpect(status().isOk());
 

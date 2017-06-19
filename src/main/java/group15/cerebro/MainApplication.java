@@ -18,10 +18,17 @@ public class MainApplication {
 	}
 
     public static void log(SessionManagerEngine manager, String s) {
+		if (manager == null) {
+			return;
+		}
 		logger.info(s + manager.dumpManager());
 	}
 
 	public static void log(Match match, SessionManagerEngine manager, String s) {
+		if (manager == null) {
+			return;
+		}
+
 		if (match != null) {
 			logger.info("MATCH id " + match + " :" + s + manager.dumpManager());
 		} else {

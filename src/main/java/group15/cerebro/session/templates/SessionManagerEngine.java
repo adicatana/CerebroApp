@@ -34,6 +34,7 @@ public interface SessionManagerEngine {
             case MULTI: return "MULTI";
             case MULTIEND: return "MULTIEND";
             case ADMIN: return "ADMIN";
+            case ABOUT: return "ABOUT";
             default: return "";
         }
     }
@@ -62,6 +63,10 @@ public interface SessionManagerEngine {
 
     void exitAdmin();
 
+    void enterAbout();
+
+    void exitAbout();
+
     enum Phase {
         NONE,
         LOGGED,
@@ -72,6 +77,7 @@ public interface SessionManagerEngine {
         FEEDBACK,
         MULTI,
         MULTIEND,
-        ADMIN
+        ADMIN,
+        ABOUT
     }
 }

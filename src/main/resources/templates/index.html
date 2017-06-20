@@ -23,6 +23,7 @@
     <script type="text/javascript" src="app/js/profile.controller.js" ></script>
     <script type="text/javascript" src="app/js/multi.controller.js" ></script>
     <script type="text/javascript" src="app/js/admin.controller.js" ></script>
+    <script type="text/javascript" src="app/js/about.controller.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app/lib/jquery.countdown360.min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -53,6 +54,8 @@
 <div ng-if="gamePhase === 'MULTIEND'" ng-include="'includes/multi.end.html'"></div>
 
 <div ng-if="gamePhase === 'ADMIN'" ng-include="'includes/admin.html'"></div>
+
+<div ng-if="gamePhase === 'ABOUT'" ng-include="'includes/about.html'"></div>
 
 </body>
 </html>

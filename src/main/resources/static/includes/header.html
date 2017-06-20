@@ -6,21 +6,27 @@
                     ng-click="profile.exitProfile()">
                     <a href="" class="btn-nav navbar-brand">Cerebro</a></li>
 
-                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE'"
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && gamePhase != 'MULTI'"
                     ng-controller="ProfileController as profile"
                     ng-click="profile.enterProfile()">
                     <a href="" class="btn-nav">My profile</a></li>
 
-                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE'"
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && gamePhase != 'MULTI'"
                     ng-controller="RankingsController as rank"
                     ng-click="rank.enterRankings()">
                     <a href="" class="btn-nav">Leaderboard</a>
                 </li>
 
-                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && !currentUser.pulete"
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && !currentUser.pulete && gamePhase != 'MULTI'"
                     ng-controller="AdminController as admin"
                     ng-click="admin.enterAdmin()">
                     <a href="" class="btn-nav">Admin</a>
+                </li>
+
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && gamePhase != 'MULTI'"
+                    ng-controller="AboutController as about"
+                    ng-click="about.enterAbout()">
+                    <a href="" class="btn-nav">About</a>
                 </li>
 
             </ul>

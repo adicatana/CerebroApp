@@ -17,6 +17,12 @@
                     <a href="" class="btn-nav">Leaderboard</a>
                 </li>
 
+                <li ng-if="currentUser != undefined && gamePhase != 'SINGLE' && !currentUser.pulete"
+                    ng-controller="AdminController as admin"
+                    ng-click="admin.enterAdmin()">
+                    <a href="" class="btn-nav">Admin</a>
+                </li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

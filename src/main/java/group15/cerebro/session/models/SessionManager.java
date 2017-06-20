@@ -141,6 +141,20 @@ public class SessionManager implements SessionManagerEngine {
     }
 
     @Override
+    public void enterAdmin() {
+        if (phase != Phase.NONE) {
+            phase = Phase.ADMIN;
+        }
+    }
+
+    @Override
+    public void exitAdmin() {
+        if (phase == Phase.ADMIN) {
+            phase = Phase.LOGGED;
+        }
+    }
+
+    @Override
     public Usr getUserForSession() {
         return user;
     }

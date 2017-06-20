@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     List<Question> findQuestionsByTopicAndValid(Topic topic, boolean valid);
+    List<Question> findQuestionsByValid(boolean valid);
+
 }

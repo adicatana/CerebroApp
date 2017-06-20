@@ -33,6 +33,7 @@ public interface SessionManagerEngine {
             case PROFILE: return "PROFILE";
             case MULTI: return "MULTI";
             case MULTIEND: return "MULTIEND";
+            case ADMIN: return "ADMIN";
             default: return "";
         }
     }
@@ -57,6 +58,10 @@ public interface SessionManagerEngine {
 
     String dumpManager();
 
+    void enterAdmin();
+
+    void exitAdmin();
+
     enum Phase {
         NONE,
         LOGGED,
@@ -66,6 +71,7 @@ public interface SessionManagerEngine {
         PROFILE,
         FEEDBACK,
         MULTI,
-        MULTIEND
+        MULTIEND,
+        ADMIN
     }
 }

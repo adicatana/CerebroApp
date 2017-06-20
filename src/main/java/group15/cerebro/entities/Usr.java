@@ -18,6 +18,7 @@ public class Usr {
     private String email;
     private String name;
     private int gamesPlayed;
+    private boolean pulete;
 
     public String getLogin() {
         return login;
@@ -67,6 +68,14 @@ public class Usr {
 
     public void setGamesPlayed(int gamesPlayed) {
         this.gamesPlayed = gamesPlayed;
+    }
+
+    public boolean isPulete() {
+        return pulete;
+    }
+
+    public void setPulete(boolean pulete) {
+        this.pulete = pulete;
     }
 
     @Override

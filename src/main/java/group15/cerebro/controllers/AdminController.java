@@ -6,6 +6,7 @@ import group15.cerebro.repositories.UserRepository;
 import group15.cerebro.session.templates.SessionManagerEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,11 @@ public class AdminController {
     @RequestMapping(value = "/pending", method = RequestMethod.GET)
     public List<Question> getPendingQuestions() {
         return questionRepository.findQuestionsByValid(false);
+    }
+
+    @RequestMapping(value = "/approve", method = RequestMethod.POST)
+    public void receiveAdminApprovals(@RequestBody List<Question> modifiedQuestions) {
+        questionRepository.save(modifiedQuestions);
     }
 
 }

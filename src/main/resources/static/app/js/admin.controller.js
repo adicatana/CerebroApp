@@ -23,6 +23,15 @@ app.controller('AdminController', ['$http', 'getGamePhase', function ($http, get
         });
     };
 
+    vm.approve = function () {
+        var qJSONString = JSON.stringify(vm.questionList);
+        $http.post("/admin/approve", qJSONString).then(function () {
+            console.log("Sent modified questions to DB " + qJSONString);
+        }).then(function () {
+            getQuestions();
+        });
+    };
+
     function getQuestions() {
         $http.get("/admin/pending").then(function(result) {
             console.log("Getting pending questions.");
